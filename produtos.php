@@ -35,7 +35,7 @@
 
         <div class="col-xs-18 col-sm-6 col-md-3">
           <div class="thumbnail">
-            <img src="http://placehold.it/500x300" alt="">
+            <img src="images/wheygold.jpg" alt="">
               <div class="caption">
                 <h4>Thumbnail label</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>

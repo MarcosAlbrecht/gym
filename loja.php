@@ -92,7 +92,7 @@
 			<div class="col-md-2">
 				<div class="header-bottom header-bottom-opcao">
 					<ul class="nav nav1 nav-pills nav-stacked">
-						<li><a href="#">Whey</a></li>
+						<li><a href="produtos.php">Whey</a></li>
 					</ul>
 					<ul class="nav nav1 nav-pills nav-stacked">
 						<li><a href="#">Termogênico</a></li>
