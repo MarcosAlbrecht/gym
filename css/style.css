@@ -105,6 +105,47 @@ body a{
 	background: #00BFF0;
 	padding:10px 0 5px 0;
 }
+
+
+.header-bottom-opcao{
+	background: #72d0f4;
+	padding:10px 0 5px 0;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #00BFF0;
+
+}
+
+.header-bottom-menu p{
+	text-align: center;
+}
+
+.header-bottom-menu{
+	margin-bottom: 0px;
+	background: #00BFF0;
+	padding:5px 0 1px 0;
+	margin-top: 10px;
+}
+
+.header-bottom-loja{
+	background: #00BFF0;
+	padding:10px 0 5px 0;
+}
+
+.thumbnail {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+
+
 i.phone {
 	background: url(../images/img-sprite.png) no-repeat -220px -8px;
 	width: 20px;
@@ -3983,7 +4024,7 @@ span.m_26 {
 	}
 	h3.m_2 {
 		font-size: 1.5em;
-		
+
 	}
 	h3.m_4 {
 		margin:5% 0 4%;
