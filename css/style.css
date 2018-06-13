@@ -105,6 +105,44 @@ body a{
 	background: #00BFF0;
 	padding:10px 0 5px 0;
 }
+
+.header-bottom-opcao{
+	background: #72d0f4;
+	padding:10px 0 5px 0;
+	margin-top: 0px;
+	margin-bottom: 20px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #00BFF0;
+
+}
+
+.header-bottom-menu p{
+	text-align: center;
+}
+
+.header-bottom-menu{
+	margin-bottom: 0px;
+	background: #00BFF0;
+	padding:5px 0 1px 0;
+	margin-top: 10px;
+}
+
+.header-bottom-loja{
+	background: #00BFF0;
+	padding:10px 0 5px 0;
+}
+
+.thumbnail {
+    position: relative;
+    padding: 0px;
+    margin-bottom: 20px;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
 i.phone {
 	background: url(../images/img-sprite.png) no-repeat -220px -8px;
 	width: 20px;
@@ -239,8 +277,24 @@ li.rss a span:hover{
 	text-transform:uppercase;
 	font-weight:400;
 	margin-right: 10px;
+
 	border:1px solid #72D0F4;
 }
+
+.nav1 li a {
+	display: block;
+	padding:9px 20px;
+	color: #fff;
+	font-size:0.85em;
+	text-transform:uppercase;
+	font-weight:400;
+	margin-bottom: 2px;
+	margin-left: 10px;
+	border:1px solid #72D0F4;
+}
+
+
+
 .nav li {
     position: relative;
 }
@@ -250,13 +304,14 @@ li.rss a span:hover{
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	-o-border-radius:3px;
-	-webkit-transition: all 0.3s ease-out;
-	-moz-transition: all 0.3s ease-out;
-	-ms-transition: all 0.3s ease-out;
-	-o-transition: all 0.3s ease-out;
-	transition: all 0.3s ease-out;
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	-ms-transition: all 0.5s ease-out;
+	-o-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
 	background:#fff;
 	color:#00BFF0;
+
 }
 .nav > li {
     float: left;
@@ -3983,7 +4038,7 @@ span.m_26 {
 	}
 	h3.m_2 {
 		font-size: 1.5em;
-		
+
 	}
 	h3.m_4 {
 		margin:5% 0 4%;
@@ -4195,21 +4250,4 @@ span.m_26 {
 	.course_demo {
 		padding: 0 5%;
 	}
-}
-
-
-
-.coldmd8 {
-	background:#000080;
-	position: relative;
-  min-height: 1px;
-  padding-right: 15px;
-  padding-left: 15px;
-}
-.main1{
-	display: block;
-}
-.classes11{
-	background:#000080;
-	padding:2%;
 }
