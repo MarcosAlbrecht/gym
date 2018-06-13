@@ -103,7 +103,7 @@
 				</div>
 			</div>
 			<div class="col-md-10">
-			 	<iframe class="col-md-12" src="index.html" height="500px"></iframe>
+			 	<iframe class="col-md-12" src="produtos.php" height="500px"></iframe>
 			</div>
 		</div>
 
