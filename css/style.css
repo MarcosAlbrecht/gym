@@ -241,6 +241,20 @@ li.rss a span:hover{
 	width: 100%;
 	clear: both;
 }
+
+.menuloja{
+	padding: 2% 0 1.8% 0;
+	background: #72D0F4;
+	z-index: 9999;
+	width: 100%;
+	clear: both;
+	margin-top: 20px;
+}
+
+.iframe{
+ border: none;
+}
+
 .logo{
 	float:left;
 }

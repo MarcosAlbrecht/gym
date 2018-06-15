@@ -76,34 +76,8 @@
 	<!-- end menu -->
 
 		<div class="container-fluid">
-			<div class="col-md-2">
-				<div class="header-bottom header-bottom-menu">
-					<p>Menu</p>
-				</div>
-			</div>
-			<div class="col-md-10">
-				<div class="header-bottom header-bottom-menu">
-					<p>Loja</p>
-				</div>
-			</div>
-		</div>
-
-		<div class="container-fluid">
-			<div class="col-md-2">
-				<div class="header-bottom header-bottom-opcao">
-					<ul class="nav nav1 nav-pills nav-stacked">
-						<li><a href="produtos.php">Whey</a></li>
-					</ul>
-					<ul class="nav nav1 nav-pills nav-stacked">
-						<li><a href="#">Termogênico</a></li>
-					</ul>
-					<ul class="nav nav1 nav-pills nav-stacked">
-						<li><a href="#">BCAA</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="col-md-10">
-			 	<iframe class="col-md-12" src="produtos.php" height="500px"></iframe>
+			<div class="col-md-12">
+			 	<iframe class="col-md-12 iframe" src="produtos.php" height="500px"></iframe>
 			</div>
 		</div>
 

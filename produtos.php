@@ -18,57 +18,29 @@
     <title></title>
   </head>
   <body>
-    <div class="container" id="tourpackages-carousel">
 
-      <div class="row">
+    <div class="menu menuloja" id="menuloja">
+		 <div class="container">
+			<div class="header-bottom_left">
+        <ul class="nav">
+          <li><a href="#">Meus Pedidos</a>
+          <li><a href="#">Carrinho</a>
+        </ul>
 
-        <div class="col-xs-18 col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="images/wheygold.jpg" alt="">
-              <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                <p><a href="#" class="btn btn-info btn-xs" role="button">Comprar</a> <a href="#" class="btn btn-default btn-xs" role="button">Button</a></p>
-            </div>
-          </div>
-        </div>
+			</div>
+			<div class="social">
+			   <ul>
+				  <li class="">Olá Visitante</li>
+				  <li class=""><a href="#"><span><b>Cadastre-se</b></span></a></li>
+          <li class="">ou Faça</li>
+				  <li class=""><a href="#"><b>Login</b></a></li>
 
-        <div class="col-xs-18 col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="images/wheygold.jpg" alt="">
-              <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a> <a href="#" class="btn btn-default btn-xs" role="button">Button</a></p>
-            </div>
-          </div>
-        </div>
+			   </ul>
+		   </div>
+		   <div class="clear"></div>
+		</div>
+	  </div>
 
-        <div class="col-xs-18 col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="http://placehold.it/500x300" alt="">
-              <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a> <a href="#" class="btn btn-default btn-xs" role="button">Button</a></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-xs-18 col-sm-6 col-md-3">
-          <div class="thumbnail">
-            <img src="http://placehold.it/500x300" alt="">
-              <div class="caption">
-                <h4>Thumbnail label</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
-                <p><a href="#" class="btn btn-info btn-xs" role="button">Button</a> <a href="#" class="btn btn-default btn-xs" role="button">Button</a></p>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- End row -->
-
-    </div><!-- End container -->
 
 
   </body>
