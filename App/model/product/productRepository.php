@@ -1,13 +1,9 @@
 <?php
 
-namespace App\model\product;
+namespace App\Model\Product;
 
-interface ProductRepository{
-
-  public function getProducts();
-  public function getProduct($id);
-
-
+interface ProductRepository
+{
+    public function getProducts();
+    public function getProduct($id);
 }
-
- ?>

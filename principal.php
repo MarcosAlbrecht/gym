@@ -17,7 +17,8 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'principal';
 
 switch($page){
   case 'cart' :
-    	$cart = new App\controller\cart();
+      $sessionCart = new App\model\Shopping\CartSession();
+    	$cart = new App\controller\cart($productRepository, $sessionCart);
       call_user_func_array(array($cart, $action), array());
   break;
   default:

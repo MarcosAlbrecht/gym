@@ -1,13 +1,13 @@
 <?php
 
-namespace App\mvc;
+namespace App\Mvc;
 
-abstract class Controller{
-  protected $view;
+abstract class Controller
+{
+    protected $view;
 
-  public function __construct(){
-    $this->view = new View();
-  }
+    public function __construct()
+    {
+        $this->view = new View();
+    }
 }
-
- ?>
