@@ -54,7 +54,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			   <li><a href="blog.html">Loja</a></li>
 			   <li><a href="pricing.html">Preço</a></li>
 			   <li><a href="contact.html">Contato</a></li>
-         <li><a href="contact.html">Login</a></li>
+         <li><a href="login.html">Login</a></li>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->
@@ -62,25 +62,72 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	  </div>
 	</div>
 	<!-- end menu -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script>
+         // FUNÇÃO PARA VERIFICAR SENHAS IGUAIS
+
+        $(function(){
+        $("#inputSubmit").click(function(){
+        var senha = $("#inputSenha").val();
+        var senha2 = $("#inputSenha2").val();
+        if(senha != senha2){
+          event.preventDefault();
+          alert("As senhas não são iguais!");
+        }
+        });
+        });
+</script>
+
+        <script>
+        // FUNÇÃO FORMATAR NO MODO CPF.
+            function formatar(mascara, documento){
+              var i = documento.value.length;
+              var saida = mascara.substring(0,1);
+              var texto = mascara.substring(i)
+
+              if (texto.substring(0,1) != saida){
+                        documento.value += texto.substring(0,1);
+              }
+
+            }
+        </script>
+
+
         <div class="main">
           <div class="register-grids">
           	<div class="container">
-						<form>
+						<form action="cadastroUsuario.php" method="POST">
 								<div class="register-top-grid">
 										<h3>INFORMAÇÕES PESSOAIS</h3>
 										<div>
-											<span>Primeiro Nome<label>*</label></span>
-											<input type="text">
+											<span>Nome<label>*</label></span>
+											<input type="text" name="nome" >
 										</div>
+
 										<div>
 											<span>Sobrenome<label>*</label></span>
-											<input type="text">
+											<input type="text" name=sobrenome"" value="">
 										</div>
-										<div>
-											<span>Endereço de email<label>*</label></span>
-											<input type="text">
+
+                    <div>
+											<span>Telefone<label>*</label></span>
+											<input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)" >
 										</div>
-										<div class="clear"> </div>
+                    <div>
+											<span>CPF<label>*</label></span>
+											<input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" >
+										</div>
+                    <div>
+											<span>Endereço<label>*</label></span>
+											<input type="text" name="endereco" >
+										</div>
+                    <div>
+											<span>Data Matricula<label>*</label></span>
+											<input type="text" name="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" >
+										</div>
+
 											<a class="news-letter" href="#">
 												<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>receber Notícias</label>
 											</a>
@@ -89,18 +136,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								<div class="clear"> </div>
 								<div class="register-bottom-grid">
 										<h3>INFORMAÇÕES DE LOGIN</h3>
+                    <div>
+											<span>Endereço de email<label>*</label></span>
+											<input type="text" name="email" value="">
+										</div>
+                    <br><br><br><br>
 										<div>
 											<span>SENHA<label>*</label></span>
-											<input type="text">
+											<input type="text" name="senha" id="inputSenha" value="senha" required="true">
 										</div>
 										<div>
 											<span>CONFIRMAR SENHA<label>*</label></span>
-											<input type="text">
+											<input type="text" name="senha2" id="inputSenha2" value="senha2" required="true">
 										</div>
 										<div class="clear"> </div>
 								</div>
 								<div class="clear"> </div>
-								<input type="submit" value="ENVIAR">
+								<input type="submit" value="ENVIAR" id="inputSubmit">
 						</form>
 					</div>
 				</div>
