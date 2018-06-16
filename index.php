@@ -24,7 +24,10 @@ switch ($page) {
         $cart = new App\Controller\Cart($productRepository, $sessionCart);
         call_user_func_array(array($cart, $action), array());
     break;
-
+    case 'whey':
+        $categoria = new App\Controller\Home($productRepository);
+        call_user_func_array(array($home, $action), array());
+      break;
     default:
         $home = new App\Controller\Home($productRepository);
         call_user_func_array(array($home, $action), array());

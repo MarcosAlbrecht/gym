@@ -251,10 +251,9 @@ li.rss a span:hover{
 	margin-top: 20px;
 }
 
-.iframe{
- border: none;
+.iframe-boladao{
+ height: 700px;
 }
-
 .logo{
 	float:left;
 }

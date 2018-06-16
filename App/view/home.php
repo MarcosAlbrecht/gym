@@ -18,37 +18,56 @@
   	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 </head>
 <body>
+  <div class="menu menuloja" id="menuloja">
+   <div class="container">
+    <div class="header-bottom_left">
+      <ul class="nav">
+        <li ><a href="index.php">Whey</a></li>
+        <li ><a href="index.php">Thermogenico</a></li>
+        <li><a href="index.php?page=cart">Carrinho</a>
+      </ul>
+
+    </div>
+    <div class="social">
+       <ul>
+        <li class="">Olá Visitante</li>
+        <li class=""><a href="#"><span><b>Cadastre-se</b></span></a></li>
+        <li class="">ou Faça</li>
+        <li class=""><a href="#"><b>Login</b></a></li>
+
+       </ul>
+     </div>
+     <div class="clear"></div>
+  </div>
+  </div>
 
     <div class="container">
         <div class="page-header">
-            <h1>Home</h1>
+            <h1>Whey</h1>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Produto</th>
-                    <th>Preço</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($products as $product) : ?>
-                <tr>
-                    <td><?php echo $product->getId();?></td>
-                    <td><?php echo $product->getName();?></td>
-                    <td>R$ <?php echo number_format($product->getPrice(), 2, ',', '.');?></td>
-                    <td>
-                        <form action="index.php?page=cart&action=add" method="post">
-                            <input name="id" type="hidden" value="<?php echo $product->getId()?>"/>
-                            <button type="submit" class="btn btn-primary">Adicionar ao Carrinho</button>
-                        </form>
-                    </td>
-                </tr>
-            <?php endforeach?>
-            </tbody>
-        </table>
+
+    </div>
+
+    <div class="container">
+            <div class="row">
+              <?php foreach ($products as $product) : ?>
+              <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                  <img src="<?php echo $product->getImage();?>" alt="Fjords">
+                  <div class="caption">
+                    <h3><?php echo $product->getName();?></h3>
+                    <p><?php echo $product->getDescription();?></p>
+                    <p>R$ <?php echo number_format($product->getPrice(), 2, ',', '.');?></p>
+                    <form action="index.php?page=cart&action=add" method="post">
+                        <input name="id" type="hidden" value="<?php echo $product->getId()?>"/>
+                        <button type="submit" class="btn btn-primary">Comprar</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <?php endforeach ?>
+            </div>
     </div>
 
 </body>

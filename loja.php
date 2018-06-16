@@ -76,8 +76,8 @@
 	<!-- end menu -->
 
 		<div class="container-fluid">
-			<div class="col-md-12">
-			 	<iframe class="col-md-12 iframe" src="produtos.php" height="500px"></iframe>
+			<div class="col-lg-12 col-md-12 col-sm-12">
+			 	<iframe class="col-md-12" src="index.php" height="1000px"></iframe>
 			</div>
 		</div>
 
