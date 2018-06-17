@@ -3561,13 +3561,8 @@ fieldset.input input[type="submit"]:hover {
 }
 
 .menuLoja{
-	  background-color: red;
-    display:inline-block;
-    width: 720px;
-    height: 540px;
-    color: white;
-    text-align: center;
-    line-height: 540px;
+	  background: #0000FF;
+
 }
 
 /*--responsive design--*/
