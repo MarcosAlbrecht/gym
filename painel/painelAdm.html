@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang=''>
+<head>
+   <meta charset='utf-8'>
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="styles.css">
+   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   <script src="script.js"></script>
+   <title>Academia Monstrão</title>
+</head>
+<body>
+
+  <script>
+  // FUNÇÃO FORMATAR NO MODO CPF.
+      function formatar(mascara, documento){
+        var i = documento.value.length;
+        var saida = mascara.substring(0,1);
+        var texto = mascara.substring(i)
+
+        if (texto.substring(0,1) != saida){
+                  documento.value += texto.substring(0,1);
+        }
+      }
+  </script>
+
+<div id='cssmenu'>
+<ul>
+   <li><a href='#'><span>Alterar Dados</span></a></li>
+   <li><a href='#'><span>Consultar Pagamento</span></a></li>
+   <li><a href='#'><span>Criar Treino</span></a></li>
+   <li><a href='#'><span>Sair</span></a></li>
+</ul>
+</div>
+
+    <br><br>
+    <form class="" action="index.html" method="post">
+      Nome: <br>
+      <input type="text" name="nome" value=""><br>
+      Sobrenome: <br>
+      <input type="text" name="sobrenome" value=""><br>
+      Telefone: <br>
+      <input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)" ><br>
+      CPF: <br>
+      <input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" ><br>
+      Endereço: <br>
+      <input type="text" name="endereco" value=""> <br><br>
+      <input type="submit" name="" value="Alterar">
+    </form>
+
+</body>
+<html>
