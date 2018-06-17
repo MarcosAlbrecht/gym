@@ -22,13 +22,12 @@
 <div class="container">
     <div class="page-header">
         <h1>Carrinho</h1>
-        <a href="index.php" class="btn btn-default">Home</a>
+        <a href="home.php" class="btn btn-default">Home</a>
     </div>
 
     <table class="table">
         <thead>
         <tr>
-            <th>#</th>
             <th>Produto</th>
             <th>Quantidade</th>
             <th>Preço</th>
@@ -39,29 +38,64 @@
         <tfoot>
             <tr>
                 <td colspan="4"></td>
-                <td><b>R$ <?php echo number_format($cartTotal, 2, ',', '.')?></b></td>
+                <td><b>R$ </b></td>
                 <td></td>
             </tr>
         </tfoot>
         <tbody>
-        <?php foreach ($cartItems as $item) : ?>
+
+        <?php
+        session_start();
+        include 'conecta_mysql.inc';
+        $product = array();
+
+        if(!isset($_SESSION['itens'])){
+          $_SESSION['itens'] = array();
+        }
+        //adiciona ao carrinho
+        if(isset($_GET['add']) && $_GET['add'] == "cart"){
+          $idProduct = $_GET['id'];
+          echo "id produto = ".$idProduct;
+          if (!isset($_SESSION['itens'][$idProduct])) {
+            $_SESSION['itens'][$idProduct] = 1;
+          }else{
+            $_SESSION['itens'][$idProduct] += 1;
+          }
+        }
+        //exibe no Carrinho
+        $total=0;
+        if (count($_SESSION['itens']) == 0) {
+          echo 'carrinho vazio';
+        }else{
+            $i=0;
+            foreach ($_SESSION['itens'] as $idProduct => $quantidade) {
+              //echo $quantidade.'<br>';
+              $select = $conexao->query("SELECT * FROM products WHERE id=$idProduct");
+              $linhas = $select->num_rows;
+              $product[$i] = $select->fetch_array();
+              $i++;
+              $total++;
+            }
+        }
+
+
+          for ($i=0; $i < $total ; $i++) : ?>
             <tr>
-                <td><?php echo $item->getProduct()->getId()?></td>
-                <td><?php echo $item->getProduct()->getName()?></td>
+                <td><?php echo $product[$i]['1'];?></td>
                 <td>
-                    <form action="index.php?page=cart&action=update" method="post">
-                        <input name="id" type="hidden" value="<?php echo $item->getProduct()->getId()?>" />
-                        <input size="2" type="text" name="quantity" value=" <?php echo $item->getQuantity()?>"/>
+                    <form action="" method="post">
+                        <input name="id" type="hidden" value=""/>
+                        <input size="2" type="text" name="quantity" value="<?php echo $quantidade ?> "/>
                         <button type="submit" class="btn btn-primary btn-xs">Alterar</button>
                     </form>
                 </td>
-                <td>R$ <?php echo number_format($item->getProduct()->getPrice(), 2, ',', '.')?></td>
-                <td>R$ <?php echo number_format($item->getSubTotal(), 2, ',', '.')?></td>
+                <td>R$ <?php echo $product[$i]['2'];?></td>
+                <td>R$ </td>
                 <td>
-                     <a href="index.php?page=cart&action=delete&id=<?php echo $item->getProduct()->getId()?>" class="btn btn-danger">Excluir</a>
+                     <a href="" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>
-        <?php endforeach;?>
+        <?php  endfor; ?>
         </tbody>
     </table>
 </div>

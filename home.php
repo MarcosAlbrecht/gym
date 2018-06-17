@@ -18,55 +18,62 @@
   	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 </head>
 <body>
-  <div class="menu menuloja" id="menuloja">
-   <div class="container">
-    <div class="header-bottom_left">
-      <ul class="nav">
-        <li ><a href="index.php">Whey</a></li>
-        <li ><a href="index.php">Thermogenico</a></li>
-        <li><a href="index.php?page=cart">Carrinho</a>
-      </ul>
-
-    </div>
-    <div class="social">
-       <ul>
-        <li class="">Olá Visitante</li>
-        <li class=""><a href="#"><span><b>Cadastre-se</b></span></a></li>
-        <li class="">ou Faça</li>
-        <li class=""><a href="#"><b>Login</b></a></li>
-
+  <div class="menu" id="menu">
+  <div class="container">
+   <div class="logo">
+     <div class="h_menu4">
+       <a class="toggleMenu" href="#">Menu</a>
+       <ul class="nav">
+         <li class="active"><a href="index.html">Whey</a></li>
+         <li><a href="sobre.html">Thermogênico</a></li>
+         <li><a href="cart.php">Carrinho</a></li>
        </ul>
-     </div>
-     <div class="clear"></div>
+        <script type="text/javascript" src="js/nav.js"></script>
+      </div><!-- end h_menu4 -->
+   </div>
+   <!-- start h_menu4 -->
+   <div class="clear"></div>
   </div>
-  </div>
-
+</div>
     <div class="container">
         <div class="page-header">
-            <h1>Whey</h1>
         </div>
-
-
     </div>
 
     <div class="container">
             <div class="row">
-              <?php foreach ($products as $product) : ?>
+              <?php
+              include 'conecta_mysql.inc';
+
+              $select = $conexao->query("SELECT * FROM products");
+              $linhas = $select->num_rows;
+              $conexao->close();
+              $product = array();
+              for ($i=0; $i <$linhas ; $i++) {
+
+                $product[$i] = $select->fetch_array();
+                //echo $product[$i]['name']." ";
+
+
+              }
+              echo $product[0]['name'];
+            for ($i=0; $i < $linhas; $i++) : ?>
+
               <div class="col-sm-6 col-md-4">
                 <div class="thumbnail">
-                  <img src="<?php echo $product->getImage();?>" alt="Fjords">
+                  <img src="<?php echo $product[$i]['image'];?>" alt="Fjords">
                   <div class="caption">
-                    <h3><?php echo $product->getName();?></h3>
-                    <p><?php echo $product->getDescription();?></p>
-                    <p>R$ <?php echo number_format($product->getPrice(), 2, ',', '.');?></p>
-                    <form action="index.php?page=cart&action=add" method="post">
-                        <input name="id" type="hidden" value="<?php echo $product->getId()?>"/>
+                    <h3><?php echo $product[$i]['name'];;?></h3>
+                    <p><?php echo $product[$i]['description'];?></p>
+                    <p>R$ <?php echo number_format($product[$i][2], 2, ',', '.');?></p>
+                    <form action="cart.php?add=cart&id=<?php echo $product[$i][0]?>" method="post">
+                        <input name="id" type="hidden" value=""/>
                         <button type="submit" class="btn btn-primary">Comprar</button>
                     </form>
                   </div>
                 </div>
               </div>
-              <?php endforeach ?>
+            <?php endfor; ?>
             </div>
     </div>
 

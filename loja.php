@@ -19,14 +19,7 @@
 </head>
 <body>
  <!-- start header_top -->
-	<div class="header">
-	   <div class="container">
 
-		  <div class="header-arrow">
-		     <a href="#menu" class="class scroll"><span> </span </a>
-		  </div>
-	    </div>
-	  </div>
 	<!-- end header_top -->
 	<!-- start header_bottom -->
 	  <div class="header-bottom">
@@ -77,7 +70,7 @@
 
 		<div class="container-fluid">
 			<div class="col-lg-12 col-md-12 col-sm-12">
-			 	<iframe class="col-md-12" src="index.php" height="1000px"></iframe>
+			 	<iframe class="col-md-12" src="home.php" height="1000px"></iframe>
 			</div>
 		</div>
 
