@@ -18,7 +18,28 @@
   	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 </head>
 <body>
+  <div class="menu" id="menu">
+  <div class="container">
+   <div class="logo">
+     <div class="h_menu4">
+       <a class="toggleMenu" href="#">Menu</a>
+       <ul class="nav">
+         <li><a href="home.php">Whey</a></li>
+         <li><a href="home.php">Thermogênico</a></li>
+         <li class="active"><a href="cart.php" >Carrinho</a></li>
+         <li><a href="meuspedidos.php">Meus Pedidos</a></li>
+       </ul>
+        <script type="text/javascript" src="js/nav.js"></script>
+      </div><!-- end h_menu4 -->
+   </div>
+   <!-- start h_menu4 -->
+   <div class="clear"></div>
+  </div>
+</div>
+<?php
+session_start();
 
+echo '
 <div class="container">
     <div class="page-header">
         <h1>Carrinho</h1>
@@ -36,18 +57,20 @@
         </tr>
         </thead>
         <tfoot>
+
             <tr>
                 <td colspan="4"></td>
-                <td><b>R$ </b></td>
+                <td><b></b></td>
                 <td></td>
             </tr>
-        </tfoot>
-        <tbody>
 
-        <?php
-        session_start();
+        </tfoot>
+        <tbody>';
+
+
         include 'conecta_mysql.inc';
-        $product = array();
+        //$product = array();
+        $totalcompra = 0;
 
         if(!isset($_SESSION['itens'])){
           $_SESSION['itens'] = array();
@@ -55,7 +78,6 @@
         //adiciona ao carrinho
         if(isset($_GET['add']) && $_GET['add'] == "cart"){
           $idProduct = $_GET['id'];
-          echo "id produto = ".$idProduct;
           if (!isset($_SESSION['itens'][$idProduct])) {
             $_SESSION['itens'][$idProduct] = 1;
           }else{
@@ -72,33 +94,54 @@
               //echo $quantidade.'<br>';
               $select = $conexao->query("SELECT * FROM products WHERE id=$idProduct");
               $linhas = $select->num_rows;
-              $product[$i] = $select->fetch_array();
+              $product = $select->fetch_array();
               $i++;
-              $total++;
+              $total += $quantidade;
+
+              echo '<tr><td>'.$product['name'].'</td>
+                  <td>
+                      <form action="remover.php?alter=cart&id='.$product['id'].'" method="post">
+                          <input name="id" type="hidden" value="'.$product['id'].'"/>
+                          <input size="2" type="text" name="quantity" value="'.$quantidade.'"/>
+                          <button type="submit" class="btn btn-primary btn-xs">Alterar</button>
+                      </form>
+                  </td>
+                  <td>R$ '.number_format($product['price'], 2, ',', '.').'</td>
+                  <td>R$ '.(double)$product['price'] * $quantidade.'</td>
+                  <td>
+                       <a href="remover.php?remov=cart&id='.$product['id'].'"class="btn btn-danger">Excluir</a>
+                  </td>
+              </tr>';
+              $totalcompra += (double)$product['price'] * $quantidade;
             }
+
         }
-
-
-          for ($i=0; $i < $total ; $i++) : ?>
-            <tr>
-                <td><?php echo $product[$i]['1'];?></td>
-                <td>
-                    <form action="" method="post">
-                        <input name="id" type="hidden" value=""/>
-                        <input size="2" type="text" name="quantity" value="<?php echo $quantidade ?> "/>
-                        <button type="submit" class="btn btn-primary btn-xs">Alterar</button>
-                    </form>
-                </td>
-                <td>R$ <?php echo $product[$i]['2'];?></td>
-                <td>R$ </td>
-                <td>
-                     <a href="" class="btn btn-danger">Excluir</a>
-                </td>
-            </tr>
-        <?php  endfor; ?>
+        echo '
         </tbody>
     </table>
-</div>
+</div>';
+echo '
+<div class="."container".">
+  <div class="row">
+    <div class="col-md-9">
 
+    </div>
+    <div class="col-md-3">
+      <div class="cardio-sublist">
+        <p>Total da compra R$ '.$totalcompra.'</p>
+        <form action="remover.php?alter=cart&id='.$product['id'].'" method="post">
+            <input name="id" type="hidden" value="'.$totalcompra.'"/>
+            <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>';
+?>
+<div class="">
+
+</div>
 </body>
 </html>

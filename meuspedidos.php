@@ -24,10 +24,10 @@
      <div class="h_menu4">
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li class="active"><a href="home.php">Whey</a></li>
+         <li><a href="home.php">Whey</a></li>
          <li><a href="home.php">Thermogênico</a></li>
          <li><a href="cart.php">Carrinho</a></li>
-         <li><a href="meuspedidos.php">Meus Pedidos</a></li>
+         <li class="active"><a href="meuspedidos.php">Meus Pedidos</a></li>
        </ul>
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
@@ -42,37 +42,8 @@
     </div>
 
     <div class="container">
-            <div class="row">
-              <?php
-              include 'conecta_mysql.inc';
-              session_start();
-              $select = $conexao->query("SELECT * FROM products");
-              $linhas = $select->num_rows;
-              $conexao->close();
-              $product = array();
-              for ($i=0; $i <$linhas ; $i++) {
-                $product[$i] = $select->fetch_array();
-                //echo $product[$i]['name']." ";
-              }
-
-            for ($i=0; $i < $linhas; $i++) : ?>
-
-              <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                  <img src="<?php echo $product[$i]['image'];?>" alt="Fjords">
-                  <div class="caption">
-                    <h3><?php echo $product[$i]['name'];;?></h3>
-                    <p><?php echo $product[$i]['description'];?></p>
-                    <p>R$ <?php echo number_format($product[$i][2], 2, ',', '.');?></p>
-                    <form action="cart.php?add=cart&id=<?php echo $product[$i][0]?>" method="post">
-                        <input name="id" type="hidden" value=""/>
-                        <button type="submit" class="btn btn-primary">Comprar</button>
-                    </form>
-                  </div>
-                </div>
-              </div>
-            <?php endfor; ?>
-            </div>
+        <div class="row">
+        </div>
     </div>
 
 </body>
