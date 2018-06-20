@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Carrinho de Compras - Cart</title>
+    <title>Carrinho de Compras</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <title>Academia Mosntrão</title>
   	<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
@@ -42,8 +42,10 @@ session_start();
 echo '
 <div class="container">
     <div class="page-header">
-        <h1>Carrinho</h1>
-        <a href="home.php" class="btn btn-default">Home</a>
+        <h2>Carrinho de Compras</h2>
+        <form action="home.php" method="post">
+            <button type="submit" class="btn btn-dark">Continuar Comprando</button>
+        </form>
     </div>
 
     <table class="table">
@@ -87,13 +89,13 @@ echo '
         //exibe no Carrinho
         $total=0;
         if (count($_SESSION['itens']) == 0) {
-          echo 'carrinho vazio';
+          //echo 'carrinho vazio';
         }else{
             $i=0;
             foreach ($_SESSION['itens'] as $idProduct => $quantidade) {
               //echo $quantidade.'<br>';
-              $select = $conexao->query("SELECT * FROM products WHERE id=$idProduct");
-              $linhas = $select->num_rows;
+              $select = $mysqli->query("SELECT * FROM products WHERE id=$idProduct");
+              //$linhas = $select->num_rows;
               $product = $select->fetch_array();
               $i++;
               $total += $quantidade;
@@ -107,14 +109,14 @@ echo '
                       </form>
                   </td>
                   <td>R$ '.number_format($product['price'], 2, ',', '.').'</td>
-                  <td>R$ '.(double)$product['price'] * $quantidade.'</td>
+                  <td>R$ '.number_format(((double)$product['price'] * $quantidade),2, ',', '.').'</td>
                   <td>
                        <a href="remover.php?remov=cart&id='.$product['id'].'"class="btn btn-danger">Excluir</a>
                   </td>
               </tr>';
               $totalcompra += (double)$product['price'] * $quantidade;
             }
-
+              $mysqli->close();
         }
         echo '
         </tbody>
@@ -127,11 +129,11 @@ echo '
 
     </div>
     <div class="col-md-3">
-      <div class="cardio-sublist">
-        <p>Total da compra R$ '.$totalcompra.'</p>
-        <form action="remover.php?alter=cart&id='.$product['id'].'" method="post">
-            <input name="id" type="hidden" value="'.$totalcompra.'"/>
-            <button type="submit" class="btn btn-success">Finalizar Pedido</button>
+      <div class="members members-cart">
+        <p><b>Total da compra R$ '.number_format($totalcompra, 2, ',','.').'</b></p>
+        <form action="finalizarpedido.php" method="post">
+            <input name="totalcompra" type="hidden" value="'.$totalcompra.'"/>
+            <button type="submit" class="btn btn-success ">Finalizar Pedido</button>
         </form>
       </div>
     </div>
@@ -139,9 +141,10 @@ echo '
   </div>
 
 </div>';
-?>
-<div class="">
 
-</div>
+?>
+
+
+
 </body>
 </html>

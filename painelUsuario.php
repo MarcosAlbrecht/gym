@@ -39,7 +39,8 @@
   </div>
 </div>
 <div class="container">
-  <?php session_start();
+  <?php
+    session_start();
     echo $_SESSION['login'] . "<br>";
   	echo $_SESSION['senha'] . "<br>";
   	echo $_SESSION['TIPOUSUARIO'] . "<br>"; ?>

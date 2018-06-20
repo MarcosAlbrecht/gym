@@ -14,10 +14,11 @@
 	$registro  = $resultado->fetch_row();
 
 	session_start();
-  $_SESSION['email'] = $email;
-	$_SESSION['senha'] = $senha;
-	$_SESSION['TIPOUSUARIO'] = $registro[3];
-
+	
+  $_SESSION['email'] = $registro[4];
+	$_SESSION['senha'] = $registro[5];
+	$_SESSION['TIPOUSUARIO'] = $registro[6];
+	$_SESSION['idUsuario'] = $registro[0];
 
 
 if($_SESSION['TIPOUSUARIO'] == 1){
@@ -32,7 +33,7 @@ if($_SESSION['TIPOUSUARIO'] == 2){
 }
 if($_SESSION['TIPOUSUARIO'] == 3){
 
-  include 'painelUsuario.html';
+  include 'painelUsuario.php';
 
 }
 

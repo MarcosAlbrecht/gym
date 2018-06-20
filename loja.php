@@ -70,7 +70,7 @@
 
 		<div class="container-fluid">
 			<div class="col-lg-12 col-md-12 col-sm-12">
-			 	<iframe class="col-md-12" src="home.php" height="1000px"></iframe>
+			 	<iframe class="col-md-12 iframeloja" src="home.php" height="1000px" frameborder="0"></iframe>
 			</div>
 		</div>
 

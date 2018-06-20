@@ -18,7 +18,8 @@
   	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 </head>
 <body>
-  <div class="menu" id="menu">
+  <div class="clear"></div>
+  <div class="menu menuloja" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
@@ -46,9 +47,9 @@
               <?php
               include 'conecta_mysql.inc';
               session_start();
-              $select = $conexao->query("SELECT * FROM products");
+              $select = $mysqli->query("SELECT * FROM products");
               $linhas = $select->num_rows;
-              $conexao->close();
+              $mysqli->close();
               $product = array();
               for ($i=0; $i <$linhas ; $i++) {
                 $product[$i] = $select->fetch_array();
@@ -57,7 +58,7 @@
 
             for ($i=0; $i < $linhas; $i++) : ?>
 
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-3">
                 <div class="thumbnail">
                   <img src="<?php echo $product[$i]['image'];?>" alt="Fjords">
                   <div class="caption">

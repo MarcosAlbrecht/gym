@@ -37,8 +37,72 @@
   </div>
 </div>
     <div class="container">
-        <div class="page-header">
-        </div>
+          <div class="col-md-12">
+            <p>
+            <h2>Minha conta</h2>
+            <h4>Administre os seus pedidos na loja Monstrão Suplementos</h4></p>
+
+          </div>
+    </div>
+
+    <div class="container">
+      <div class="col-md-6">
+
+        <div class="container">
+            <div class="page-header">
+
+            </div>
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Num. do Pedido</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                </tr>
+                </thead>
+                <tfoot>
+
+                    <tr>
+                        <td colspan="4"></td>
+                        <td><b></b></td>
+                        <td></td>
+                    </tr>
+
+                </tfoot>
+                <tbody>
+                  <?php
+                    include 'conecta_mysql.inc';
+                    session_start();
+
+                    if(!isset($_SESSION['login']) || !isset($_SESSION['senha'])) {
+                        echo 'logado';
+                        echo $_SESSION['login'];
+                    }else{
+                        header('location: login.html');
+                    }
+
+                   ?>
+                  <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td>
+
+                      </td>
+                  </tr>
+
+            </tbody>
+        </table>
+
+
+
+      </div>
+      <div class="col-md-6">
+
+      </div>
+
     </div>
 
     <div class="container">
