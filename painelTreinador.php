@@ -18,58 +18,27 @@
    <title>Academia Monstrão</title>
 </head>
 <body>
-
   <div class="menu" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
-
-      <a class="toggleMenu" href="#">Menu</a>
+       <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li ><a href="alterarDados.html">Alterar Dados</a></li>
+         <li ><a href="alterarDados.php">Alterar Dados</a></li>
          <li><a href="#">Consultar Pagamentos</a></li>
-         <li><a href="criarTreino.html">Criar Treino</a></li>
+         <li><a href="criarTreino.php">Criar Treino</a></li>
          <li><a href="index.html">Sair</a></li>
        </ul>
-
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
    </div>
    <!-- start h_menu4 -->
+
    <div class="clear"></div>
   </div>
 </div>
-<div class="container">
-    <br><br>
-    <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="alterar">
-      Nome: <br>
-      <input type="text" name="nome" value=""><br>
-      Sobrenome: <br>
-      <input type="text" name="sobrenome" value=""><br>
-      Telefone: <br>
-      <input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)" ><br>
-      CPF: <br>
-      <input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" ><br>
-      Endereço: <br>
-      <input type="text" name="endereco" value=""> <br><br>
-      <input type="submit" name="" value="Alterar">
-    </form>
-</div>
 
 
-<script>
-// FUNÇÃO FORMATAR NO MODO CPF.
-    function formatar(mascara, documento){
-      var i = documento.value.length;
-      var saida = mascara.substring(0,1);
-      var texto = mascara.substring(i)
 
-      if (texto.substring(0,1) != saida){
-                documento.value += texto.substring(0,1);
-      }
-
-    }
-</script>
 </body>
 <html>

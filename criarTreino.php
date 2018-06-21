@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang=''>
 <head>
@@ -19,45 +17,47 @@
  	 <script src="js/jquery.min.js"></script>
    <title>Academia Monstrão</title>
 </head>
-
 <body>
-
 
   <div class="menu" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
-       <a class="toggleMenu" href="#">Menu</a>
+
+      <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li><a href="verifica.php">Consultar Treinos</a></li>
-         <li><a href="pagarMensalidade.php">Pagar Mensalidade</a></li>
+         <li ><a href="alterarDados.php">Alterar Dados</a></li>
+         <li><a href="mensalidades.php">Mensalidades</a></li>
+         <li><a href="criarTreino.php">Criar Treino</a></li>
          <li><a href="index.html">Sair</a></li>
        </ul>
+
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
    </div>
    <!-- start h_menu4 -->
-
    <div class="clear"></div>
   </div>
 </div>
 <div class="container">
-  <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="mostrarTreino">
-    Digite seu nome: <br>
-    <input type="text" name="nome" value=""> <br> <br>
-    <input type="submit" name="" value="Mostrar Treino">
-  </form>
+    <br><br>
+    <form class="" action="verifica.php" method="post">
+    <input type="hidden" name="operacao" value="criarTreino">
+      Treino - ABC <br>
+      (Seg-Qua-Sex) ou (Ter-Qui-sab) <br><br>
+      Aluno: <br>
+      <input type="textarea" name="aluno" value=""> <br>
+      Treino A: <br>
+      <textarea name="treinoA" rows="5" cols="25"></textarea><br>
+      Treino B: <br>
+      <textarea name="treinoB" rows="5" cols="25"></textarea><br>
+      Treino C: <br>
+      <textarea name="treinoC" rows="5" cols="25"></textarea><br> <br>
+      <input type="submit" name="" value="Salvar Treino">
+    </form>
 </div>
 
-
-
-
-
-
-
-
-
+<br>
 <div class="footer-bottom">
   <div class="container">
   <div class="row section group">
@@ -114,8 +114,6 @@
   <div class="clear"></div>
  </div>
   </div>
-
-
 
 </body>
 <html>

@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang=''>
 <head>
@@ -19,45 +17,61 @@
  	 <script src="js/jquery.min.js"></script>
    <title>Academia Monstrão</title>
 </head>
-
 <body>
-
 
   <div class="menu" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
-       <a class="toggleMenu" href="#">Menu</a>
+
+      <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li><a href="verifica.php">Consultar Treinos</a></li>
+         <li ><a href="verifica.php">Consultar Treinos</a></li>
          <li><a href="pagarMensalidade.php">Pagar Mensalidade</a></li>
          <li><a href="index.html">Sair</a></li>
        </ul>
+
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
    </div>
    <!-- start h_menu4 -->
-
    <div class="clear"></div>
   </div>
 </div>
 <div class="container">
-  <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="mostrarTreino">
-    Digite seu nome: <br>
-    <input type="text" name="nome" value=""> <br> <br>
-    <input type="submit" name="" value="Mostrar Treino">
-  </form>
+    <br><br>
+    <form class="" action="verifica.php" method="post">
+    <input type="hidden" name="operacao" value="alterar">
+      Numero do Cartão: <br>
+      <input type="text" name="numeroCartao" value=""> <br>
+      Nome do Cartão: <br>
+      <input type="text" name="nomeCartao" value=""> <br>
+      Data de Expiração: <br>
+      <input type="text" name="dataExpiracao" value=""> <br>
+      Código de Segurança: <br>
+      <input type="text" name="codigoSeguranca" value="">
+      <br><br>
+      <input type="submit" name="" value="Pagar">
+    </form>
 </div>
 
 
 
 
+<script>
+// FUNÇÃO FORMATAR NO MODO CPF.
+    function formatar(mascara, documento){
+      var i = documento.value.length;
+      var saida = mascara.substring(0,1);
+      var texto = mascara.substring(i)
 
+      if (texto.substring(0,1) != saida){
+                documento.value += texto.substring(0,1);
+      }
 
-
-
-
+    }
+</script>
+<br><br><br><br><br><br><br><br>
 <div class="footer-bottom">
   <div class="container">
   <div class="row section group">
@@ -114,8 +128,5 @@
   <div class="clear"></div>
  </div>
   </div>
-
-
-
 </body>
 <html>

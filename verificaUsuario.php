@@ -14,26 +14,27 @@
 	$registro  = $resultado->fetch_row();
 
 	session_start();
-	
-  $_SESSION['email'] = $registro[4];
-	$_SESSION['senha'] = $registro[5];
+
+  $_SESSION['email'] = $email;
+	$_SESSION['senha'] = $senha;
 	$_SESSION['TIPOUSUARIO'] = $registro[6];
 	$_SESSION['idUsuario'] = $registro[0];
+	$_SESSION['nome'] = $registro[1];
+                                 
 
 
-if($_SESSION['TIPOUSUARIO'] == 1){
-
-  header('location: painelMaster.html');
-
-}
 if($_SESSION['TIPOUSUARIO'] == 2){
 
-  include 'painelTreinador.html';
+  header('location:  painelTreinador.php');
 
-}
-if($_SESSION['TIPOUSUARIO'] == 3){
+}else if($_SESSION['TIPOUSUARIO'] == 1){
 
-  include 'painelUsuario.php';
+  header('location: painelUsuario.php');
+
+}else{
+
+	header('location: login.html');
+
 
 }
 

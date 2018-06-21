@@ -79,26 +79,26 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         });
         });
 </script>
+<script>
+// FUNÇÃO FORMATAR NO MODO CPF.
+    function formatar(mascara, documento){
+      var i = documento.value.length;
+      var saida = mascara.substring(0,1);
+      var texto = mascara.substring(i)
 
-        <script>
-        // FUNÇÃO FORMATAR NO MODO CPF.
-            function formatar(mascara, documento){
-              var i = documento.value.length;
-              var saida = mascara.substring(0,1);
-              var texto = mascara.substring(i)
+      if (texto.substring(0,1) != saida){
+                documento.value += texto.substring(0,1);
+      }
 
-              if (texto.substring(0,1) != saida){
-                        documento.value += texto.substring(0,1);
-              }
-
-            }
-        </script>
+    }
+</script>
 
 
         <div class="main">
           <div class="register-grids">
           	<div class="container">
-						<form action="cadastroUsuario.php" method="POST">
+						<form action="verifica.php" method="POST">
+              <input type="hidden" name="operacao" value="cadastrar">
 								<div class="register-top-grid">
 										<h3>INFORMAÇÕES PESSOAIS</h3>
 										<div>
@@ -108,34 +108,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 										<div>
 											<span>Sobrenome<label>*</label></span>
-											<input type="text" name=sobrenome"" value="">
+											<input type="text" name="sobrenome" value="">
 										</div>
 
                     <div>
 											<span>Telefone<label>*</label></span>
-											<input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)" >
+											<input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)">
 										</div>
                     <div>
 											<span>CPF<label>*</label></span>
-											<input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" >
+											<input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)">
 										</div>
                     <div>
 											<span>Endereço<label>*</label></span>
 											<input type="text" name="endereco" >
 										</div>
-                    <div>
-											<span>Data Matricula<label>*</label></span>
-											<input type="text" name="date" maxlength="10" OnKeyPress="formatar('##/##/####', this)" >
-										</div>
-                    <br>
 
-                    <div>
-                      Tipo: <br><br>
-                      <select name="tipo">
-                        <option value="3">Aluno</option>
-                        <option value="2">Professor</option>
-                      </select>
-                    </div>
+
+                    <br>
 
 										<div class="clear"> </div>
 								</div>
@@ -149,15 +139,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <br><br><br><br>
 										<div>
 											<span>SENHA<label>*</label></span>
-											<input type="text" name="senha" id="inputSenha" value="senha" required="true">
+											<input type="text" name="senha" id="inputSenha" value="#" required="true">
 										</div>
 										<div>
 											<span>CONFIRMAR SENHA<label>*</label></span>
-											<input type="text" name="senha2" id="inputSenha2" value="senha2" required="true">
+											<input type="text" name="senha2" id="inputSenha2" value="#" required="true">
 										</div>
 										<div class="clear"> </div>
 								</div>
 								<div class="clear"> </div>
+                <input type="hidden" name="tipo" value="1">
 								<input type="submit" value="ENVIAR" id="inputSubmit">
 						</form>
 					</div>
