@@ -18,14 +18,64 @@
   	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 </head>
 <body>
-  <div class="menu" id="menu">
+
+  <!-- start header_top -->
+
+ 	<!-- end header_top -->
+ 	<!-- start header_bottom -->
+ 	  <div class="header-bottom">
+ 		 <div class="container">
+ 			<div class="header-bottom_left">
+ 				<i class="phone"> </i><span>1-200-346-2986</span>
+ 			</div>
+ 			<div class="social">
+ 			   <ul>
+ 				  <li class="facebook"><a href="#"><span> </span></a></li>
+ 				  <li class="twitter"><a href="#"><span> </span></a></li>
+ 				  <li class="pinterest"><a href="#"><span> </span></a></li>
+ 				  <li class="google"><a href="#"><span> </span></a></li>
+ 				  <li class="tumblr"><a href="#"><span> </span></a></li>
+ 				  <li class="instagram"><a href="#"><span> </span></a></li>
+ 				  <li class="rss"><a href="#"><span> </span></a></li>
+ 			   </ul>
+ 		   </div>
+ 		   <div class="clear"></div>
+ 		</div>
+ 	  </div>
+ 	<!-- end header_bottom -->
+ 	<!-- start menu -->
+     <div class="menu" id="menu">
+ 		  <div class="container">
+ 			 <div class="logo">
+ 				<a href="index.html"><img src="images/logo.png" alt=""/></a>
+ 			 </div>
+ 			 <!-- start h_menu4 -->
+ 			 <div class="h_menu4">
+ 			   <a class="toggleMenu" href="#">Menu</a>
+ 				 <ul class="nav">
+ 				   <li><a href="index.html">Home</a></li>
+ 				   <li><a href="sobre.html">Sobre</a></li>
+ 				   <li><a href="trainers.html">Treinos</a></li>
+ 				   <li><a href="classes.html">Professores</a></li>
+ 				   <li class="active"><a href="loja.php">Loja</a></li>
+ 				   <li><a href="pricing.html">Preços</a></li>
+ 				   <li><a href="contact.html">Contato</a></li>
+ 					 <li><a href="login.html">Login</a></li>
+ 				 </ul>
+ 				  <script type="text/javascript" src="js/nav.js"></script>
+ 			  </div><!-- end h_menu4 -->
+ 			 <div class="clear"></div>
+ 	  </div>
+ 	</div>
+ 	<!-- end menu -->
+
+  <div class="menu menuloja" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li><a href="home.php">Whey</a></li>
-         <li><a href="home.php">Thermogênico</a></li>
+         <li><a href="loja.php">Loja</a></li>
          <li class="active"><a href="cart.php" >Carrinho</a></li>
          <li><a href="meuspedidos.php">Meus Pedidos</a></li>
        </ul>
@@ -122,6 +172,25 @@ echo '
         </tbody>
     </table>
 </div>';
+if (count($_SESSION['itens']) != 0) {
+  echo '
+  <div class="."container".">
+    <div class="row">
+      <div class="col-md-9">
+
+      </div>
+      <div class="col-md-3">
+        <div class="members members-cart">
+          <p><b>Total da compra R$ '.number_format($totalcompra, 2, ',','.').'</b></p>
+          <form action="finalizarpedido.php" method="post">
+              <input name="totalcompra" type="hidden" value="'.$totalcompra.'"/>
+              <button type="hidden" class="btn btn-success ">Finalizar Pedido</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>';
+}else{
 echo '
 <div class="."container".">
   <div class="row">
@@ -133,15 +202,13 @@ echo '
         <p><b>Total da compra R$ '.number_format($totalcompra, 2, ',','.').'</b></p>
         <form action="finalizarpedido.php" method="post">
             <input name="totalcompra" type="hidden" value="'.$totalcompra.'"/>
-            <button type="submit" class="btn btn-success ">Finalizar Pedido</button>
+
         </form>
       </div>
     </div>
-
   </div>
-
 </div>';
-
+}
 ?>
 
 

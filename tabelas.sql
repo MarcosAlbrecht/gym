@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `dbloja`.`venda` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_venda_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`));
+    REFERENCES `dbloja`.`usuario` (`id`));
 
 
 -- -----------------------------------------------------
@@ -124,10 +124,10 @@ CREATE TABLE IF NOT EXISTS `dbloja`.`products_has_venda` (
   PRIMARY KEY (`products_id`, `venda_id`),
   CONSTRAINT `fk_products_has_venda_products`
     FOREIGN KEY (`products_id`)
-    REFERENCES `mydb`.`products` (`id`),
+    REFERENCES `dbloja`.`products` (`id`),
   CONSTRAINT `fk_products_has_venda_venda1`
     FOREIGN KEY (`venda_id`)
-    REFERENCES `mydb`.`venda` (`id`));
+    REFERENCES `dbloja`.`venda` (`id`));
 
 insert into products(name, price, image, description, qtd) values ("Whey gold 1KG", 130.90, "images/wheygold.jpg", "A Whey Gold 100% Protein ON é uma proteína de alto valor biológico e é muito usada por atletas de rendimento, praticantes de atividade física e até idosos que pretendem minimizar a perda muscular que ocorre com o processo de envelhecimento.", 10);
   insert into products(name, price, image, description, qtd) values ("Whey Max Titanium 1KG", 110.00, "images/whey-max-titanium.jpg", "O 100% Whey Protein Max Titanium 900 g é um suplemento proteico à base de proteína concentrada do soro do leite. Possui alto valor biológico, sendo rico em BCAA.", 10);

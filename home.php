@@ -18,15 +18,14 @@
   	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
 </head>
 <body>
-  <div class="clear"></div>
+
   <div class="menu menuloja" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li class="active"><a href="home.php">Whey</a></li>
-         <li><a href="home.php">Thermogênico</a></li>
+         <li class="active"><a href="home.php">Loja</a></li>
          <li><a href="cart.php">Carrinho</a></li>
          <li><a href="meuspedidos.php">Meus Pedidos</a></li>
        </ul>
@@ -43,6 +42,15 @@
     </div>
 
     <div class="container">
+      <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#">Whey</a></li>
+          <li><a href="#">Thermogênico</a></li>
+        </ul>
+      </div>
+      <div class="col-md-10">
+
+
             <div class="row">
               <?php
               include 'conecta_mysql.inc';
@@ -73,7 +81,8 @@
                 </div>
               </div>
             <?php endfor; ?>
-            </div>
+          </div>
+        </div>
     </div>
 
 </body>
