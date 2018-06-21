@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -59,7 +59,7 @@
 				   <li class="active"><a href="loja.php">Loja</a></li>
 				   <li><a href="pricing.html">Preços</a></li>
 				   <li><a href="contact.html">Contato</a></li>
-					 <li><a href="login.html">Login</a></li>
+					 <li><a href="login.php">Login</a></li>
 				 </ul>
 				  <script type="text/javascript" src="js/nav.js"></script>
 			  </div><!-- end h_menu4 -->
@@ -68,10 +68,77 @@
 	</div>
 	<!-- end menu -->
 
-		<div class="container-fluid">
-			<div class="col-lg-12 col-md-12 col-sm-12">
-			 	<iframe class="col-md-12 iframeloja" src="home.php" height="1000px" frameborder="0"></iframe>
+	<div class="menu menuloja" id="menu">
+	<div class="container">
+	 <div class="logo">
+		 <div class="h_menu4">
+			 <a class="toggleMenu" href="#">Menu</a>
+			 <ul class="nav">
+				 <li class="active"><a href="home.php">Loja</a></li>
+				 <li><a href="cart.php">Carrinho</a></li>
+				 <li><a href="meuspedidos.php">Meus Pedidos</a></li>
+				 <?php
+				 	if (isset($_SESSION['email']) && $_SESSION['senha']) {
+				 		if ($_SESSION['idUsuario'] == 1) {
+				 			echo '<li><a href="paginaAdmLoja.php">Administração</a></li>';
+				 		}
+					}
+				  ?>
+			 </ul>
+				<script type="text/javascript" src="js/nav.js"></script>
+			</div><!-- end h_menu4 -->
+	 </div>
+	 <!-- start h_menu4 -->
+	 <div class="clear"></div>
+	</div>
+</div>
+		<div class="container">
+				<div class="page-header">
+				</div>
+		</div>
+
+		<div class="container">
+			<div class="col-md-2">
+				<ul class="nav nav-pills nav-stacked">
+					<li><a href="#">Whey</a></li>
+					<li><a href="#">Thermogênico</a></li>
+				</ul>
 			</div>
+			<div class="col-md-10">
+
+
+						<div class="row">
+							<?php
+							include 'conecta_mysql.inc';
+
+							$select = $mysqli->query("SELECT * FROM products");
+							$linhas = $select->num_rows;
+							$mysqli->close();
+							$product = array();
+							for ($i=0; $i <$linhas ; $i++) {
+								$product[$i] = $select->fetch_array();
+								//echo $product[$i]['name']." ";
+							}
+
+						for ($i=0; $i < $linhas; $i++) : ?>
+
+							<div class="col-sm-6 col-md-3">
+								<div class="thumbnail">
+									<img src="<?php echo $product[$i]['image'];?>" alt="Fjords">
+									<div class="caption">
+										<h3><?php echo $product[$i]['name'];;?></h3>
+										<p><?php echo $product[$i]['description'];?></p>
+										<p>R$ <?php echo number_format($product[$i][2], 2, ',', '.');?></p>
+										<form action="cart.php?add=cart&id=<?php echo $product[$i][0]?>" method="post">
+												<input name="id" type="hidden" value=""/>
+												<button type="submit" class="btn btn-primary">Comprar</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						<?php endfor; ?>
+					</div>
+				</div>
 		</div>
 
 
@@ -128,8 +195,8 @@
 				  <li class="rss"><a href="#"><span> </span></a></li>
 			   </ul>
 		    </div>
-		   <div class="clear"></div>
-		  </div>
+		   	<div class="clear"></div>
+		  	</div>
 	     </div>
 </body>
 </html>
