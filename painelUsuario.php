@@ -44,12 +44,52 @@
 <div class="container">
   <form class="" action="verifica.php" method="post">
     <input type="hidden" name="operacao" value="mostrarTreino">
-    Digite seu nome: <br>
+    <?php
+
+
+     ?>
     <input type="text" name="nome" value=""> <br> <br>
     <input type="submit" name="" value="Mostrar Treino">
   </form>
 </div>
+<div class="container">
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ddd</th>
+          <th>sasa</th>
+          <th>aaa</th>
+        </tr>
+      </thead>
+<?php
+session_start();
+include 'conecta_mysql.inc';
+if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+  $idAluno = $_SESSION['idUsuario'];
+  $resultado = $mysqli->query("SELECT * FROM usuario");
+  $linhas = $resultado->num_rows;
 
+for ($i=0; $i <$linhas ; $i++) {
+  $dados = $resultado->fetch_array();
+
+  echo'
+         <tbody>
+           <tr>
+             <td>'.$dados['email'].'</td>
+             <td>'.$dados['senha'].'</td>
+             <td>'.$dados['nome'].'</td>
+           </tr>
+         </tbody>
+
+ ';
+}
+}
+
+?>
+</table>
+</div>
+</div>
 
 
 

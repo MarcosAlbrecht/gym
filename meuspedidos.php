@@ -102,7 +102,7 @@ session_start();
 
             </div>
             <?php
-            if (isset($_SESSION['email']) &&isset($_SESSION['idUsuario'])) {
+            if (isset($_SESSION['email']) &&isset($_SESSION['senha'])) {
             echo'
             <table class="table">
                 <thead>

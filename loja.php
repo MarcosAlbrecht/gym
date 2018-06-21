@@ -126,7 +126,7 @@
 								<div class="thumbnail">
 									<img src="<?php echo $product[$i]['image'];?>" alt="Fjords">
 									<div class="caption">
-										<h3><?php echo $product[$i]['name'];;?></h3>
+										<h3><?php echo $product[$i]['name'];?></h3>
 										<p><?php echo $product[$i]['description'];?></p>
 										<p>R$ <?php echo number_format($product[$i][2], 2, ',', '.');?></p>
 										<form action="cart.php?add=cart&id=<?php echo $product[$i][0]?>" method="post">
