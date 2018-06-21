@@ -30,7 +30,7 @@
 			$_SESSION['senha'] = $registro[5];
 			$_SESSION['TIPOUSUARIO'] = $registro[10];
 			$_SESSION['idUsuario'] = $registro[0];
-			header('location: index.html');
+			header('location: index.php');
 
 		}else{
 			$_SESSION['erroLogin'] = "Email ou senha incorretos";
@@ -39,7 +39,7 @@
 
 if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
 	session_destroy();
-	header('location: index.html');
+	header('location: index.php');
 }
 
 if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {

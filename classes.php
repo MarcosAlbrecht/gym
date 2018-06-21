@@ -50,17 +50,24 @@
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
 			   <li><a href="index.html">Home</a></li>
-			   <li><a href="sobre.html">Sobre</a></li>
-			   <li><a href="trainers.html">Treinos</a></li>
-			   <li class="active"><a href="classes.html">Professores</a> <ul>
-					<li><a href="single_class.html">Musculação</a></li>
-					<li><a href="single_class.html">Pilates</a></li>
-					<li><a href="single_class.html">Aeróbico</a></li>
-				 </ul></li>
+			   <li><a href="sobre.php">Sobre</a></li>
+			   <li><a href="trainers.php">Treinos</a></li>
+			   <li class="active"><a href="classes.php">Professores</a></li>
 			   <li><a href="loja.php">Loja</a></li>
-			   <li><a href="pricing.html">Preços</a></li>
-			   <li><a href="contact.html">Contato</a></li>
-         <li><a href="login.php">Login</a></li>
+			   <li><a href="pricing.php">Preços</a></li>
+			   <li><a href="contact.php">Contato</a></li>
+         <?php
+         session_start();
+				 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+
+					 echo'<li><a href="">'.$_SESSION['email'].'</a><ul>
+					 <li><a href="verificaUsuario.php?action=minhapagina">Minha Página</a></li>
+					 <li><a href="verificaUsuario.php?action=logout">Logout</a></li>
+					</ul></li>';
+				 }else{
+					 echo'<li><a href="login.php">Login</a></li>';
+				 }
+					?>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->
