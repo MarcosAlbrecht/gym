@@ -39,23 +39,87 @@
    <div class="clear"></div>
   </div>
 </div>
-<div class="container">
-    <br><br>
-    <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="consultarPagamento">
-       Nome do Aluno: <br>
-      <input type="text" name="nome" value=""><br><br>
-
-      <input type="submit" name="" value="Consultar">
-    </form>
+<div class="main">
+  <div class="register-grids">
+    <div class="container">
+      <div class="register-top-grid">
+        <div class="col-md-4">
+          <h3>NOME DO ALUNO</h3>
+          <form class="" action="consultarMensalidade.php?action=consultarmensalidade" method="post">
+          <input type="hidden" name="operacao" value="consultarMensalidade">
+            <input type="text" name="nome" value=""> <br><br>
+            <input type="submit" name="enviar" value="CONSULTAR">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-
 <br>
-<div class="container">
-  <iframe src="www.white.com" width="100%" height=1000px frameborder="0"></iframe>
-</div>
 
+<div class="container">
+  <div class="col-md-6">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Aluno</th>
+          <th>Data Pagamento</th>
+          <th>Data Vencimento</th>
+        </tr>
+      </thead>
+
+
+<?php
+
+session_start();
+include 'conecta_mysql.inc';
+if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+  $aluno = $_SESSION['nome'];
+  $resultado = $mysqli->query("SELECT * FROM pagamento");
+  $linhas = $resultado->num_rows;
+
+  function CalcularVencimento($data,$dias)
+  {
+  	$novadata = explode("/",$data);
+  	$dia = $novadata[0];
+  	$mes = $novadata[1];
+  	$ano = $novadata[2];
+
+  	if ($dias==0){
+      return date('d/m/Y',mktime(0,0,0,$mes,$dia,$ano));
+    }else{
+      return date('d/m/Y',mktime(0,0,0,$mes,$dia+$dias,$ano));
+    }
+  }
+
+
+
+for ($i=0; $i <$linhas ; $i++) {
+
+   $dados = $resultado->fetch_array();
+   $data = $dados['dataPagamento'];
+   $dias = $dados['plano'];
+
+  echo'
+         <tbody>
+           <tr>
+             <td>'.$_SESSION['nome'].'</td>
+             <td>'.$dados['dataPagamento'].'</td>
+             <td>'.CalcularVencimento($data,$dias).'</td>
+           </tr>
+         </tbody>
+
+ ';
+}
+}
+
+
+
+
+ ?>
+</table>
+</div>
+</div>
 
 
 <div class="footer-bottom">

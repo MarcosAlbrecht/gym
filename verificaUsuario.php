@@ -26,6 +26,7 @@
 
 		if ($linhas > 0) {
 			//echo "logado";
+			$_SESSION['nome'] = $registro[1];
 			$_SESSION['email'] = $registro[4];
 			$_SESSION['senha'] = $registro[5];
 			$_SESSION['TIPOUSUARIO'] = $registro[10];

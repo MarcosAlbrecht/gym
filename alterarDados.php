@@ -39,27 +39,144 @@
    <div class="clear"></div>
   </div>
 </div>
-<div class="container">
-    <br><br>
-    <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="alterar">
-      Nome a ser alterado: <br>
-      <input type="text" name="nome1" value=""><br>
-      Nome: <br>
-      <input type="text" name="nome" value=""><br>
-      Sobrenome: <br>
-      <input type="text" name="sobrenome" value=""><br>
-      Telefone: <br>
-      <input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)" ><br>
-      CPF: <br>
-      <input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)" ><br>
-      Endereço: <br>
-      <input type="text" name="endereco" value=""> <br><br>
-      <br>
-      <input type="submit" name="" value="Alterar">
-    </form>
-</div>
+<div class="main">
+  <div class="register-grids">
+    <div class="container">
+    <form action="alterarDados.php?action=alterar" method="POST">
+      <input type="hidden" name="operacao" value="cadastrar">
+        <div class="register-top-grid">
+            <h3>ALTERAR DADOS</h3>
+            <div>
+              <span>Nome a ser alterado<label>*</label></span>
+              <input type="text" name="nome1" >
+            </div>
 
+            <div>
+              <span>Nome<label>*</label></span>
+              <input type="text" name="nome" >
+            </div>
+
+            <div>
+              <span>Sobrenome<label>*</label></span>
+              <input type="text" name="sobrenome" value="">
+            </div>
+
+            <div>
+              <span>Telefone<label>*</label></span>
+              <input type="text" name="telefone" maxlength="13" OnKeyPress="formatar('##-#####-####', this)">
+            </div>
+
+            <div>
+              <span>CPF<label>*</label></span>
+              <input type="text" name="cpf" maxlength="14" onkeypress="formatar('###.###.###-##', this)">
+            </div>
+
+            <div class="container">
+              <br>
+              Estado: <br>
+              <select name="estados-brasil">
+                    <option value="Acre">Acre</option>
+                    <option value="Alagoas">Alagoas</option>
+                    <option value="Amapá">Amapá</option>
+                    <option value="Amazonas">Amazonas</option>
+                    <option value="Bahia">Bahia</option>
+                    <option value="Ceará">Ceará</option>
+                    <option value="Distrito">Distrito Federal</option>
+                    <option value="Espírito Santo">Espírito Santo</option>
+                    <option value="Goiás">Goiás</option>
+                    <option value="Maranhão">Maranhão</option>
+                    <option value="Mato Grosso">Mato Grosso</option>
+                    <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                    <option value="Minas Gerais">Minas Gerais</option>
+                    <option value="Pará">Pará</option>
+                    <option value="Paraíba">Paraíba</option>
+                    <option value="Paraná">Paraná</option>
+                    <option value="Pernambuco">Pernambuco</option>
+                    <option value="Piauí">Piauí</option>
+                    <option value="Rio de Janeiro">Rio de Janeiro</option>
+                    <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                    <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                    <option value="Rondônia">Rondônia</option>
+                    <option value="Roraima">Roraima</option>
+                    <option value="Santa Catarina">Santa Catarina</option>
+                    <option value="São Paulo">São Paulo</option>
+                    <option value="Sergipe">Sergipe</option>
+                    <option value="Tocantins">Tocantins</option>
+              </select>
+            </div>
+
+            <div>
+              <span>Cidade<label>*</label></span>
+              <input type="text" name="cidade" >
+            </div>
+            <div>
+              <span>Bairro<label>*</label></span>
+              <input type="text" name="bairro" >
+            </div>
+            <div>
+              <span>Endereço<label>*</label></span>
+              <input type="text" name="endereco" >
+            </div>
+
+            <br>
+            <div class="clear"> </div>
+        </div>
+        <div class="clear"> </div>
+        <div class="clear"> </div>
+        <input type="hidden" name="tipo" value="1">
+        <input type="submit" value="Alterar" id="inputSubmit">
+    </form>
+  </div>
+</div>
+ </div>
+
+
+<?php
+
+include "conecta_mysql.inc";
+session_start();
+
+if(isset($_GET['action']) && $_GET['action'] == "alterar"){
+
+   if($_SESSION['TIPOUSUARIO'] <= 2){
+
+     $nome1 = $_POST['nome1'];
+     $nome = $_POST['nome'];
+     $sobrenome = $_POST['sobrenome'];
+     $cpf = $_POST['cpf'];
+     $endereco = $_POST['endereco'];
+     $telefone = $_POST['telefone'];
+     $estado = $_POST['estado'];
+     $cidade = $_POST['cidade'];
+     $bairro = $_POST['bairro'];
+
+     $resultado = $mysqli->query("SELECT * FROM usuario WHERE nome = '$nome1'");
+     $linhas = $resultado->num_rows;
+     $dados = $resultado->fetch_array();
+     $name = $dados['nome'];
+
+     if($name != $nome1){
+
+       echo "Aluno não existe";
+
+     }else{
+
+       $sql = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', endereco = '$endereco' WHERE id = '$id'");
+       $mysqli->query($sql);
+       echo "Registro Alterado";
+
+     }
+
+
+   }else{
+
+     header('location: index.php');
+
+   }
+
+}
+
+ ?>
 
 
 

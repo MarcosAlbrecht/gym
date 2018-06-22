@@ -41,33 +41,24 @@
    <div class="clear"></div>
   </div>
 </div>
-<div class="container">
-  <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="mostrarTreino">
-    <?php
 
-
-     ?>
-    <input type="text" name="nome" value=""> <br> <br>
-    <input type="submit" name="" value="Mostrar Treino">
-  </form>
-</div>
 <div class="container">
   <div class="col-md-6">
     <table class="table">
       <thead>
         <tr>
-          <th>ddd</th>
-          <th>sasa</th>
-          <th>aaa</th>
+          <th>Aluno</th>
+          <th>Treino - A</th>
+          <th>Treino - B</th>
+          <th>Treino - C</th>
         </tr>
       </thead>
 <?php
 session_start();
 include 'conecta_mysql.inc';
 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-  $idAluno = $_SESSION['idUsuario'];
-  $resultado = $mysqli->query("SELECT * FROM usuario");
+  $aluno = $_SESSION['nome'];
+  $resultado = $mysqli->query("SELECT * FROM treino WHERE aluno = '$aluno'");
   $linhas = $resultado->num_rows;
 
 for ($i=0; $i <$linhas ; $i++) {
@@ -76,9 +67,10 @@ for ($i=0; $i <$linhas ; $i++) {
   echo'
          <tbody>
            <tr>
-             <td>'.$dados['email'].'</td>
-             <td>'.$dados['senha'].'</td>
-             <td>'.$dados['nome'].'</td>
+             <td>'.$dados['aluno'].'</td>
+             <td>'.$dados['treinoA'].'</td>
+             <td>'.$dados['treinoB'].'</td>
+             <td>'.$dados['treinoC'].'</td>
            </tr>
          </tbody>
 

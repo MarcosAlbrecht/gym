@@ -28,7 +28,7 @@
        <ul class="nav">
          <li ><a href="verifica.php">Consultar Treinos</a></li>
          <li><a href="pagarMensalidade.php">Pagar Mensalidade</a></li>
-         <li><a href="index.html">Sair</a></li>
+         <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
         <script type="text/javascript" src="js/nav.js"></script>
@@ -38,28 +38,73 @@
    <div class="clear"></div>
   </div>
 </div>
-<div class="container">
-    <br><br>
-    <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="alterar">
-      Numero do Cartão: <br>
-      <input type="text" name="numeroCartao" value=""> <br>
-      Nome do Cartão: <br>
-      <input type="text" name="nomeCartao" value=""> <br>
-      Data de Expiração: <br>
-      <input type="text" name="dataExpiracao" value=""> <br>
-      Código de Segurança: <br>
-      <input type="text" name="codigoSeguranca" value="">
-      <br><br>
-      <input type="submit" name="" value="Pagar">
+<div class="main">
+  <div class="register-grids">
+    <div class="container">
+    <form action="verifica.php" method="POST">
+      <input type="hidden" name="operacao" value="cadastrar">
+        <div class="register-top-grid">
+            <h3>INFORMAÇÕES GERAL</h3>
+            <div class="container">
+              <span>Data Pagamento<label>*</label></span>
+              <input type="text" name="dataPagamento" value="" maxlength="10" onkeypress="formatar('##/##/####', this)" >
+            </div>
+            <br>
+            <div class="container">
+                Tipo do Plano:
+              <select class="" name="plantoTipo">
+                <option value="30">Mensal</option>
+                <option value="90">Semestral</option>
+                <option value="180">Anual</option>
+              </select>
+            </div>
+            <div class="container"></div>
+            <div class="container"></div>
+            <div class="container"></div>
+            <div class="container"></div>
+            <div class="container"></div>
+            <div class="container"></div>
+            <div class="container"></div>
+            <div class="container">
+              <h3>INFORMAÇÕES DO CARTÃO</h3>
+              <span>Número do Cartão<label>*</label></span>
+              <input type="text" name="numeroCartao" value="" maxlength="20" onkeypress="formatar('####.####.##########', this)" >
+            </div>
+            <div class="container">
+              <br>
+              <span>Nome do Cartão<label>*</label></span>
+              <input type="text" name="nomeCartao" value="">
+            </div>
+            <div class="container">
+              <span>Data de Expiração<label>*</label></span>
+              <input type="text" name="dataExpiracao" maxlength="5" onkeypress="formatar('##/##', this)">
+            </div>
+            <div class="container">
+              <span>Código de Segurança<label>*</label></span>
+              <input type="text" name="codigoSeguranca" maxlength="3" onkeypress="formatar('###', this)">
+            </div>
+            <div class="container">
+                Tipo Cartao:
+              <select class="" name="cartaoTipo">
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="American Express">American Express</option>
+              </select>
+            </div>
+        <div class="clear"> </div>
+        <input type="hidden" name="tipo" value="1">
+        <div class="container">
+            <input type="submit" value="PAGAR" id="inputSubmit">
+        </div>
     </form>
+   </div>
+  </div>
+ </div>
 </div>
 
 
-
-
 <script>
-// FUNÇÃO FORMATAR NO MODO CPF.
+// FUNÇÃO FORMATAR NO MODO CPF/DATA/TELEFONE.
     function formatar(mascara, documento){
       var i = documento.value.length;
       var saida = mascara.substring(0,1);
@@ -71,7 +116,7 @@
 
     }
 </script>
-<br><br><br><br><br><br><br><br>
+
 <div class="footer-bottom">
   <div class="container">
   <div class="row section group">

@@ -39,25 +39,35 @@
    <div class="clear"></div>
   </div>
 </div>
-<div class="container">
-    <br><br>
-    <form class="" action="verifica.php" method="post">
-    <input type="hidden" name="operacao" value="criarTreino">
-      Treino - ABC <br>
-      (Seg-Qua-Sex) ou (Ter-Qui-sab) <br><br>
-      Aluno: <br>
-      <input type="textarea" name="aluno" value=""> <br>
-      Treino A: <br>
-      <textarea name="treinoA" rows="5" cols="25"></textarea><br>
-      Treino B: <br>
-      <textarea name="treinoB" rows="5" cols="25"></textarea><br>
-      Treino C: <br>
-      <textarea name="treinoC" rows="5" cols="25"></textarea><br> <br>
-      <input type="submit" name="" value="Salvar Treino">
-    </form>
+
+<div class="main">
+  <div class="register-grids">
+    <div class="container">
+      <div class="register-top-grid">
+        <div class="col-md-4">
+          <h3>TREINO - ABC</h3> <h3>(Seg-Qua-Sex) ou (Ter-Qui-Sab)</h3> <br>
+          <form class="" action="verifica.php" method="post">
+          <input type="hidden" name="operacao" value="criarTreino">
+            Aluno: <br>
+            <input type="text" name="nome" value=""> <br>
+            Treino A: <br>
+            <textarea name="treinoA" rows="5" cols="25"></textarea><br>
+            Treino B: <br>
+            <textarea name="treinoB" rows="5" cols="25"></textarea><br>
+            Treino C: <br>
+            <textarea name="treinoC" rows="5" cols="25"></textarea><br> <br>
+            <input type="submit" name="enviar" value="SALVAR TREINO">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<br>
+
+
+
+
 <div class="footer-bottom">
   <div class="container">
   <div class="row section group">
