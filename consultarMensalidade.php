@@ -75,7 +75,7 @@ session_start();
 include 'conecta_mysql.inc';
 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
   $aluno = $_SESSION['nome'];
-  $resultado = $mysqli->query("SELECT * FROM pagamento");
+  $resultado = $mysqli->query("SELECT * FROM pagamento WHERE id = '$idUsuario'");
   $linhas = $resultado->num_rows;
 
   function CalcularVencimento($data,$dias)
@@ -92,8 +92,6 @@ if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
     }
   }
 
-
-
 for ($i=0; $i <$linhas ; $i++) {
 
    $dados = $resultado->fetch_array();
@@ -108,14 +106,9 @@ for ($i=0; $i <$linhas ; $i++) {
              <td>'.CalcularVencimento($data,$dias).'</td>
            </tr>
          </tbody>
-
  ';
 }
 }
-
-
-
-
  ?>
 </table>
 </div>

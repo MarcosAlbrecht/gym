@@ -19,6 +19,9 @@
           $tipo = $_POST['tipo'];
           $email = $_POST['email'];
           $senha = $_POST['senha'];
+          $estado = $_POST['estado'];
+          $cidade = $_POST['cidade'];
+          $bairro = $_POST['bairro'];
 
           $resultado = $mysqli->query("SELECT * FROM usuario WHERE email = '$email'");
           $linhas = $resultado->num_rows;

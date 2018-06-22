@@ -75,17 +75,18 @@
               <br>
               Estado: <br>
               <select name="estados-brasil">
-                    <?php
-                      // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
-                      include "conecta_mysql.inc";
-                      $sql="SELECT * FROM estado order by uf";
-                      $resultado = mysqli_query($sql);
-                      while($vreg = mysqli_fetch_array($resultado)){
-                        $uf = $vreg['id'];
-                        $sigla = $vreg['nome'];
-                        echo '<option value="$uf">$sigla</option>';
-                      }
-                     ?>
+                <option value="">ESCOLHA</option>
+                <?php
+                  // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
+                  include "conecta_mysql.inc";
+                  $resultado = $mysqli->query("SELECT * FROM estado");
+
+                  while($vreg = $resultado->fetch_array()){
+                    $uf = $vreg['id'];
+                    $sigla = $vreg['nome'];
+                    echo "<option value=$uf> $sigla</option>";
+                  }
+                 ?>
               </select>
             </div>
 

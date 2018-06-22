@@ -122,17 +122,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                     <div class="container">
                       <br><br>
-                      Estado:
+                      Estado: <br> <br>
                       <select name="estados-brasil">
+                        <option value="">ESCOLHA</option>
                         <?php
                           // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
                           include "conecta_mysql.inc";
-                          $sql="SELECT * FROM estado order by uf";
-                          $resultado = mysqli_query($sql);
-                          while($vreg = mysqli_fetch_array($resultado)){
+                          session_start();
+                          $resultado = $mysqli->query("SELECT * FROM estado");
+
+                          while($vreg = $resultado->fetch_array()){
                             $uf = $vreg['id'];
                             $sigla = $vreg['nome'];
-                            echo '<option value="$uf">$sigla</option>';
+                            echo "<option value=$uf> $sigla</option>";
                           }
                          ?>
                       </select>
