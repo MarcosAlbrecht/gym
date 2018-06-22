@@ -89,7 +89,7 @@ session_start();
 					<h4 class="title">NOVOS CLIENTES</h4>
 
 					<div class="button1">
-					   <a href="register.html"><input type="submit" name="Submit" value="Criar conta"></a>
+					   <a href="register.php"><input type="submit" name="Submit" value="Criar conta"></a>
 					 </div>
 					 <div class="clear"></div>
 				  </div>
