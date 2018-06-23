@@ -15,7 +15,6 @@
 	<!-- grid-slider -->
 	<script type="text/javascript" src="js/jquery.mousewheel.js"></script>
 	<script type="text/javascript" src="js/jquery.contentcarousel.js"></script>
-	</head>
 </head>
 <body>
  <!-- start header_top -->
@@ -53,7 +52,7 @@
     <div class="menu" id="menu">
 	  <div class="container">
 		 <div class="logo">
-			<a href="index.html"><img src="images/logo.png" alt=""/></a>
+			<a href="index.php"><img src="images/logo.png" alt=""/></a>
 		 </div>
 		 <!-- start h_menu4 -->
 		 <div class="h_menu4">

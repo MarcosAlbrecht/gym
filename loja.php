@@ -46,7 +46,7 @@
     <div class="menu" id="menu">
 		  <div class="container">
 			 <div class="logo">
-				<a href="index.html"><img src="images/logo.png" alt=""/></a>
+				<a href="index.php"><img src="images/logo.png" alt=""/></a>
 			 </div>
 			 <!-- start h_menu4 -->
 			 <div class="h_menu4">
@@ -61,17 +61,15 @@
 				   <li><a href="contact.php">Contato</a></li>
 					 <?php
 					 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-
 						 echo'<li><a href="">'.$_SESSION['email'].'</a><ul>
 						 <li><a href="verificaUsuario.php?action=minhapagina">Minha Página</a></li>
-						 <li><a href="verificaUsuario.php?action=logout">Logout</a></li>
+						 <li><a href="verificaUsuario.php?action=logout">Logout</a></li></ul>
 						</ul></li>';
 					 }else{
-						 echo'<li><a href="login.php">Login</a></li>';
+						 echo'<li><a href="login.php">Login</a></li></ul>';
 					 }
-
 						?>
-						 </ul>
+						</ul>
 				  <script type="text/javascript" src="js/nav.js"></script>
 			  </div><!-- end h_menu4 -->
 			 <div class="clear"></div>
@@ -110,10 +108,11 @@
 
 		<div class="container">
 			<div class="col-md-2">
-				<div class="mebmers">
-				<ul class="nav nav-pills nav-stacked">
+				<div class="members">
+				<ul class="nav nav-pills nav-stacked nav-admim ">
 					<li><a href="#">Whey</a></li>
 					<li><a href="#">Thermogênico</a></li>
+					<li><a href="#">BCAA</a></li>
 				</ul>
 				</div>
 			</div>

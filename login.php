@@ -121,6 +121,27 @@ session_start();
   						  </fieldset>
   						 </form>
                ';
+            }elseif(isset($_GET['action']) && $_GET['action'] == "admloja"){
+              echo'
+  						<form action="verificaUsuario.php?action=admloja" method="post" name="login" id="login-form">
+  						  <fieldset class="input">
+  						    <p id="login-form-username">
+  						      <label for="modlgn_username">Email</label>
+  						      <input id="modlgn_username" type="text" name="email" class="inputbox" size="18" autocomplete="off">
+  						    </p>
+  						    <p id="login-form-password">
+  						      <label for="modlgn_passwd">Senha</label>
+  						      <input id="modlgn_passwd" type="password" name="senha" class="inputbox" size="18" autocomplete="off">
+  						    </p>
+  						    <div class="remember">
+  							    <p id="login-form-remember">
+  							      <label for="modlgn_remember"><a href="#">Esqueceu sua senha ? </a></label>
+  							   </p>
+  							    <input type="submit" name="Submit" class="button" value="Entrar"><div class="clear"></div>
+  							 </div>
+  						  </fieldset>
+  						 </form>
+               ';
             }else{
             echo'
 						<form action="verificaUsuario.php" method="post" name="login" id="login-form">
