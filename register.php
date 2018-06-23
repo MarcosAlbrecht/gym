@@ -97,8 +97,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="main">
           <div class="register-grids">
           	<div class="container">
-						<form action="verifica.php" method="POST">
-              <input type="hidden" name="operacao" value="cadastrar">
+						<form action="register.php?action=cadastrar" method="POST">
 								<div class="register-top-grid">
 										<h3>INFORMAÇÕES PESSOAIS</h3>
 										<div>
@@ -123,7 +122,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="container">
                       <br><br>
                       Estado: <br> <br>
-                      <select name="estados-brasil">
+                      <select name="estado">
                         <option value="">ESCOLHA</option>
                         <?php
                           // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
@@ -180,7 +179,40 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</form>
 					</div>
 				</div>
-         </div>
+      </div>
+
+      <?php
+      include "conecta_mysql.inc";
+
+
+      if ((isset($_GET['action']) && $_GET['action'] == "cadastrar")) {
+      	if ($_SESSION['TIPOUSUARIO'] == 1) {
+
+
+            $nome = $_POST['nome'];
+            $sobrenome = $_POST['sobrenome'];
+            $telefone = $_POST['telefone'];
+            $cpf = $_POST['cpf'];
+            $endereco = $_POST['endereco'];
+            $tipo = $_POST['tipo'];
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
+            $estado = $_POST['estado'];
+            $cidade = $_POST['cidade'];
+            $bairro = $_POST['bairro'];
+
+
+            $sql1 = ("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado')");
+            $mysqli->query($sql1);
+
+      		  header('location: register.php');
+      	}
+      }
+
+      $mysqli->close();
+       ?>
+
+
          <div class="footer-bottom">
 		   <div class="container">
 		 	 <div class="row section group">

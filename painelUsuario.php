@@ -83,13 +83,6 @@ for ($i=0; $i <$linhas ; $i++) {
 </div>
 </div>
 
-
-
-
-
-
-
-
 <div class="footer-bottom">
   <div class="container">
   <div class="row section group">

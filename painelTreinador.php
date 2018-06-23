@@ -25,7 +25,7 @@
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
          <li ><a href="alterarDados.php">Alterar Dados</a></li>
-         <li><a href="#">Consultar Pagamentos</a></li>
+         <li><a href="consultarMensalidade.php">Consultar Pagamentos</a></li>
          <li><a href="criarTreino.php">Criar Treino</a></li>
          <li><a href="index.html">Sair</a></li>
        </ul>
@@ -38,6 +38,62 @@
   </div>
 </div>
 
+<div class="footer-bottom">
+  <div class="container">
+  <div class="row section group">
+   <div class="col-md-4">
+      <h4 class="m_7">Inscreva-se para receber Newsletter</h4>
+      <p class="m_8">Você ficará por dentro de todas as nossas promoções e eventos.</p>
+         <form class="subscribe">
+              <input type="text" value="Insert Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Insert Email';}">
+       </form>
+           <div class="subscribe1">
+             <a href="#">Enviar Email<i class="but_arrow"> </i></a>
+           </div>
+   </div>
+   <div class="col-md-4">
+     <div class="f-logo">
+       <img src="images/logo.png" alt=""/>
+     </div>
+     <p class="m_9">A vontade de se preparar tem que ser maior do que a vontade de vencer. Vencer será consequência da boa preparação, Entre em contato conosco e agende uma aula gratuita.</p>
+     <p class="address">Telefone : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">(00) 222 666 444</span></p>
+     <p class="address">Email : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="m_10">projeto@meuprojeto.com</span></p>
+   </div>
+   <div class="col-md-4">
+     <ul class="list">
+       <h4 class="m_7">Menu</h4>
+       <li><a href="#">Sobre</a></li>
+       <li><a href="trainers.html">Treinos</a></li>
+       <li><a href="classes.html">Professores</a></li>
+       <li><a href="pricing.html">Preços</a></li>
+       <li><a href="loja.html">Loja</a></li>
+       <li><a href="login.html">Login</a></li>
+       <li><a href="contact.html">Contato</a></li>
+     </ul>
+   </div>
+   <div class="clear"></div>
+     </div>
+ </div>
+</div>
+<div class="copyright">
+ <div class="container">
+   <div class="copy">
+       <p>© 2018 Template by Marcos e Jean</p>
+   </div>
+   <div class="social">
+    <ul>
+     <li class="facebook"><a href="#"><span> </span></a></li>
+     <li class="twitter"><a href="#"><span> </span></a></li>
+     <li class="pinterest"><a href="#"><span> </span></a></li>
+     <li class="google"><a href="#"><span> </span></a></li>
+     <li class="tumblr"><a href="#"><span> </span></a></li>
+     <li class="instagram"><a href="#"><span> </span></a></li>
+     <li class="rss"><a href="#"><span> </span></a></li>
+    </ul>
+   </div>
+  <div class="clear"></div>
+ </div>
+  </div>
 
 
 </body>
