@@ -29,9 +29,9 @@
      <div class="h_menu4">
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li><a href="verifica.php">Consultar Treinos</a></li>
+         <li><a href="painelUsuario.php?action=consultartreino">Consultar Treinos</a></li>
          <li><a href="pagarMensalidade.php">Pagar Mensalidade</a></li>
-         <li><a href="index.html">Sair</a></li>
+         <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
@@ -48,37 +48,46 @@
       <thead>
         <tr>
           <th>Aluno</th>
-          <th>Treino - A</th>
-          <th>Treino - B</th>
-          <th>Treino - C</th>
+          <th>Treino A</th>
+          <th>Treino B</th>
+          <th>Treino B</th>
         </tr>
       </thead>
-<?php
-session_start();
-include 'conecta_mysql.inc';
-if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-  $aluno = $_SESSION['nome'];
-  $resultado = $mysqli->query("SELECT * FROM treino WHERE aluno = '$aluno'");
-  $linhas = $resultado->num_rows;
+          <?php
+          if((isset($_GET['action']) && $_GET['action'] == "consultartreino")){
 
-for ($i=0; $i <$linhas ; $i++) {
-  $dados = $resultado->fetch_array();
 
-  echo'
-         <tbody>
-           <tr>
-             <td>'.$dados['aluno'].'</td>
-             <td>'.$dados['treinoA'].'</td>
-             <td>'.$dados['treinoB'].'</td>
-             <td>'.$dados['treinoC'].'</td>
-           </tr>
-         </tbody>
+                    session_start();
+                    include 'conecta_mysql.inc';
+                  //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
- ';
-}
-}
 
-?>
+                      $nome = $_SESSION['nome'];
+                      $resultado = $mysqli->query("SELECT * FROM treino where aluno = '$nome'");
+
+                      while($vreg = $resultado->fetch_row()){
+
+                        $aluno = $vreg[1];
+                        $treinoA = $vreg[2];
+                        $treinoB = $vreg[3];
+                        $treinoC = $vreg[4];
+
+
+                      echo '
+
+                      <td>'.$aluno.'</td>
+                      <td>'.$treinoA.'</td>
+                      <td>'.$treinoB.'</td>
+                      <td>'.$treinoC.'</td>';
+
+                //  }
+                  }
+                }
+
+
+           ?>
+
+
 </table>
 </div>
 </div>
