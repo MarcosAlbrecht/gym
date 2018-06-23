@@ -27,9 +27,9 @@
       <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
          <li ><a href="alterarDados.php">Alterar Dados</a></li>
-         <li><a href="mensalidades.php">Mensalidades</a></li>
+         <li><a href="consultarMensalidade.php">Mensalidades</a></li>
          <li><a href="criarTreino.php">Criar Treino</a></li>
-         <li><a href="index.html">Sair</a></li>
+         <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
         <script type="text/javascript" src="js/nav.js"></script>

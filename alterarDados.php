@@ -81,9 +81,9 @@
                   include "conecta_mysql.inc";
                   $resultado = $mysqli->query("SELECT * FROM estado");
 
-                  while($vreg = $resultado->fetch_array()){
-                    $uf = $vreg['id'];
-                    $sigla = $vreg['nome'];
+                  while($vreg = $resultado->fetch_row()){
+                    $uf = $vreg[0];
+                    $sigla = $vreg[2];
                     echo "<option value=$uf> $sigla</option>";
                   }
                  ?>
