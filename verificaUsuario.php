@@ -27,9 +27,9 @@
 		if ($linhas > 0) {
 			//echo "logado";
 			$_SESSION['nome'] = $registro[1];
-			$_SESSION['email'] = $registro[5];
-			$_SESSION['senha'] = $registro[6];
-			$_SESSION['TIPOUSUARIO'] = $registro[11];
+			$_SESSION['email'] = $registro[4];
+			$_SESSION['senha'] = $registro[5];
+			$_SESSION['TIPOUSUARIO'] = $registro[10];
 			$_SESSION['idUsuario'] = $registro[0];
 			header('location: index.php');
 
@@ -46,12 +46,6 @@ if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
 if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	if ($_SESSION['TIPOUSUARIO'] == 1) {
 		header('location: painelTreinador.php');
-	}
-}
-
-if ((isset($_GET['action']) && $_GET['action'] == "admloja")) {
-	if ($_SESSION['TIPOUSUARIO'] == 1) {
-		header('location: paginaAdmLoja.php');
 	}
 }
 
@@ -194,7 +188,7 @@ if($_SESSION['TIPOUSUARIO'] == 3){
 
 
 	}else{
-
+			
 			header('location: painelUsuario.php');
 
 
