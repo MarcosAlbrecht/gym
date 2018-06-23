@@ -42,7 +42,7 @@
 <div class="main">
   <div class="register-grids">
     <div class="container">
-    <form action="alterarDados.php?action=alterar" method="POST">
+    <form action="verificaUsuario.php?action=alterar" method="POST">
       <input type="hidden" name="operacao" value="cadastrar">
         <div class="register-top-grid">
             <h3>ALTERAR DADOS</h3>
@@ -138,63 +138,6 @@
   </div>
 </div>
 
-
-<?php
-
-              include "conecta_mysql.inc";
-              session_start();
-
-              if(isset($_GET['action']) && $_GET['action'] == "alterar"){
-
-                  if (!isset($nome) == " "){
-
-                    //SE DADOS NÃO SÃO PREENCHIDOS
-                    header('location: alterarDados.php?action=semDados');
-
-                  }
-
-              }else if(isset($_GET['action']) && $_GET['action'] == "alterar"){
-
-                 if($_SESSION['TIPOUSUARIO'] <= 2){
-
-                   $nome1 = $_POST['nome1'];
-                   $nome = $_POST['nome'];
-                   $sobrenome = $_POST['sobrenome'];
-                   $cpf = $_POST['cpf'];
-                   $endereco = $_POST['endereco'];
-                   $telefone = $_POST['telefone'];
-                   $estado = $_POST['estado'];
-                   $cidade = $_POST['cidade'];
-                   $bairro = $_POST['bairro'];
-
-                   $resultado = $mysqli->query("SELECT * FROM usuario WHERE nome = '$nome1'");
-                   $linhas = $resultado->num_rows;
-                   $dados = $resultado->fetch_array();
-                   $name = $dados['nome'];
-
-                   if($name != $nome1){
-                     // SE ALUNO NÃO EXISTE
-                     header('location: alterarDados.php?action=naoExiste');
-
-                   }else{
-
-                     // FAZ UPDATE DO USUARIO, SALVA NO BANCO E VOLTA PRA PAGINA DE ALTERAÇÃO COM MENSAGEM DE DADOS ALTERADOS
-                     $sql1 = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', endereco = '$endereco', estado = '$estado' WHERE id  = '$id'");
-                     $mysqli->query($sql1);
-                     header('location: criarTreino.php?action=dadosAlterados');
-
-                   }
-
-
-                 }else{
-                   // CASO TIPO DO USUARIO NÃO TENHA PERMISSÃO
-                   header('location: index.php');
-
-                 }
-
-              }
-
- ?>
 
 
 

@@ -18,121 +18,25 @@
    <title>Academia Monstrão</title>
 </head>
 <body>
-
   <div class="menu" id="menu">
   <div class="container">
    <div class="logo">
      <div class="h_menu4">
-
-      <a class="toggleMenu" href="#">Menu</a>
+       <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
-         <li ><a href="verifica.php">Consultar Treinos</a></li>
-         <li><a href="pagarMensalidade.php">Pagar Mensalidade</a></li>
-         <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
+         <li ><a href="alterarDados.php">Alterar Dados</a></li>
+         <li><a href="consultarMensalidade.php">Consultar Pagamentos</a></li>
+         <li><a href="criarTreino.php">Criar Treino</a></li>
+         <li><a href="index.html">Sair</a></li>
        </ul>
-
         <script type="text/javascript" src="js/nav.js"></script>
       </div><!-- end h_menu4 -->
    </div>
    <!-- start h_menu4 -->
+
    <div class="clear"></div>
   </div>
 </div>
-<div class="main">
-  <div class="register-grids">
-    <div class="container">
-    <form action="verificaUsuario.php?action=pagar" method="POST">
-      <input type="hidden" name="operacao" value="cadastrar">
-        <div class="register-top-grid">
-            <h3>INFORMAÇÕES GERAL</h3>
-            <div class="container">
-              <span>Data Pagamento<label>*</label></span>
-              <input type="text" name="dataPagamento" value="" maxlength="10" onkeypress="formatar('##/##/####', this)" >
-            </div>
-            <br>
-            <div class="container">
-                Tipo do Plano:
-              <select class="" name="plantoTipo">
-                <option value="30">Mensal</option>
-                <option value="90">Semestral</option>
-                <option value="180">Anual</option>
-              </select>
-            </div>
-            <div class="container"></div>
-            <div class="container"></div>
-            <div class="container"></div>
-            <div class="container"></div>
-            <div class="container"></div>
-            <div class="container"></div>
-            <div class="container"></div>
-            <div class="container">
-              <h3>INFORMAÇÕES DO CARTÃO</h3>
-              <span>Número do Cartão<label>*</label></span>
-              <input type="text" name="numeroCartao" value="" maxlength="20" onkeypress="formatar('####.####.##########', this)" >
-            </div>
-            <div class="container">
-              <br>
-              <span>Nome do Cartão<label>*</label></span>
-              <input type="text" name="nomeCartao" value="">
-            </div>
-            <div class="container">
-              <span>Data de Expiração<label>*</label></span>
-              <input type="text" name="dataExpiracao" maxlength="5" onkeypress="formatar('##/##', this)">
-            </div>
-            <div class="container">
-              <span>Código de Segurança<label>*</label></span>
-              <input type="text" name="codigoSeguranca" maxlength="3" onkeypress="formatar('###', this)">
-            </div>
-            <div class="container">
-                Tipo Cartao:
-              <select class="" name="cartaoTipo">
-                <option value="Visa">Visa</option>
-                <option value="MasterCard">MasterCard</option>
-                <option value="American Express">American Express</option>
-              </select>
-            </div>
-        <div class="clear"> </div>
-        <input type="hidden" name="tipo" value="1">
-        <div class="container">
-            <input type="submit" value="PAGAR" id="inputSubmit">
-        </div>
-    </form>
-    <?php if((isset($_GET['action']) && $_GET['action'] == 'pago')){
-
-      echo '<div class="container">
-              <h3>Mensalidade Paga, Obrigado!!</h3>
-          </div>';
-
-    }?>
-    <?php if((isset($_GET['action']) && $_GET['action'] == 'semDados')){
-
-      echo '<div class="container">
-              <h3>Informe os Dados !!</h3>
-          </div>';
-
-    }?>
-   </div>
-  </div>
- </div>
-</div>
-
-
-
-
-
-<script>
-// FUNÇÃO FORMATAR NO MODO CPF/DATA/TELEFONE.
-    function formatar(mascara, documento){
-      var i = documento.value.length;
-      var saida = mascara.substring(0,1);
-      var texto = mascara.substring(i)
-
-      if (texto.substring(0,1) != saida){
-                documento.value += texto.substring(0,1);
-      }
-
-    }
-</script>
 
 <div class="footer-bottom">
   <div class="container">
@@ -190,5 +94,7 @@
   <div class="clear"></div>
  </div>
   </div>
+
+
 </body>
 <html>
