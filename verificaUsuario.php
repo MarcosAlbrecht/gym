@@ -49,6 +49,12 @@ if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	}
 }
 
+if ((isset($_GET['action']) && $_GET['action'] == "admloja")) {
+	if ($_SESSION['TIPOUSUARIO'] == 1) {
+		header('location: paginaAdmLoja.php');
+	}
+}
+
 
 
 if ($linhas > 0) {

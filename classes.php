@@ -1,4 +1,4 @@
-<
+<?php session_start(); ?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -49,7 +49,7 @@
 		 <div class="h_menu4"><!-- start h_menu4 -->
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
-			   <li><a href="index.html">Home</a></li>
+			   <li><a href="index.php">Home</a></li>
 			   <li><a href="sobre.php">Sobre</a></li>
 			   <li><a href="trainers.php">Treinos</a></li>
 			   <li class="active"><a href="classes.php">Professores</a></li>
@@ -57,7 +57,6 @@
 			   <li><a href="pricing.php">Preços</a></li>
 			   <li><a href="contact.php">Contato</a></li>
          <?php
-         session_start();
 				 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
 					 echo'<li><a href="">'.$_SESSION['email'].'</a><ul>

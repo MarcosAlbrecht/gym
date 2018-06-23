@@ -8,7 +8,9 @@ echo "<br>total da compra ".$totalcompra."<br>";
 
 //echo $_SESSION['itens'][2];
 date_default_timezone_set('America/Sao_Paulo');
-$data = date('Y-m-d');
+$date = date('Y-m-d');
+$data = date('Y-m-d', strtotime(str_replace('-', '/', $date)));
+echo $data;
 
 
 

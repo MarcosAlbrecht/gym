@@ -11,7 +11,6 @@ body a{
 	-o-transition: 0.5s all;
 }
 
-
 .header {
 	width: 100%;
 	height: 100%;
@@ -118,10 +117,6 @@ body a{
 	border-style: solid;
 	border-color: #00BFF0;
 
-}
-
-.iframeloja{
-	margin-top: 0px;
 }
 
 .header-bottom-menu p{
@@ -248,6 +243,14 @@ li.rss a span:hover{
 	clear: both;
 }
 
+.menu-adm{
+	background:#E0E0E0;
+}
+
+.menu-adm ul{
+	padding-left: 10px;
+}
+
 .menuloja{
 	clear: both;
 	margin-top: 10px;
@@ -294,22 +297,23 @@ li.rss a span:hover{
 	text-transform:uppercase;
 	font-weight:400;
 	margin-right: 10px;
-
 	border:1px solid #72D0F4;
 }
 
-.nav1 li a {
+.nav-admim li a {
 	display: block;
 	padding:9px 20px;
 	color: #fff;
 	font-size:0.85em;
 	text-transform:uppercase;
 	font-weight:400;
-	margin-bottom: 2px;
-	margin-left: 10px;
-	border:1px solid #72D0F4;
+	margin-right: 10px;
+	border:0px;
 }
 
+.nav-admim li{
+	border-bottom: 1px solid #E0FFFF;
+}
 
 
 .nav li {
@@ -765,16 +769,35 @@ ul.tooltip{
 	border-bottom: 1px solid #B9DEEC;
 	padding:10px 0;
 }
-.members{
-	background:#00bff0;
+
+.members-adm{
+	background:#000000;
 	padding:10.3% 0%;
 	text-align:center;
+	border-radius: 5px;
+	-webkit-opacity:0.6;
 }
 
-.members-cart{
-	background:#B9DEEC;
+.members{
+	background:#00BFF0;
 	padding:10.3% 0%;
-	text-align:left;
+	text-align:center;
+	border-radius: 5px;
+	-webkit-opacity:0.6;
+}
+
+.col_admin{
+	border: 1px solid #696969;
+	box-shadow: 4px -5px 2px #696969;
+}
+
+.members-adm p{
+	text-align: center;
+}
+
+.col-separa{
+	border-bottom: 1px solid #696969;
+	padding-bottom: 30px;
 }
 
 h4.m_3{
