@@ -60,60 +60,81 @@
 <div class="container">
   <div class="col-md-6">
     <table class="table">
-      <thead>
+
         <tr>
           <th>Aluno</th>
           <th>Data Pagamento</th>
           <th>Data Vencimento</th>
         </tr>
-      </thead>
+
+          <?php
+          if((isset($_GET['action']) && $_GET['action'] == "consultarmensalidade")){
 
 
-<?php
+                    session_start();
+                    include 'conecta_mysql.inc';
+                  //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
-session_start();
-include 'conecta_mysql.inc';
-if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-  $aluno = $_SESSION['nome'];
-  $resultado = $mysqli->query("SELECT * FROM pagamento WHERE id = '$idUsuario'");
-  $linhas = $resultado->num_rows;
+                      // testar sem LOGIN
+                      $nome = $_POST['nome'];
+                      $resultado = $mysqli->query("SELECT * FROM pagamento where nomeCartao = '$nome'");
+                    //  $linhas = $resultado->num_rows;
 
-  function CalcularVencimento($data,$dias)
-  {
-  	$novadata = explode("/",$data);
-  	$dia = $novadata[0];
-  	$mes = $novadata[1];
-  	$ano = $novadata[2];
+                  /*    $aluno = $_SESSION['nome'];
+                      $resultado = $mysqli->query("SELECT * FROM pagamento WHERE id = '$idUsuario'");
+                      $linhas = $resultado->num_rows; */
 
-  	if ($dias==0){
-      return date('d/m/Y',mktime(0,0,0,$mes,$dia,$ano));
-    }else{
-      return date('d/m/Y',mktime(0,0,0,$mes,$dia+$dias,$ano));
-    }
-  }
+                      while($vreg = $resultado->fetch_row()){
 
-for ($i=0; $i <$linhas ; $i++) {
+                        $nomeNoCartao = $vreg[2];
+                        $dtPagamento = $vreg[5];
+                        $plano = $vreg[6];
 
-   $dados = $resultado->fetch_array();
-   $data = $dados['dataPagamento'];
-   $dias = $dados['plano'];
+                        // troca / por -
+                        $nvdtPagamento = str_replace('/','-',$dtPagamento);
 
-  echo'
-         <tbody>
-           <tr>
-             <td>'.$_SESSION['nome'].'</td>
-             <td>'.$dados['dataPagamento'].'</td>
-             <td>'.CalcularVencimento($data,$dias).'</td>
-           </tr>
-         </tbody>
- ';
-}
-}
- ?>
+                      echo '
+
+                      <td>'.$nomeNoCartao.'</td>
+                      <td>'.$dtPagamento.'</td>
+                      <td>'.CalcularVencimento($nvdtPagamento,$plano).'</td>';
+
+                //  }
+                  }
+                }
+
+
+           ?>
+
+
 </table>
 </div>
 </div>
 
+
+<?php
+    function CalcularVencimento($data,$dias)
+    {
+
+      if($dias == '30'){
+
+      return  date('d/m/Y', strtotime('+30 days', strtotime($data)));
+
+    }else if($dias == '90'){
+
+        return  date('d/m/Y', strtotime('+90 days', strtotime($data)));
+
+      }else{
+
+      return  date('d/m/Y', strtotime('+180 days', strtotime($data)));
+
+      }
+
+
+}
+
+
+ ?>
 
 <div class="footer-bottom">
   <div class="container">

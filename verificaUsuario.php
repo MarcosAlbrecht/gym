@@ -45,7 +45,7 @@ if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
 
 if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	if ($_SESSION['TIPOUSUARIO'] == 1) {
-		header('location: painelUsuario.php');
+		header('location: painelTreinador.php');
 	}
 }
 
@@ -72,6 +72,10 @@ if ($linhas > 0) {
 	}
 	}
 }
+
+
+
+
 
 $mysqli->close();
 ?>

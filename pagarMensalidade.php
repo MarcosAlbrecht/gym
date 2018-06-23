@@ -41,7 +41,7 @@
 <div class="main">
   <div class="register-grids">
     <div class="container">
-    <form action="verifica.php" method="POST">
+    <form action="pagarMensalidade.php?action=pagar" method="POST">
       <input type="hidden" name="operacao" value="cadastrar">
         <div class="register-top-grid">
             <h3>INFORMAÇÕES GERAL</h3>
@@ -101,6 +101,43 @@
   </div>
  </div>
 </div>
+
+  <?php
+
+
+  include 'conecta_mysql.inc';
+  session_start();
+
+
+
+  //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+
+      if((isset($_GET['action']) && $_GET['action'] == "pagar")){
+
+        $numeroCartao = $_POST['numeroCartao'];
+        $nomeCartao = $_POST['nomeCartao'];
+        $dataExpericao = $_POST['dataExpiracao'];
+        $codigoSeguranca = $_POST['codigoSeguranca'];
+        $dataPagamento = $_POST['dataPagamento'];
+        $plano = $_POST['plantoTipo'];
+
+        $resultado = $mysqli->query("INSERT INTO pagamento(numeroCartao,nomeCartao,dataExpiracao,codigoSeguranca,dataPagamento,plano) values ('$numeroCartao', '$nomeCartao', '$dataExpericao', '$codigoSeguranca', '$dataPagamento', '$plano') " );
+        $mysqli->query($resultado);
+
+
+      }
+
+
+  //  }else{
+
+
+  //}
+
+
+
+    $mysqli->close();
+   ?>
+
 
 
 <script>

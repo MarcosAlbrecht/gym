@@ -33,8 +33,21 @@
 
           }else{
 
-            $sql = ("INSERT INTO usuario(nome,sobrenome,telefone,cpf,endereco,tipo,email,senha) VALUES ('$nome','$sobrenome','$telefone','$cpf','$endereco', '$tipo', '$email', '$senha')");
-            $mysqli->query($sql);
+            $sql1 = ("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado')");
+            $resultado = $mysqli->query("SELECT * FROM usuario");
+            $linhas = $resultado->num_rows;
+            for ($i=0; $i < $linhas ; $i++) {
+              $dados = $resultado->fetch_array();
+            }
+            $sql1 = ("INSERT INTO cidade(nome) values ('$cidade') where id = $dados['id']");
+            $sql3 = ("INSERT INTO bairro(nome) values ('$bairro') where id = $dados['id']");
+            $sql4 = ("INSERT INTO rua(nome) values ('$endereco') where id = $dados['id']");
+
+
+            $mysqli->query($sql1);
+            $mysqli->query($sql2);
+            $mysqli->query($sql3);
+            $mysqli->query($sql4);
             header('location: index.html');
           }
 

@@ -110,56 +110,89 @@
         <div class="clear"> </div>
         <input type="hidden" name="tipo" value="1">
         <input type="submit" value="Alterar" id="inputSubmit">
+        </div>
+          <?php // -------- MENSAGENS DE AVISO ------- ?>
+        <?php if((isset($_GET['action']) && $_GET['action'] == 'dadosAlterados')){
+
+          echo '<div class="container">
+                  <h3>Dados alterados !!</h3>
+              </div>';
+
+        }?>
+        <?php if((isset($_GET['action']) && $_GET['action'] == 'naoExiste')){
+
+          echo '<div class="container">
+                  <h3>Aluno Não Existe !!</h3>
+              </div>';
+
+        }?>
+        <?php if((isset($_GET['action']) && $_GET['action'] == 'semDados')){
+
+          echo '<div class="container">
+                  <h3>Preencha os Dados !!</h3>
+              </div>';
+
+        }?>
+        <?php // -------- MENSAGENS DE AVISO ------- ?>
     </form>
   </div>
 </div>
- </div>
 
 
 <?php
 
-include "conecta_mysql.inc";
-session_start();
+              include "conecta_mysql.inc";
+              session_start();
 
-if(isset($_GET['action']) && $_GET['action'] == "alterar"){
+              if(isset($_GET['action']) && $_GET['action'] == "alterar"){
 
-   if($_SESSION['TIPOUSUARIO'] <= 2){
+                  if (!isset($nome) == " "){
 
-     $nome1 = $_POST['nome1'];
-     $nome = $_POST['nome'];
-     $sobrenome = $_POST['sobrenome'];
-     $cpf = $_POST['cpf'];
-     $endereco = $_POST['endereco'];
-     $telefone = $_POST['telefone'];
-     $estado = $_POST['estado'];
-     $cidade = $_POST['cidade'];
-     $bairro = $_POST['bairro'];
+                    //SE DADOS NÃO SÃO PREENCHIDOS
+                    header('location: alterarDados.php?action=semDados');
 
-     $resultado = $mysqli->query("SELECT * FROM usuario WHERE nome = '$nome1'");
-     $linhas = $resultado->num_rows;
-     $dados = $resultado->fetch_array();
-     $name = $dados['nome'];
+                  }
 
-     if($name != $nome1){
+              }else if(isset($_GET['action']) && $_GET['action'] == "alterar"){
 
-       echo "Aluno não existe";
+                 if($_SESSION['TIPOUSUARIO'] <= 2){
 
-     }else{
+                   $nome1 = $_POST['nome1'];
+                   $nome = $_POST['nome'];
+                   $sobrenome = $_POST['sobrenome'];
+                   $cpf = $_POST['cpf'];
+                   $endereco = $_POST['endereco'];
+                   $telefone = $_POST['telefone'];
+                   $estado = $_POST['estado'];
+                   $cidade = $_POST['cidade'];
+                   $bairro = $_POST['bairro'];
 
-       $sql = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', endereco = '$endereco' WHERE id  = '$id'");
-       $mysqli->query($sql);
-       echo "Registro Alterado";
+                   $resultado = $mysqli->query("SELECT * FROM usuario WHERE nome = '$nome1'");
+                   $linhas = $resultado->num_rows;
+                   $dados = $resultado->fetch_array();
+                   $name = $dados['nome'];
 
-     }
+                   if($name != $nome1){
+                     // SE ALUNO NÃO EXISTE
+                     header('location: alterarDados.php?action=naoExiste');
+
+                   }else{
+
+                     // FAZ UPDATE DO USUARIO, SALVA NO BANCO E VOLTA PRA PAGINA DE ALTERAÇÃO COM MENSAGEM DE DADOS ALTERADOS
+                     $sql1 = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', endereco = '$endereco', estado = '$estado' WHERE id  = '$id'");
+                     $mysqli->query($sql1);
+                     header('location: criarTreino.php?action=dadosAlterados');
+
+                   }
 
 
-   }else{
+                 }else{
+                   // CASO TIPO DO USUARIO NÃO TENHA PERMISSÃO
+                   header('location: index.php');
 
-     header('location: index.php');
+                 }
 
-   }
-
-}
+              }
 
  ?>
 
@@ -178,6 +211,7 @@ if(isset($_GET['action']) && $_GET['action'] == "alterar"){
 
     }
 </script>
+
 <br><br><br>
 <div class="footer-bottom">
   <div class="container">
