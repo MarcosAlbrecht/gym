@@ -27,9 +27,9 @@
 		if ($linhas > 0) {
 			//echo "logado";
 			$_SESSION['nome'] = $registro[1];
-			$_SESSION['email'] = $registro[4];
-			$_SESSION['senha'] = $registro[5];
-			$_SESSION['TIPOUSUARIO'] = $registro[10];
+			$_SESSION['email'] = $registro[5];
+			$_SESSION['senha'] = $registro[6];
+			$_SESSION['TIPOUSUARIO'] = $registro[11];
 			$_SESSION['idUsuario'] = $registro[0];
 			header('location: index.php');
 
@@ -194,7 +194,7 @@ if($_SESSION['TIPOUSUARIO'] == 3){
 
 
 	}else{
-			
+
 			header('location: painelUsuario.php');
 
 
