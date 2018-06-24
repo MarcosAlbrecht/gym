@@ -94,16 +94,22 @@
 		    </div>
 	      </div>
 	      <div class="container">
-	       <div class="about_trainer">
-					 <p><h3>Desde outubro de 2006, a Academia Monstrão, uma das mais modernas academias de Marechal Cândido Rondon, vem funcionando
+					<div class="col-md-3">
+
+					</div>
+	       <div class="col-md-6">
+					 <h3> Desde outubro de 2006, a Academia Monstrão, uma das mais modernas academias de Marechal Cândido Rondon, vem funcionando
 					com toda energia em sua nova instalação no Clube, com aparelhagem de primeira linha e profissionais altamente qualificados.
  				 	Os não sócios têm acesso à academia através de uma entrada exclusiva com estacionamento. A academia oferece musculação;
 				  todas as modalidades de ginástica:
 			  	jump, spinning, step, abdominal, localizada, pilates com bola; yoga; condicionamento físico; box;
 				 corrida; alongamento;  massagem relaxante, banho de lua e toda a parte
 				 de estética. Também disponibiliza atendimento nutricional e fisioterapeutico, acupuntura, avaliação física e corporal.</h3>
-			 </p>
+
 		   </div>
+			 <div class="col-md-3">
+
+			 </div>
 	    </div>
 	    <div class="login">
 	  	    <div class="row login_details">

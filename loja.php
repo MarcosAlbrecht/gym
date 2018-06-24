@@ -98,10 +98,11 @@
 			</div><!-- end h_menu4 -->
 	 </div>
 	 <!-- start h_menu4 -->
-	 <div class="clear"></div>
+
 	</div>
+
 </div>
-		<div class="container">
+		<div class="container-fluid">
 				<div class="page-header">
 				</div>
 		</div>
@@ -110,44 +111,19 @@
 			<div class="col-md-2">
 				<div class="members">
 				<ul class="nav nav-pills nav-stacked nav-admim ">
-					<li><a href="#">Whey</a></li>
-					<li><a href="#">Thermogênico</a></li>
-					<li><a href="#">BCAA</a></li>
+					<li><a href="listarProdutos.php?action=whey" target="iframe">Whey</a></li>
+					<li><a href="listarProdutos.php?action=thermogenico" target="iframe">Thermogênico</a></li>
+					<li><a href="listarProdutos.php?action=bcaa" target="iframe">BCAA</a></li>
 				</ul>
 				</div>
+
 			</div>
 
 			<div class="col-md-10">
 						<div class="row">
-							<?php
-							include 'conecta_mysql.inc';
-
-							$select = $mysqli->query("SELECT * FROM products");
-							$linhas = $select->num_rows;
-							$mysqli->close();
-							$product = array();
-							for ($i=0; $i <$linhas ; $i++) {
-								$product[$i] = $select->fetch_array();
-								//echo $product[$i]['name']." ";
-							}
-
-						for ($i=0; $i < $linhas; $i++) : ?>
-
-							<div class="col-sm-6 col-md-3">
-								<div class="thumbnail">
-									<img src="<?php echo $product[$i]['image'];?>" alt="Fjords">
-									<div class="caption">
-										<h3><?php echo $product[$i]['name'];?></h3>
-										<p><?php echo $product[$i]['description'];?></p>
-										<p>R$ <?php echo number_format($product[$i][2], 2, ',', '.');?></p>
-										<form action="cart.php?add=cart&id=<?php echo $product[$i][0]?>" method="post">
-												<input name="id" type="hidden" value=""/>
-												<button type="submit" class="btn btn-primary">Comprar</button>
-										</form>
-									</div>
-								</div>
+							<div class="embed-responsive embed-responsive-16by9">
+							  <iframe class="embed-responsive-item" frameborder="0" width="100%" height="1000" src="listarProdutos.php" name="iframe" sandbox="allow-top-navigation" allowfullscreen></iframe>
 							</div>
-						<?php endfor; ?>
 					</div>
 				</div>
 		</div>

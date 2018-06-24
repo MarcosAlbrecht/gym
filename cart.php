@@ -48,7 +48,7 @@
      <div class="menu" id="menu">
  		  <div class="container">
  			 <div class="logo">
- 				<a href="index.html"><img src="images/logo.png" alt=""/></a>
+ 				<a href="index.php"><img src="images/logo.png" alt=""/></a>
  			 </div>
  			 <!-- start h_menu4 -->
  			 <div class="h_menu4">
@@ -108,10 +108,16 @@
 echo '
 <div class="container">
     <div class="page-header">
+
         <h2>Carrinho de Compras</h2>
-        <form action="home.php" method="post">
-            <button type="submit" class="btn btn-dark">Continuar Comprando</button>
-        </form>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+        <a href="loja.php" class="btn btn-primary btn-lg">Continuar Comprando</a>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <br><br>
     </div>
 
     <table class="table">
@@ -148,6 +154,7 @@ echo '
           $idProduct = $_GET['id'];
           if (!isset($_SESSION['itens'][$idProduct])) {
             $_SESSION['itens'][$idProduct] = 1;
+            echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=cart.php"/>';
           }else{
             $_SESSION['itens'][$idProduct] += 1;
           }
@@ -190,13 +197,13 @@ echo '
 </div>';
 if (count($_SESSION['itens']) != 0) {
   echo '
-  <div class="."container".">
+  <div class="container">
     <div class="row">
       <div class="col-md-9">
 
       </div>
       <div class="col-md-3">
-        <div class="members members-cart">
+        <div class="members">
           <p><b>Total da compra R$ '.number_format($totalcompra, 2, ',','.').'</b></p>
           <form action="finalizarpedido.php" method="post">
               <input name="totalcompra" type="hidden" value="'.$totalcompra.'"/>
@@ -208,13 +215,13 @@ if (count($_SESSION['itens']) != 0) {
   </div>';
 }else{
 echo '
-<div class="."container".">
+<div class="container">
   <div class="row">
     <div class="col-md-9">
 
     </div>
     <div class="col-md-3">
-      <div class="members members-cart">
+      <div class="members">
         <p><b>Total da compra R$ '.number_format($totalcompra, 2, ',','.').'</b></p>
         <form action="finalizarpedido.php" method="post">
             <input name="totalcompra" type="hidden" value="'.$totalcompra.'"/>

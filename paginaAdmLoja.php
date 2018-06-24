@@ -113,7 +113,8 @@
          <li><a href="vendas.php?action=vendas" target="iframe">Vendas</a></li>
          <li><a href="vendas.php?action=usuarios" target="iframe">Usuários</a></li>
          <li><a href="vendas.php?action=inserir" target="iframe">Inserir</a></li>
-         <li><a href="vendas.php?action=inserir" target="iframe">LOGOUT</a></li>
+				 <li><a href="vendas.php?action=produtos" target="iframe">Produtos</a></li>
+         <li><a href="vendas.php?action=logout">LOGOUT</a></li>
         </ul>
         </nav>
         </div>

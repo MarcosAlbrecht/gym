@@ -110,7 +110,7 @@ include 'conecta_mysql.inc';
     }
     $mysqli->close();
 
-    echo'';
+
   }elseif((isset($_GET['action']) && $_GET['action'] == "inserir")){
     echo '<form action="vendas.php?action=cadastrar" method="post">
   <div class="form-group">
@@ -139,8 +139,78 @@ include 'conecta_mysql.inc';
   </div>
   <button type="submit" class="btn btn-primary">Cadastrar</button>
 </form>';
-  }
+}elseif((isset($_GET['action']) && $_GET['action'] == "produtos")){
+    $result = $mysqli->query("SELECT * FROM products order by id");
+    $linhas = $result->num_rows;
+    echo '<div class="container ">
+      <div class="row">
+        <div class="col-md-6 col-separa">
+          <h4>Buscar um Produto</h4>
+          <form class="" action="vendas.php?action=buscarProduto" method="post">
+            <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              <form class="" action="vendas.php?action=buscarProduto" method="post">
+                <td>Nome:  </td>
+                <td><input type="text" class="form-control" name="nome" placeholder="Nome"></td>
+                <td><input type="submit" class="btn btn-danger" value="Buscar"></td>
+              </form>
+                <td></td>
+            
+              </tr>
+            </tbody>
+            </table>
 
+
+        </div>
+
+
+      </div>
+
+    </div>
+    ';
+
+    echo '<br><div class="table-responsive">
+       <table class="table">
+         <thead>
+           <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Preço</th>
+              <th>Descrição</th>
+              <th>Quantidade</th>
+           </tr>
+         </thead>';
+
+         for ($i=0; $i < $linhas; $i++) {
+           $total = $result->fetch_array();
+           echo '
+                <tfoot>
+                  <tr>
+                    <td>'.$total['id'].'</td>
+                    <td>'.$total['name'].'</td>
+                    <td>'.$total['price'].'</td>
+                    <td>'.$total['description'].'</td>
+                    <td>'.$total['qtd'].'</td>
+                  </tr>
+
+                </tfoot>
+             ';
+       }
+
+
+}
   if ((isset($_GET['action']) && $_GET['action'] == "buscar")) {
     $nome = $_POST['nome'];
     $result = $mysqli->query("SELECT * FROM usuario WHERE nome like'%$nome%'");
@@ -176,6 +246,73 @@ include 'conecta_mysql.inc';
            }
   }
 
+  if ((isset($_GET['action']) && $_GET['action'] == "buscarProduto")) {
+    $nome = $_POST['nome'];
+    $result = $mysqli->query("SELECT * FROM products WHERE name like'%$nome%'");
+    $linhas = $result->num_rows;
+    echo '<div class="container ">
+      <div class="row">
+        <div class="col-md-6 col-separa">
+          <h4>Buscar um Produto</h4>
+          <form class="" action="vendas.php?action=buscarProduto" method="post">
+            <table>
+            <thead>
+              <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              <form class="" action="vendas.php?action=buscarProduto" method="post">
+                <td>Nome:  </td>
+                <td><input type="text" class="form-control" name="nome" placeholder="Nome"></td>
+                <td><input type="submit" class="btn btn-danger" value="Buscar"></td>
+              </form>
+
+              </tr>
+            </tbody>
+            </table>
+        </div>
+      </div>
+
+    </div>';
+    echo '<br><div class="table-responsive">
+       <table class="table">
+         <thead>
+           <tr>
+           <th>ID</th>
+           <th>Nome</th>
+           <th>Preço</th>
+           <th>Descrição</th>
+           <th>Quantidade</th>
+
+           </tr>
+         </thead>';
+         for ($i=0; $i < $linhas; $i++) {
+           $total = $result->fetch_array();
+           echo '
+                <tfoot>
+                  <tr>
+                  <td>'.$total['id'].'</td>
+                  <td>'.$total['name'].'</td>
+                  <td>'.$total['price'].'</td>
+                  <td>'.$total['description'].'</td>
+                  <td>'.$total['qtd'].'</td>
+                  </tr>
+
+                </tfoot>
+             ';
+           }
+  }
+
+
+
   if ((isset($_GET['action']) && $_GET['action'] == "cadastrar")) {
     $titulo = $_POST['titulo'];
     $preco = $_POST['preco'];
@@ -196,7 +333,13 @@ $mysqli->close();
 
   }
 
+  if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
+    session_destroy();
+    echo '<META HTTP-EQUIV="REFRESH" CONTENT="0;URL=loja.php"/>';
+  }
+
  ?>
+
 
 </table>
 </div>
