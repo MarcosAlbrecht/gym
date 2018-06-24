@@ -14,28 +14,18 @@
 		$linhas = $resultado->num_rows;
 		$registro  = $resultado->fetch_row();
 
-
-
-
-  /*$_SESSION['email'] = $email;
-	$_SESSION['senha'] = $senha;
-	$_SESSION['TIPOUSUARIO'] = $registro[6];
-	$_SESSION['idUsuario'] = $registro[0];
-	$_SESSION['nome'] = $registro[1];*/
-
-
 		if ($linhas > 0) {
-			//echo "logado";
+			echo "logado";
 			$_SESSION['nome'] = $registro[1];
 			$_SESSION['email'] = $registro[4];
 			$_SESSION['senha'] = $registro[5];
 			$_SESSION['TIPOUSUARIO'] = $registro[10];
 			$_SESSION['idUsuario'] = $registro[0];
-			header('location: index.php');
-
+			//header('location: index.php');
 		}else{
+
 			$_SESSION['erroLogin'] = "Email ou senha incorretos";
-			header('location: login.php');
+			//header('location: sobre.php');
 		}
 
 if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
@@ -47,30 +37,24 @@ if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	if ($_SESSION['TIPOUSUARIO'] == 1) {
 		header('location: painelTreinador.php');
 	}
+}else{
+	header('location: login.php');
 }
 
-
-
 if ($linhas > 0) {
+	if ((isset($_GET['action']) && $_GET['action'] == "carrinho")) {
+		header('location: cart.php');
+	}
+
 	if ((isset($_GET['action']) && $_GET['action'] == "meuspedidos")) {
 		header('location: meuspedidos.php');
-	}else{
-
-	if($_SESSION['TIPOUSUARIO'] == 1){
-
-	  //header('location: painelMaster.html');
-
 	}
-	if($_SESSION['TIPOUSUARIO'] == 2){
 
-	  include 'painelTreinador.html';
+	if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
+		session_destroy();
+		header('location: index.php');
+	}
 
-	}
-	if($_SESSION['TIPOUSUARIO'] == 3){
-
-	  include 'painelUsuario.php';
-	}
-	}
 }
 
 // ------------------ CADASTRA USUARIO -------------------------------------
@@ -188,15 +172,19 @@ if($_SESSION['TIPOUSUARIO'] == 3){
 
 
 	}else{
-			
+
 			header('location: painelUsuario.php');
 
 
 	}
 
 }else{
+	if (!isset($_SESSION['TIPOUSUARIO'])) {
+		header('location: login.php');
+	}else{
 			// SE TIPO USUARIO NÃO FOR = 3 (USUARIO) VOLTA PRA INDEX
-			header('location: index.php');
+			//header('location: index.php');
+	}
 }
 
 

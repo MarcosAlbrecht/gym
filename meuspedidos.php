@@ -138,8 +138,6 @@ session_start();
 
                 </tfoot>
                 <tbody>';
-
-
                           include "conecta_mysql.inc";
                           $iduser = $_SESSION['idUsuario'];
                           $resultado = $mysqli->query("SELECT * FROM venda where usuario_id=$iduser");
