@@ -25,7 +25,7 @@
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
          <li ><a href="alterarDados.php">Alterar Dados</a></li>
-         <li><a href="consultarMensalidade.php">Consultar Pagamentos</a></li>
+         <li><a href="consultarMensalidade.php">Mensalidades</a></li>
          <li><a href="criarTreino.php">Criar Treino</a></li>
          <li><a href="index.html">Sair</a></li>
        </ul>

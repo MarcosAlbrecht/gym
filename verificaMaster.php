@@ -31,8 +31,8 @@
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
          <li ><a href="painelMaster.php?action=excluirAlterar">Alterar/excluir</a></li>
-         <li><a href="consultarMensalidade.php">Mensalidades</a></li>
-         <li><a href="criarTreino.php">Criar Treino</a></li>
+         <li><a href="verificaMaster.php?action=consultarmensalidade">Mensalidades</a></li>
+         <li><a href="verificaMaster.php?action=criarTreino">Criar Treino</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
@@ -209,6 +209,190 @@ if(isset($_GET['action']) && $_GET['action'] == "alteraMaster"){
 ?>
 
 
+<?php
+ // ----------------------- CRIAR TREINO MASTER ------------------------------
+
+ if(isset($_GET['action']) && $_GET['action'] == "criarTreino"){
+
+
+echo '
+          <div class="main">
+            <div class="register-grids">
+              <div class="container">
+                <div class="register-top-grid">
+                  <div class="col-md-4">
+                    <h3>TREINO - ABC</h3> <h3>(Seg-Qua-Sex) ou (Ter-Qui-Sab)</h3> <br>
+                    <form class="" action="verificaMaster.php?action=criarTreino" method="post">
+                    <input type="hidden" name="operacao" value="criarTreino">
+                      Nome aluno: <br>
+                      <input type="text" name="nome" value=""> <br>
+                      Treino A: <br>
+                      <textarea name="treinoA" rows="5" cols="25"></textarea><br>
+                      Treino B: <br>
+                      <textarea name="treinoB" rows="5" cols="25"></textarea><br>
+                      Treino C: <br>
+                      <textarea name="treinoC" rows="5" cols="25"></textarea><br> <br>
+                      <input type="submit" name="enviar" value="SALVAR TREINO">
+                    </div>'; ?>
+
+                    <?php // -------- MENSAGENS DE AVISO ------- ?>
+                    <?php if((isset($_GET['action']) && $_GET['action'] == 'treinoCriado')){
+
+                      echo '<div class="container">
+                              <h3>Treino Criado !!</h3>
+                          </div>';
+
+                    }?>
+                    <?php if((isset($_GET['action']) && $_GET['action'] == 'naoExiste')){
+
+                      echo '<div class="container">
+                              <h3>Aluno Não Existe !!</h3>
+                          </div>';
+
+                    }?>
+                    <?php if((isset($_GET['action']) && $_GET['action'] == 'semDados')){
+
+                      echo '<div class="container">
+                              <h3>Preencha os Dados !!</h3>
+                          </div>';
+
+                    }?>
+                    <?php // -------- MENSAGENS DE AVISO ------- ?>
+              <?php  echo '     </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> '; ?>
+
+<?php   } ?>
+
+
+<?php // ------------------ CONSULTAR MENSALIDADE ------------------------ ?>
+
+<?php
+
+ if(isset($_GET['action']) && $_GET['action'] == "consultarmensalidade"){
+
+  echo '
+            <div class="main">
+              <div class="register-grids">
+                <div class="container">
+                  <div class="register-top-grid">
+                    <div class="col-md-4">
+                      <h3>NOME DO ALUNO</h3>
+                      <form class="" action="verificaMaster.php?action=consultarmensalidade" method="post">
+                      <input type="hidden" name="operacao" value="consultarMensalidade">
+                        <input type="text" name="nome" value=""> <br><br>
+                        <input type="submit" name="enviar" value="CONSULTAR">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+
+            <div class="container">
+              <div class="col-md-6">
+                <table class="table">
+
+                    <tr>
+                      <th>Aluno</th>
+                      <th>Data Pagamento</th>
+                      <th>Data Vencimento</th>
+                    </tr> '; ?>
+
+                      <?php
+                      if((isset($_GET['action']) && $_GET['action'] == "consultarmensalidade")){
+
+
+
+                                include 'conecta_mysql.inc';
+                              //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+
+                                  // testar sem LOGIN
+                                  $nome = $_POST['nome'];
+                                  $resultado = $mysqli->query("SELECT * FROM pagamento where nomeCartao = '$nome'");
+                                //  $linhas = $resultado->num_rows;
+
+                              /*    $aluno = $_SESSION['nome'];
+                                  $resultado = $mysqli->query("SELECT * FROM pagamento WHERE id = '$idUsuario'");
+                                  $linhas = $resultado->num_rows; */
+
+                                  function CalcularVencimento($data,$dias)
+                                  {
+
+                                    if($dias == '30'){
+
+                                    return  date('d/m/Y', strtotime('+30 days', strtotime($data)));
+
+                                  }else if($dias == '90'){
+
+                                      return  date('d/m/Y', strtotime('+90 days', strtotime($data)));
+
+                                    }else{
+
+                                    return  date('d/m/Y', strtotime('+180 days', strtotime($data)));
+
+                                    }
+                              }
+
+
+
+                                  while($vreg = $resultado->fetch_row()){
+
+                                    $nomeNoCartao = $vreg[2];
+                                    $dtPagamento = $vreg[5];
+                                    $plano = $vreg[6];
+
+                                    // troca / por -
+                                    $nvdtPagamento = str_replace('/','-',$dtPagamento);
+
+                                  echo '
+
+                                  <td>'.$nomeNoCartao.'</td>
+                                  <td>'.$dtPagamento.'</td>
+                                  <td>'.CalcularVencimento($nvdtPagamento,$plano).'</td>';
+
+                            //  }
+                              }
+                            }
+
+
+           ?>
+
+<?php echo '
+</table>
+</div>
+</div> '; ?>
+
+
+<?php
+
+ }
+
+ ?>
+
+ <?php
+ // ------------ FUNÇÃO MASTER - EXCLUIR USUARIO -----------------------
+  if((isset($_GET['action']) && $_GET['action'] == "excluir")){
+          // VERIFICA SE É ADM
+    //  if($_SESSION['TIPOUSUARIO'] == 1){
+            include 'conecta_mysql.inc';
+            $nome = $_SESSION['excluir'];
+            $resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
+            $dados = $resultado->fetch_row();
+            $id = $dados[0];
+            $exclui = $mysqli->query("DELETE FROM usuario WHERE id = $id");
+  //    }else{
+
+            header('location: painelMaster.php');
+
+  //    }
+  }
+
+  ?>
 
 <br>
 

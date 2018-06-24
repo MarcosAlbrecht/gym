@@ -26,8 +26,8 @@
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
          <li ><a href="painelMaster.php?action=excluirAlterar">Alterar/excluir</a></li>
-         <li><a href="consultarMensalidade.php">Mensalidades</a></li>
-         <li><a href="criarTreino.php">Criar Treino</a></li>
+         <li><a href="verificaMaster.php?action=mensalidade">Mensalidades</a></li>
+         <li><a href="verificaMaster.php?action=criarTreino">Criar Treino</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
@@ -71,18 +71,19 @@
           if((isset($_GET['action']) && $_GET['action'] == "excluirAlterar")){
 
 
-                    session_start();
-                    include 'conecta_mysql.inc';
+                      session_start();
+                      include 'conecta_mysql.inc';
                   //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
                       // testar sem LOGIN
+                      $_SESSION['excluir'] = $_POST['nome'];
                       $nome = $_POST['nome'];
                       $resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
 
 
                       while($vreg = $resultado->fetch_row()){
 
-                        $nomeDoAluno = $vreg[2];
+                        $nomeDoAluno = $vreg[1];
                         $dtPagamento = $vreg[5];
                         $plano = $vreg[6];
 
@@ -104,110 +105,6 @@
 
 
 
-      <?php          if((isset($_GET['action']) && $_GET['action'] == "alterar")){ ?>
-
-              <?php    echo '<div class="main">
-                    <div class="register-grids">
-                      <div class="container">
-                      <form action="verificaUsuario.php?action=alterar" method="POST">
-                        <input type="hidden" name="operacao" value="cadastrar">
-                          <div class="register-top-grid">
-                              <h3>ALTERAR DADOS</h3>
-                              <div>
-                                <span>Nome a ser alterado<label>*</label></span>
-                                <input type="text" name="nome1" value="" >
-                              </div>
-
-                              <div>
-                                <span>Nome<label>*</label></span>
-                                <input type="text" name="nome" >
-                              </div>
-
-                              <div>
-                                <span>Sobrenome<label>*</label></span>
-                                <input type="text" name="sobrenome" value="">
-                              </div>
-
-                              <div>
-                                <span>Telefone<label>*</label></span>
-                                <input type="text" name="telefone" maxlength="13" >
-                              </div>
-
-                              <div>
-                                <span>CPF<label>*</label></span>
-                                <input type="text" name="cpf" maxlength="14" >
-                              </div>
-
-                              <div class="container">
-                                <br>
-                                Estado: <br>
-                                <select name="estados-brasil">
-                                  <option value="">ESCOLHA</option> '; ?>
-                                  <?php
-                                    // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
-                                    include "conecta_mysql.inc";
-                                    $resultado = $mysqli->query("SELECT * FROM estado");
-
-                                    while($vreg = $resultado->fetch_row()){
-                                      $uf = $vreg[0];
-                                      $sigla = $vreg[2];
-                                      echo "<option value=$uf> $sigla</option>";
-                                    }
-                                   ?>
-                <?php echo    '  </select>
-                              </div>
-
-                              <div>
-                                <span>Cidade<label>*</label></span>
-                                <input type="text" name="cidade" >
-                              </div>
-                              <div>
-                                <span>Bairro<label>*</label></span>
-                                <input type="text" name="bairro" >
-                              </div>
-                              <div>
-                                <span>Endereço<label>*</label></span>
-                                <input type="text" name="endereco" >
-                              </div>
-
-                              <br>
-                              <div class="clear"> </div>
-                          </div>
-                          <div class="clear"> </div>
-                          <div class="clear"> </div>
-                          <input type="hidden" name="tipo" value="1">
-                          <input type="submit" value="Alterar" id="inputSubmit">
-                          </div>'; ?>
-                            <?php // -------- MENSAGENS DE AVISO ------- ?>
-                          <?php if((isset($_GET['action']) && $_GET['action'] == 'dadosAlterados')){
-
-                            echo '<div class="container">
-                                    <h3>Dados alterados !!</h3>
-                                </div>';
-
-                          }?>
-                          <?php if((isset($_GET['action']) && $_GET['action'] == 'naoExiste')){
-
-                            echo '<div class="container">
-                                    <h3>Aluno Não Existe !!</h3>
-                                </div>';
-
-                          }?>
-                          <?php if((isset($_GET['action']) && $_GET['action'] == 'semDados')){
-
-                            echo '<div class="container">
-                                    <h3>Preencha os Dados !!</h3>
-                                </div>';
-
-                          }?>
-                          <?php // -------- MENSAGENS DE AVISO ------- ?>
-                  <?php  '     </form>
-                    </div>
-                  </div> ';?>
-
-
-
-        <?php       }  ?>
 
 
 
