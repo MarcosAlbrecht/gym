@@ -35,12 +35,12 @@ if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
 
 if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	if ($_SESSION['TIPOUSUARIO'] == 1) {
-		
-		header('location: painelMaster.php');
-	
-	}else if($_SESSION['TIPOUSUARIO'] == 2){
 
 		header('location: painelMaster.php');
+
+	}else if($_SESSION['TIPOUSUARIO'] == 2){
+
+		header('location: painelTreinador.php');
 	}else{
 
 		header('location: painelUsuario.php');
@@ -95,7 +95,7 @@ if ($linhas > 0) {
 				$last_id_endereco = $mysqli->insert_id;
 
 
-				$resultado = $mysqli->query("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id,cidade_id,bairro_id,rua_id,tipousuario_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado','$last_id_cidade','$last_id_bairro','$last_id_endereco',3)");
+				$resultado = $mysqli->query("INSERT INTO usuario(nome,sobrenome,cpf,contato,email,senha,estado_id,cidade_id,bairro_id,rua_id,tipousuario_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado','$last_id_cidade','$last_id_bairro','$last_id_endereco',3)");
 
 /*
 				$resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
@@ -103,7 +103,7 @@ if ($linhas > 0) {
 				$dados = $resultado->fetch_array();
 				$idusuario = $dados['id'];
 /*
-				
+
 				$insereEndereços = $mysqli->query("INSERT INTO usuario(cidade_id,rua_id,bairro_id) select id_usuario from cidade");
 */
 			 header('location: register.php?action=cadastrado');
@@ -114,15 +114,6 @@ if ($linhas > 0) {
 	 // ------------------- ALTERAR DADOS --------------------------------
 
 	 if(isset($_GET['action']) && $_GET['action'] == "alterar"){
-
-			 if (!isset($nome) == " "){
-
-				 //SE DADOS NÃO SÃO PREENCHIDOS
-				 header('location: alterarDados.php?action=semDados');
-
-			 }
-
-	 }else if(isset($_GET['action']) && $_GET['action'] == "alterar"){
 
 			if($_SESSION['TIPOUSUARIO'] <= 2){
 
@@ -136,9 +127,15 @@ if ($linhas > 0) {
 				$cidade = $_POST['cidade'];
 				$bairro = $_POST['bairro'];
 
+
+
 				$resultado = $mysqli->query("SELECT * FROM usuario WHERE nome = '$nome1'");
 				$linhas = $resultado->num_rows;
 				$dados = $resultado->fetch_array();
+				$idEndereco = $dados['rua_id'];
+				$idBairro = $dados['bairro_id'];
+				$idCidade = $dados['cidade_id'];
+				$idEstado = $dados['estado_id'];
 				$name = $dados['nome'];
 
 				if($name != $nome1){
@@ -148,26 +145,19 @@ if ($linhas > 0) {
 				}else{
 
 					// FAZ UPDATE DO USUARIO, SALVA NO BANCO E VOLTA PRA PAGINA DE ALTERAÇÃO COM MENSAGEM DE DADOS ALTERADOS
-					$sql1 = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', endereco = '$endereco', estado = '$estado' WHERE id  = '$id'");
+					$sql1 = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', estado_id = '$idEstado',cidade_id = '$idCidade', bairro_id = '$idBairro', rua_id = '$idEndereco' WHERE id  = '$id'");
 					$mysqli->query($sql1);
 					header('location: alterarDados.php?action=dadosAlterados');
 
 				}
-
-
-			}else{
-				// CASO TIPO DO USUARIO NÃO TENHA PERMISSÃO
-				header('location: index.php');
-
 			}
-
 	 }
 
 	 // ----------------- PAGAR MENSALIDADE --------------------------------------------
 
 	 if((isset($_GET['action']) && $_GET['action'] == "pagar")){
 
-			 if (!isset($dataPagamento) == " "){
+			 if (isset($dataPagamento) == " "){
 
 				 //SE DADOS NÃO SÃO PREENCHIDOS
 				 header('location: pagarMensalidade.php?action=semDados');
@@ -183,7 +173,6 @@ if ($linhas > 0) {
 				 $idusuario = $_SESSION['idUsuario'];
 
 				 $resultado = $mysqli->query("INSERT INTO pagamento(numeroCartao,nomeCartao,dataExpiracao,codigoSeguranca,dataPagamento,plano,usuario_id) values ('$numeroCartao', '$nomeCartao', '$dataExpericao', '$codigoSeguranca', '$dataPagamento', '$plano','$idusuario') " );
-				 $mysqli->query($resultado);
 				 header('location: pagarMensalidade.php?action=pago');
 
 			 }

@@ -47,7 +47,6 @@
         <div class="col-md-4">
           <h3>TREINO - ABC</h3> <h3>(Seg-Qua-Sex) ou (Ter-Qui-Sab)</h3> <br>
           <form class="" action="criarTreino.php?action=criarTreino" method="post">
-          <input type="hidden" name="operacao" value="criarTreino">
             Nome aluno: <br>
             <input type="text" name="nome" value=""> <br>
             Treino A: <br>
@@ -57,7 +56,8 @@
             Treino C: <br>
             <textarea name="treinoC" rows="5" cols="25"></textarea><br> <br>
             <input type="submit" name="enviar" value="SALVAR TREINO">
-          </div>
+            </form>
+
           <?php // -------- MENSAGENS DE AVISO ------- ?>
           <?php if((isset($_GET['action']) && $_GET['action'] == 'treinoCriado')){
 
@@ -81,7 +81,7 @@
 
           }?>
           <?php // -------- MENSAGENS DE AVISO ------- ?>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -93,19 +93,12 @@
             include "conecta_mysql.inc";
             session_start();
 
-            if(isset($_GET['action']) && $_GET['action'] == "criarTreino"){
 
-                if (!isset($nome) == " "){
 
-                  // SE DADOS NÃO SÃO PREENCHIDOS
-                  header('location: alterarDados.php?action=semDados');
+          if(isset($_GET['action']) && $_GET['action'] == "criarTreino"){
 
-                }
 
-            }else if(isset($_GET['action']) && $_GET['action'] == "criarTreino"){
-
-               if($_SESSION['TIPOUSUARIO'] <= 2){
-
+              if($_SESSION['TIPOUSUARIO'] <= 2){
 
                            $aluno = $_POST['nome'];
                            $treinoA = $_POST['treinoA'];
@@ -116,24 +109,29 @@
                            $linhas = $resultado->num_rows;
                            $dados = $resultado->fetch_array();
                            $nome = $dados['nome'];
+                           $idUsuarioTreino = $dados['id'];
+                           echo $idUsuarioTreino;
 
                            if($nome != $aluno){
                              // SE ALUNO NÃO EXISTE
-                             header('location: alterarDados.php?action=naoExiste');
+                             header('location: criarTreino.php?action=naoExiste');
 
                            }else{
 
-                             $sql = $mysqli->query("INSERT INTO treino(aluno,treinoA,treinoB,treinoC) VALUES ('$aluno', '$treinoA', '$treinoB', '$treinoC')");
+
+
+                             $sql = $mysqli->query("INSERT INTO treino(treinoA,treinoB,treinoC,usuario_id) VALUES ('$treinoA', '$treinoB', '$treinoC','$idUsuarioTreino')");
                              $mysqli->query($sql);
                              header('location: criarTreino.php?action=treinoCriado');
 
                            }
+                  }else{
 
-               }else{
-                      // CASO TIPO USUARIO NÃO TENHA PERMISSAO VOLTA PRA INDEX
-                     header('location: index.php');
+                        header('location: index.php');
+                  }
+
                }
-            }
+
 
  ?>
 

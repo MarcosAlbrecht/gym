@@ -1,3 +1,7 @@
+<?php
+
+session_start();
+ ?>
 <!doctype html>
 <html lang=''>
 <head>
@@ -73,7 +77,7 @@
             <div class="container">
               <br>
               <span>Nome do Cartão<label>*</label></span>
-              <input type="text" name="nomeCartao" value="">
+              <input type="text" name="nomeCartao" value="<?php echo $_SESSION['nome'] ?>">
             </div>
             <div class="container">
               <span>Data de Expiração<label>*</label></span>

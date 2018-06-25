@@ -33,6 +33,7 @@
          <li ><a href="painelMaster.php?action=excluirAlterar">Alterar/excluir</a></li>
          <li><a href="verificaMaster.php?action=consultarmensalidade">Mensalidades</a></li>
          <li><a href="verificaMaster.php?action=criarTreino">Criar Treino</a></li>
+         <li ><a href="painelMaster.php?action=excluirAlterar">Voltar</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
@@ -48,12 +49,12 @@
 
     <?php // -------------------- FUNÇÃO IMPRIME PAGINA PARA ALTERAR DADOS ----------------------  ?>
 
-      <?php          if((isset($_GET['action']) && $_GET['action'] == "alterar")){ ?>
+      <?php          if((isset($_GET['action']) && $_GET['action'] == "alteraMaster")){ ?>
 
               <?php    echo '<div class="main">
                     <div class="register-grids">
                       <div class="container">
-                      <form action="verificaMaster.php?action=alteraMaster" method="POST">
+                      <form action="verificaMaster.php?action=alterar" method="POST">
                         <input type="hidden" name="operacao" value="cadastrar">
                           <div class="register-top-grid">
                               <h3>ALTERAR DADOS</h3>
@@ -85,7 +86,7 @@
                               <div class="container">
                                 <br>
                                 Estado: <br>
-                                <select name="estados-brasil">
+                                <select name="estado">
                                   <option value="">ESCOLHA</option> '; ?>
                                   <?php
                                     // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
@@ -94,7 +95,7 @@
 
                                     while($vreg = $resultado->fetch_row()){
                                       $uf = $vreg[0];
-                                      $sigla = $vreg[2];
+                                      $sigla = $vreg[1];
                                       echo "<option value=$uf> $sigla</option>";
                                     }
                                    ?>
@@ -157,19 +158,14 @@
 <?php  // ----------------------- FUNÇÃO ALTERA DADOS --------------------------------- ?>
 
 <?php
-if(isset($_GET['action']) && $_GET['action'] == "alteraMaster"){
 
-   if (!isset($nome) == " "){
 
-     //SE DADOS NÃO SÃO PREENCHIDOS
-     header('location: alterarDados.php?action=semDados');
-
-   }
-
-}else if(isset($_GET['action']) && $_GET['action'] == "alteraMaster"){
+if(isset($_GET['action']) && $_GET['action'] == "alterar"){
 
   if($_SESSION['TIPOUSUARIO'] <= 2){
 
+
+      include 'conecta_mysql.inc';
     $nome1 = $_POST['nome1'];
     $nome = $_POST['nome'];
     $sobrenome = $_POST['sobrenome'];
@@ -180,29 +176,34 @@ if(isset($_GET['action']) && $_GET['action'] == "alteraMaster"){
     $cidade = $_POST['cidade'];
     $bairro = $_POST['bairro'];
 
+    $insereCidade = $mysqli->query("INSERT INTO cidade(nome) values ('$cidade')");
+    $last_id_cidade = $mysqli->insert_id;
+    $insereBairro = $mysqli->query("INSERT INTO bairro(nome) values ('$bairro')");
+    $last_id_bairro = $mysqli->insert_id;
+    $insereEndereco = $mysqli->query("INSERT INTO rua(nome) values ('$endereco')");
+    $last_id_endereco = $mysqli->insert_id;
+
     $resultado = $mysqli->query("SELECT * FROM usuario WHERE nome = '$nome1'");
     $linhas = $resultado->num_rows;
     $dados = $resultado->fetch_array();
     $name = $dados['nome'];
+    $idEndereco = $dados['rua_id'];
+    $idBairro = $dados['bairro_id'];
+    $idCidade = $dados['cidade_id'];
+    $idEstado = $dados['estado_id'];
 
     if($name != $nome1){
       // SE ALUNO NÃO EXISTE
-      header('location: alterarDados.php?action=naoExiste');
+      header('location: painelMaster.php?action=naoExiste');
 
     }else{
 
       // FAZ UPDATE DO USUARIO, SALVA NO BANCO E VOLTA PRA PAGINA DE ALTERAÇÃO COM MENSAGEM DE DADOS ALTERADOS
-      $sql1 = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',telefone = '$telefone', endereco = '$endereco', estado = '$estado' WHERE id  = '$id'");
+      $sql1 = ("UPDATE usuario SET nome = '$nome',sobrenome = '$sobrenome', cpf = '$cpf',contato = '$telefone', estado_id = '$idEstado',cidade_id = '$last_id_cidade', bairro_id = '$last_id_bairro', rua_id = '$last_id_endereco' WHERE id  = '$id'");
       $mysqli->query($sql1);
-      header('location: alterarDados.php?action=dadosAlterados');
+      header('location: painelMaster.php?action=dadosAlterados');
 
     }
-
-
-  }else{
-    // CASO TIPO DO USUARIO NÃO TENHA PERMISSÃO
-    header('location: index.php');
-
   }
 
 }
@@ -281,7 +282,7 @@ echo '
                   <div class="register-top-grid">
                     <div class="col-md-4">
                       <h3>NOME DO ALUNO</h3>
-                      <form class="" action="verificaMaster.php?action=consultarmensalidade" method="post">
+                      <form class="" action="verificaMaster.php?action=consultarmensalidade&bt=btconsultar" method="post">
                       <input type="hidden" name="operacao" value="consultarMensalidade">
                         <input type="text" name="nome" value=""> <br><br>
                         <input type="submit" name="enviar" value="CONSULTAR">
@@ -291,20 +292,11 @@ echo '
                 </div>
               </div>
             </div>
-            <br>
+            <br> ';
 
-            <div class="container">
-              <div class="col-md-6">
-                <table class="table">
 
-                    <tr>
-                      <th>Aluno</th>
-                      <th>Data Pagamento</th>
-                      <th>Data Vencimento</th>
-                    </tr> '; ?>
 
-                      <?php
-                      if((isset($_GET['action']) && $_GET['action'] == "consultarmensalidade")){
+                      if((isset($_GET['bt']) && $_GET['bt'] == "btconsultar")){
 
 
 
@@ -339,6 +331,15 @@ echo '
                               }
 
 
+                        echo     '<div class="container">
+                                <div class="col-md-6">
+                                  <table class="table">
+
+                                      <tr>
+                                        <th>Aluno</th>
+                                        <th>Data Pagamento</th>
+                                        <th>Data Vencimento</th>
+                                      </tr> ';
 
                                   while($vreg = $resultado->fetch_row()){
 
@@ -385,12 +386,13 @@ echo '
             $dados = $resultado->fetch_row();
             $id = $dados[0];
             $exclui = $mysqli->query("DELETE FROM usuario WHERE id = $id");
+            $linhas =  $mysqli->affected_rows;
+            header('location: painelMaster.php?action=excluido');
   //    }else{
 
-            header('location: painelMaster.php');
-
+          //  header('location: painelMaster.php');
   //    }
-  }
+}
 
   ?>
 

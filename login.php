@@ -49,7 +49,7 @@ session_start();
     <div class="menu" id="menu">
     <div class="container">
      <div class="logo">
-      <a href="index.html"><img src="images/logo.png" alt=""/></a>
+      <a href="index.php"><img src="images/logo.png" alt=""/></a>
      </div>
      <!-- start h_menu4 -->
      <div class="h_menu4">
@@ -65,7 +65,7 @@ session_start();
          <?php
          if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
-           echo'<li class="active"><a href="">'.$_SESSION['email'].'</a> <ul>
+           echo'<li class="active"><a href="">'.$_SESSION['nome'].'</a> <ul>
   					<li><a href="verificaUsuario.php?action=minhapagina">Minha Página</a></li>
   					<li><a href="verificaUsuario.php?action=logout">Logout</a></li>
   				 </ul></li>';

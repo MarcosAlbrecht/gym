@@ -42,19 +42,19 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <div class="menu">
 	  <div class="container">
 		 <div class="logo">
-			<a href="index.html"><img src="images/logo.png" alt=""/></a>
+			<a href="index.php"><img src="images/logo.png" alt=""/></a>
 		 </div>
 		 <div class="h_menu4"><!-- start h_menu4 -->
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
-			   <li class="active"><a href="index.html">Home</a></li>
+			   <li ><a href="index.php">Home</a></li>
 			   <li><a href="sobre.php">Sobre</a></li>
 			   <li><a href="trainers.php">Treinos</a></li>
 			   <li><a href="classes.php">Professores</a></li>
-			   <li><a href="blog.php">Loja</a></li>
+			   <li><a href="loja.php">Loja</a></li>
 			   <li><a href="pricing.php">Preço</a></li>
 			   <li><a href="contact.php">Contato</a></li>
-         <li><a href="login.php">Login</a></li>
+         <li class="active"><a href="login.php">Login</a></li>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
 		  </div><!-- end h_menu4 -->

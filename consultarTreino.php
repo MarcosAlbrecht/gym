@@ -76,9 +76,9 @@
                     include 'conecta_mysql.inc';
                   //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
-                      
-                      $nome = $_SESSION['nome'];
-                      $resultado = $mysqli->query("SELECT * FROM treino where aluno = '$nome'");
+
+                      $id = $_SESSION['idUsuario'];
+                      $resultado = $mysqli->query("SELECT * FROM treino where usuario_id = '$id'");
 
                       while($vreg = $resultado->fetch_row()){
 

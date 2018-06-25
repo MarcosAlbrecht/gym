@@ -31,6 +31,7 @@
        <ul class="nav">
          <li><a href="painelUsuario.php?action=consultartreino">Consultar Treinos</a></li>
          <li><a href="pagarMensalidade.php">Pagar Mensalidade</a></li>
+          <li><a href="index.php">Voltar para o site</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
         <script type="text/javascript" src="js/nav.js"></script>
@@ -54,35 +55,39 @@
         </tr>
       </thead>
           <?php
-          if((isset($_GET['action']) && $_GET['action'] == "consultartreino")){
 
 
                     session_start();
                     include 'conecta_mysql.inc';
-                  //  if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
+                    if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
 
+                      $id = $_SESSION['idUsuario'];
                       $nome = $_SESSION['nome'];
-                      $resultado = $mysqli->query("SELECT * FROM treino where aluno = '$nome'");
+                      $resultado = $mysqli->query("SELECT * FROM treino where usuario_id = '$id'");
 
                       while($vreg = $resultado->fetch_row()){
 
-                        $aluno = $vreg[1];
-                        $treinoA = $vreg[2];
-                        $treinoB = $vreg[3];
-                        $treinoC = $vreg[4];
+
+                        $treinoA = $vreg[1];
+                        $treinoB = $vreg[2];
+                        $treinoC = $vreg[3];
 
 
                       echo '
 
-                      <td>'.$aluno.'</td>
+                      <td>'.$nome.'</td>
                       <td>'.$treinoA.'</td>
                       <td>'.$treinoB.'</td>
                       <td>'.$treinoC.'</td>';
 
-                //  }
                   }
+
+                  }else{
+
+                    header('location: login.php');
                 }
+
 
 
            ?>

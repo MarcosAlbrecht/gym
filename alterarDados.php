@@ -29,7 +29,7 @@
          <li ><a href="alterarDados.php">Alterar Dados</a></li>
          <li><a href="consultarMensalidade.php">Mensalidades</a></li>
          <li><a href="criarTreino.php">Criar Treino</a></li>
-         <li><a href="index.html">Sair</a></li>
+         <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
         <script type="text/javascript" src="js/nav.js"></script>
@@ -74,7 +74,7 @@
             <div class="container">
               <br>
               Estado: <br>
-              <select name="estados-brasil">
+              <select name="estado">
                 <option value="">ESCOLHA</option>
                 <?php
                   // CONSULTA NO BANCO OS ESTADOS CADASTRADOS
@@ -83,7 +83,7 @@
 
                   while($vreg = $resultado->fetch_row()){
                     $uf = $vreg[0];
-                    $sigla = $vreg[2];
+                    $sigla = $vreg[1];
                     echo "<option value=$uf> $sigla</option>";
                   }
                  ?>

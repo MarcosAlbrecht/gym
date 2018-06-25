@@ -28,6 +28,7 @@
          <li ><a href="painelMaster.php?action=excluirAlterar">Alterar/excluir</a></li>
          <li><a href="verificaMaster.php?action=consultarmensalidade">Mensalidades</a></li>
          <li><a href="verificaMaster.php?action=criarTreino">Criar Treino</a></li>
+         <li><a href="painelMaster.php?action=excluirAlterar">Voltar</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 
@@ -46,7 +47,7 @@
       <div class="register-top-grid">
         <div class="col-md-4">
           <h3>Inserir Nome</h3>
-          <form class="" action="painelMaster.php?action=excluirAlterar" method="post">
+          <form class="" action="painelMaster.php?action=excluirAlterar&bt=excluirAlterar" method="post">
           <input type="hidden" name="operacao" value="alterar">
             <input type="text" name="nome" value=""> <br><br>
             <input type="submit" name="enviar" value="CONSULTAR">
@@ -56,19 +57,31 @@
     </div>
   </div>
 </div>
+<?php if((isset($_GET['action']) && $_GET['action'] == 'excluido')){
 
-<div class="container">
-  <div class="col-md-6">
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Aluno</th>
-        </tr>
-      </thead>
+  echo '<div class="container">
+          <h3>USUARIO EXCLUIDO</h3>
+      </div>';
+
+}?>
+<?php if((isset($_GET['action']) && $_GET['action'] == 'dadosAlterados')){
+
+  echo '<div class="container">
+          <h3>DADOS ALTERADOS</h3>
+      </div>';
+
+}?>
+<?php if((isset($_GET['action']) && $_GET['action'] == 'naoExiste')){
+
+  echo '<div class="container">
+          <h3>aluno não existe</h3>
+      </div>';
+
+}?>
 
 
           <?php
-          if((isset($_GET['action']) && $_GET['action'] == "excluirAlterar")){
+          if((isset($_GET['bt']) && $_GET['bt'] == "excluirAlterar")){
 
 
                       session_start();
@@ -80,22 +93,29 @@
                       $nome = $_POST['nome'];
                       $resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
 
+                      echo '<div class="container">
+                        <div class="col-md-6">
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th>Aluno</th>
+                              </tr>
+                            </thead>';
+
 
                       while($vreg = $resultado->fetch_row()){
 
                         $nomeDoAluno = $vreg[1];
-                        $dtPagamento = $vreg[5];
-                        $plano = $vreg[6];
 
 
-
-                      echo "<td> $nomeDoAluno </td>";
+                      echo "<tr><td> $nomeDoAluno </td>";
                       echo "<td><a href='verificaMaster.php?action=alteraMaster'>Alterar </a></td>";
-                      echo "<td><a href='verificaMaster.php?action=excluir'>Excluir </a></td>";
+                      echo "<td><a href='verificaMaster.php?action=excluir'>Excluir </a></td></tr>";
 
 
                 //  }
                   }
+
                 }
            ?>
 </table>
