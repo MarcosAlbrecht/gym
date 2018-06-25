@@ -6,7 +6,7 @@ select * from products_has_venda;
 select * from bairro;
 
 
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `dbloja` DEFAULT CHARACTER SET utf8 ;
 USE `dbloja` ;
 
 -- -----------------------------------------------------

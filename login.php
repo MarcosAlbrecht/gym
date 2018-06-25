@@ -65,7 +65,7 @@ session_start();
          <?php
          if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
-           echo'<li class="active"><a href="">'.$_SESSION['email'].'</a> <ul>
+           echo'<li class="active"><a href="">'.$_SESSION['nome'].'</a> <ul>
   					<li><a href="verificaUsuario.php?action=minhapagina">Minha Página</a></li>
   					<li><a href="verificaUsuario.php?action=logout">Logout</a></li>
   				 </ul></li>';
@@ -172,7 +172,7 @@ session_start();
             if (!isset($_GET['action'])) {
 
             echo'
-						<form action="verificaUsuario.php?action=" method="post" name="login" id="login-form">
+						<form action="verificaUsuario.php?action=logar" method="post" name="login" id="login-form">
 						  <fieldset class="input">
 						    <p id="login-form-username">
 						      <label for="modlgn_username">Email</label>

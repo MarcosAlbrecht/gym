@@ -3,7 +3,6 @@
 
 	include "conecta_mysql.inc";
 
-  $operacao = $_POST['operacao'];
 
 	session_start();
 
@@ -15,7 +14,7 @@
 		$registro  = $resultado->fetch_row();
 
 		if ($linhas > 0) {
-			echo "logado";
+
 			$_SESSION['nome'] = $registro[1];
 			$_SESSION['email'] = $registro[5];
 			$_SESSION['senha'] = $registro[6];
@@ -25,7 +24,7 @@
 		}else{
 
 			$_SESSION['erroLogin'] = "Email ou senha incorretos";
-			//header('location: sobre.php');
+			header('location: login.php');
 		}
 
 if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
@@ -35,9 +34,9 @@ if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
 
 if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	if ($_SESSION['TIPOUSUARIO'] == 1) {
-		
+
 		header('location: painelMaster.php');
-	
+
 	}else if($_SESSION['TIPOUSUARIO'] == 2){
 
 		header('location: painelMaster.php');
@@ -46,21 +45,23 @@ if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 		header('location: painelUsuario.php');
 	}
 
-}else{
-	header('location: login.php');
 }
 
 if ($linhas > 0) {
-	if ((isset($_GET['action']) && $_GET['action'] == "carrinho")) {
+	if (isset($_GET['action']) && $_GET['action'] == "carrinho") {
 		header('location: cart.php');
 	}
 
-	if ((isset($_GET['action']) && $_GET['action'] == "meuspedidos")) {
+	if (isset($_GET['action']) && $_GET['action'] == "meuspedidos") {
 		header('location: meuspedidos.php');
 	}
 
-	if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
+	if (isset($_GET['action']) && $_GET['action'] == "logout") {
 		session_destroy();
+		header('location: index.php');
+	}
+
+	if (isset($_GET['action']) && $_GET['action'] == "logar") {
 		header('location: index.php');
 	}
 
@@ -103,7 +104,7 @@ if ($linhas > 0) {
 				$dados = $resultado->fetch_array();
 				$idusuario = $dados['id'];
 /*
-				
+
 				$insereEndereços = $mysqli->query("INSERT INTO usuario(cidade_id,rua_id,bairro_id) select id_usuario from cidade");
 */
 			 header('location: register.php?action=cadastrado');

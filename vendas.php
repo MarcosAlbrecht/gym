@@ -83,8 +83,8 @@ include 'conecta_mysql.inc';
            <tr>
              <th>ID</th>
              <th>Nome</th>
+             <th>Contato</th>
              <th>email</th>
-             <th>senha</th>
              <th>cpf</th>
              <th>Tipo Usuario</th>
 
@@ -92,16 +92,16 @@ include 'conecta_mysql.inc';
          </thead>';
 
     for ($i=0; $i < $linhas; $i++) {
-      $total = $result->fetch_row();
+      $total = $result->fetch_array();
       echo '
            <tfoot>
              <tr>
-               <td>'.$total[0].'</td>
-               <td>'.$total[1].'</td>
-               <td>'.$total[4].'</td>
-               <td>'.$total[5].'</td>
-               <td>'.$total[3].'</td>
-               <td>'.$total[10].'</td>
+               <td>'.$total['id'].'</td>
+               <td>'.$total['nome'].'</td>
+               <td>'.$total['contato'].'</td>
+               <td>'.$total['email'].'</td>
+               <td>'.$total['cpf'].'</td>
+               <td>'.$total['tipousuario_id'].'</td>
              </tr>
 
            </tfoot>
@@ -167,7 +167,7 @@ include 'conecta_mysql.inc';
                 <td><input type="submit" class="btn btn-danger" value="Buscar"></td>
               </form>
                 <td></td>
-            
+
               </tr>
             </tbody>
             </table>
