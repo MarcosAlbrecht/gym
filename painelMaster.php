@@ -26,7 +26,7 @@
        <a class="toggleMenu" href="#">Menu</a>
        <ul class="nav">
          <li ><a href="painelMaster.php?action=excluirAlterar">Alterar/excluir</a></li>
-         <li><a href="verificaMaster.php?action=mensalidade">Mensalidades</a></li>
+         <li><a href="verificaMaster.php?action=consultarmensalidade">Mensalidades</a></li>
          <li><a href="verificaMaster.php?action=criarTreino">Criar Treino</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>

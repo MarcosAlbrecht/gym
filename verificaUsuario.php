@@ -17,9 +17,9 @@
 		if ($linhas > 0) {
 			echo "logado";
 			$_SESSION['nome'] = $registro[1];
-			$_SESSION['email'] = $registro[4];
-			$_SESSION['senha'] = $registro[5];
-			$_SESSION['TIPOUSUARIO'] = $registro[10];
+			$_SESSION['email'] = $registro[5];
+			$_SESSION['senha'] = $registro[6];
+			$_SESSION['TIPOUSUARIO'] = $registro[11];
 			$_SESSION['idUsuario'] = $registro[0];
 			//header('location: index.php');
 		}else{
@@ -35,8 +35,17 @@ if ((isset($_GET['action']) && $_GET['action'] == "logout")) {
 
 if ((isset($_GET['action']) && $_GET['action'] == "minhapagina")) {
 	if ($_SESSION['TIPOUSUARIO'] == 1) {
-		header('location: painelTreinador.php');
+		
+		header('location: painelMaster.php');
+	
+	}else if($_SESSION['TIPOUSUARIO'] == 2){
+
+		header('location: painelMaster.php');
+	}else{
+
+		header('location: painelUsuario.php');
 	}
+
 }else{
 	header('location: login.php');
 }
@@ -78,21 +87,27 @@ if ($linhas > 0) {
 				$usuario = 3;
 
 
-				$resultado = $mysqli->query("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado')");
+				$insereCidade = $mysqli->query("INSERT INTO cidade(nome) values ('$cidade')");
+				$last_id_cidade = $mysqli->insert_id;
+				$insereBairro = $mysqli->query("INSERT INTO bairro(nome) values ('$bairro')");
+				$last_id_bairro = $mysqli->insert_id;
+				$insereEndereco = $mysqli->query("INSERT INTO rua(nome) values ('$endereco')");
+				$last_id_endereco = $mysqli->insert_id;
 
 
+				$resultado = $mysqli->query("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id,cidade_id,bairro_id,rua_id,tipousuario_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado','$last_id_cidade','$last_id_bairro','$last_id_endereco',3)");
+
+/*
 				$resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
 				$linhas = $resultado->num_rows;
 				$dados = $resultado->fetch_array();
 				$idusuario = $dados['id'];
 /*
-				$insereCidade = $mysqli->query("INSERT INTO cidade(id_usuario, nome) values ('$idusuario', '$cidade')");
-				$insereBairro = $mysqli->query("INSERT INTO bairro(id_usuario, nome) values ('$idusuario', '$bairro')");
-				$insereEndereco = $mysqli->query("INSERT INTO rua(id_usuario, nome) values ('$idusuario', '$endereco')");
-
+				
 				$insereEndereços = $mysqli->query("INSERT INTO usuario(cidade_id,rua_id,bairro_id) select id_usuario from cidade");
 */
 			 header('location: register.php?action=cadastrado');
+				echo $endereco;
 
 	 }
 
@@ -165,8 +180,9 @@ if ($linhas > 0) {
 				 $codigoSeguranca = $_POST['codigoSeguranca'];
 				 $dataPagamento = $_POST['dataPagamento'];
 				 $plano = $_POST['plantoTipo'];
+				 $idusuario = $_SESSION['idUsuario'];
 
-				 $resultado = $mysqli->query("INSERT INTO pagamento(numeroCartao,nomeCartao,dataExpiracao,codigoSeguranca,dataPagamento,plano) values ('$numeroCartao', '$nomeCartao', '$dataExpericao', '$codigoSeguranca', '$dataPagamento', '$plano') " );
+				 $resultado = $mysqli->query("INSERT INTO pagamento(numeroCartao,nomeCartao,dataExpiracao,codigoSeguranca,dataPagamento,plano,usuario_id) values ('$numeroCartao', '$nomeCartao', '$dataExpericao', '$codigoSeguranca', '$dataPagamento', '$plano','$idusuario') " );
 				 $mysqli->query($resultado);
 				 header('location: pagarMensalidade.php?action=pago');
 
