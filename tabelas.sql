@@ -7,12 +7,12 @@ select * from bairro;
 
 
 CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+USE `dbloja` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`products`
+-- Table `dbloja`.`products`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`products` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(255) NOT NULL,
   `price` DECIMAL(10,2) NOT NULL,
@@ -24,9 +24,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`estado`
+-- Table `dbloja`.`estado`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`estado` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`estado` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
@@ -34,9 +34,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`cidade`
+-- Table `dbloja`.`cidade`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`cidade` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`cidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -44,9 +44,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`bairro`
+-- Table `dbloja`.`bairro`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`bairro` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`bairro` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -56,7 +56,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`rua`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`rua` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`rua` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -66,7 +66,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`tipousuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`tipousuario` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`tipousuario` (
   `id` INT NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
@@ -76,7 +76,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `mydb`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   `sobrenome` VARCHAR(255) NOT NULL,
@@ -92,26 +92,26 @@ CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_usuario_estado1`
     FOREIGN KEY (`estado_id`)
-    REFERENCES `mydb`.`estado` (`id`),
+    REFERENCES `dbloja`.`estado` (`id`),
   CONSTRAINT `fk_usuario_cidade1`
     FOREIGN KEY (`cidade_id`)
-    REFERENCES `mydb`.`cidade` (`id`),
+    REFERENCES `dbloja`.`cidade` (`id`),
   CONSTRAINT `fk_usuario_bairro1`
     FOREIGN KEY (`bairro_id`)
-    REFERENCES `mydb`.`bairro` (`id`),
+    REFERENCES `dbloja`.`bairro` (`id`),
   CONSTRAINT `fk_usuario_rua1`
     FOREIGN KEY (`rua_id`)
-    REFERENCES `mydb`.`rua` (`id`),
+    REFERENCES `dbloja`.`rua` (`id`),
   CONSTRAINT `fk_usuario_tipousuario1`
     FOREIGN KEY (`tipousuario_id`)
-    REFERENCES `mydb`.`tipousuario` (`id`))
+    REFERENCES `dbloja`.`tipousuario` (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`venda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`venda` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`venda` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `valor` DECIMAL(10,2) NOT NULL,
   `date` VARCHAR(45) NOT NULL,
@@ -119,31 +119,31 @@ CREATE TABLE IF NOT EXISTS `mydb`.`venda` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_venda_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`))
+    REFERENCES `dbloja`.`usuario` (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`products_has_venda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`products_has_venda` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`products_has_venda` (
   `products_id` INT NOT NULL,
   `venda_id` INT NOT NULL,
   `quantidade` INT NULL,
   PRIMARY KEY (`products_id`, `venda_id`),
   CONSTRAINT `fk_products_has_venda_products`
     FOREIGN KEY (`products_id`)
-    REFERENCES `mydb`.`products` (`id`),
+    REFERENCES `dbloja`.`products` (`id`),
   CONSTRAINT `fk_products_has_venda_venda1`
     FOREIGN KEY (`venda_id`)
-    REFERENCES `mydb`.`venda` (`id`))
+    REFERENCES `dbloja`.`venda` (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`pagamento`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`pagamento` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`pagamento` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `numeroCartao` VARCHAR(45) NOT NULL,
   `nomeCartao` VARCHAR(45) NOT NULL,
@@ -155,14 +155,14 @@ CREATE TABLE IF NOT EXISTS `mydb`.`pagamento` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_pagamento_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`))
+    REFERENCES `dbloja`.`usuario` (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `mydb`.`treino`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`treino` (
+CREATE TABLE IF NOT EXISTS `dbloja`.`treino` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `treinoA` VARCHAR(255) NOT NULL,
   `treinoB` VARCHAR(255) NOT NULL,
@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`treino` (
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_treino_usuario1`
     FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`))
+    REFERENCES `dbloja`.`usuario` (`id`))
 ENGINE = InnoDB;
 
 
