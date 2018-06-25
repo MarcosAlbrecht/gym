@@ -172,7 +172,7 @@ session_start();
             if (!isset($_GET['action'])) {
 
             echo'
-						<form action="verificaUsuario.php?action=" method="post" name="login" id="login-form">
+						<form action="verificaUsuario.php?action=logar" method="post" name="login" id="login-form">
 						  <fieldset class="input">
 						    <p id="login-form-username">
 						      <label for="modlgn_username">Email</label>
