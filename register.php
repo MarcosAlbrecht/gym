@@ -174,7 +174,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="clear"> </div>
 								</div>
 								<div class="clear"> </div>
-                
+
 								<input type="submit" value="ENVIAR" id="inputSubmit">
 						</form>
             <?php if((isset($_GET['action']) && $_GET['action'] == 'cadastrado')){
@@ -187,51 +187,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 				</div>
       </div>
-
-      <?php
-      include "conecta_mysql.inc";
-
-
-      if ((isset($_GET['action']) && $_GET['action'] == "cadastrar")) {
-    //  	if ($_SESSION['TIPOUSUARIO'] == 1) {
-
-
-          $nome = $_POST['nome'];
-          $sobrenome = $_POST['sobrenome'];
-          $telefone = $_POST['telefone'];
-          $cpf = $_POST['cpf'];
-          $endereco = $_POST['endereco'];
-          $tipo = $_POST['tipo'];
-          $email = $_POST['email'];
-          $senha = $_POST['senha'];
-          $estado = $_POST['estado'];
-          $cidade = $_POST['cidade'];
-          $bairro = $_POST['bairro'];
-          $usuario = 3;
-
-
-          $sql1 = ("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id,tipousuario_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado', '$usuario')");
-          $mysqli->query($sql1);
-
-          $resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
-          $linhas = $resultado->num_rows;
-          $dados = $resultado->fetch_array();
-          $idusuario = $dados['id'];
-
-          $insereCidade = $mysqli->query("INSERT INTO cidade(id_usuario, nome) values ('$idusuario', '$cidade')");
-          $insereBairro = $mysqli->query("INSERT INTO bairro(id_usuario, nome) values ('$idusuario', '$bairro')");
-          $insereEndereco = $mysqli->query("INSERT INTO rua(id_usuario, nome) values ('$idusuario', '$endereco')");
-
-          $insereEndereços = $mysqli->query("INSERT INTO usuario(cidade_id,rua_id,bairro_id) select id_usuario from cidade");
-
-        header('location: index.php');
-
-
-    //  	}
-      }
-
-      $mysqli->close();
-       ?>
 
 
          <div class="footer-bottom">
