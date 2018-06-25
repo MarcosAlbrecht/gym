@@ -78,7 +78,7 @@
 				 session_start();
 				 if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
 
-					 echo'<li><a href="">'.$_SESSION['email'].'</a> <ul>
+					 echo'<li><a href="">'.$_SESSION['nome'].'</a> <ul>
 					 <li><a href="verificaUsuario.php?action=minhapagina">Minha Página</a></li>
 					 <li><a href="verificaUsuario.php?action=logout">Logout</a></li>
 					</ul></li>';

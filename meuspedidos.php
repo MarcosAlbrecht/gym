@@ -61,7 +61,7 @@ session_start();
          <li><a href="contact.php">Contato</a></li>
          <?php
          if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
-           echo'<li><a href="">'.$_SESSION['email'].'</a><ul>
+           echo'<li><a href="">'.$_SESSION['nome'].'</a><ul>
            <li><a href="verificaUsuario.php?action=minhapagina">Minha Página</a></li>
            <li><a href="verificaUsuario.php?action=logout">Logout</a></li></ul>
           </ul></li>';
@@ -88,7 +88,7 @@ session_start();
          <li class="active"><a href="meuspedidos.php">Meus Pedidos</a></li>
          <?php
 				 	if (isset($_SESSION['email']) && $_SESSION['senha']) {
-				 		if ($_SESSION['idUsuario'] == 1) {
+				 		if ($_SESSION['TIPOUSUARIO'] == 1) {
 				 			echo '<li><a href="paginaAdmLoja.php">Administração</a></li>';
 				 		}
 					}
@@ -118,7 +118,7 @@ session_start();
 
             </div>
             <?php
-            if (isset($_SESSION['email']) &&isset($_SESSION['senha'])) {
+            if (isset($_SESSION['email']) && isset($_SESSION['senha'])) {
             echo'
             <table class="table">
                 <thead>
@@ -144,9 +144,9 @@ session_start();
                       		$linhas = $resultado->num_rows;
                       		for ($i=0; $i <$linhas ; $i++) {
                             $registro = $resultado->fetch_array();
-                            echo '<tr><td>'.$registro[0].'</td>
-                            <td>'.$registro[2].'</td>
-                            <td>'.$registro[1].'</td>
+                            echo '<tr><td>'.$registro['id'].'</td>
+                            <td>'.$registro['date'].'</td>
+                            <td>R$ '.number_format($registro['valor'], 2, ',', '.').'</td>
                         </tr>';
                           }
                       }else{

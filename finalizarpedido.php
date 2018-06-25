@@ -34,45 +34,117 @@ $data = date('Y-m-d', strtotime(str_replace('-', '/', $date)));
 
 // --------- verifica se esta logado e finaliza o pedido ------------
 if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
-
-  //echo "<br>Entrou aqui e esta logado<br>";
   $tipo = $_SESSION['TIPOUSUARIO'];
-  //echo $_SESSION['email'] ;
-	//echo $_SESSION['senha'] ;
-	$idUsuario = $_SESSION['idUsuario'];
-  //echo '<br>id usuario '.$idUsuario.'<br>';
-  $select = "INSERT INTO venda (usuario_id, date, valor) VALUES ($idUsuario,  '$data', $totalcompra)";
-  if ($mysqli->query($select) === TRUE) {
-    $last_id = $mysqli->insert_id;
-    //echo "Inserido com sucesso. Ultimo ID inserido: " . $last_id;
-} else {
-    //echo "Error: " . $select . "<br>" . $mysqli->error;
-}
-//--------- INSERE TA TABELA product_has_venda O ID DA VENDA E OS PRODUTOS COMPRADOS -------------
-foreach ($_SESSION['itens'] as $idProduct => $quantidade) {
-  echo 'ulitmo id'.$last_id.'<br>';
-  $select1 = "INSERT INTO products_has_venda (products_id, venda_id, quantidade) VALUES ($idProduct,  $last_id, $quantidade)";
-  if ($mysqli->query($select1) === TRUE) {
-    unset($_SESSION['itens'][$idProduct]);
-    //echo "Inserido com sucesso. Ultimo ID inserido: " . $last_id;
-    $select2 = $mysqli->query("SELECT * FROM products WHERE id=$idProduct");
-    $products = $select2->fetch_array();
-    $qtd = $products['qtd'] - $quantidade;
+  $idUsuario = $_SESSION['idUsuario'];
 
-    // ------- atualiza a quantidade dos produtos -------------
-    $select3 = "UPDATE products SET qtd=$qtd WHERE id=$idProduct ";
-    if ($mysqli->query($select3) === TRUE){
-      //echo "Aleterado com sucesso";
+    if (isset($_GET['action']) && isset($_GET['action']) == 'confirmar') {
+      $select = "INSERT INTO venda (usuario_id, date, valor) VALUES ($idUsuario,  '$data', $totalcompra)";
+      if ($mysqli->query($select) === TRUE) {
+        $last_id = $mysqli->insert_id;
+      }
+    //--------- INSERE TA TABELA product_has_venda O ID DA VENDA E OS PRODUTOS COMPRADOS -------------
+    foreach ($_SESSION['itens'] as $idProduct => $quantidade) {
+
+      $select1 = "INSERT INTO products_has_venda (products_id, venda_id, quantidade) VALUES ($idProduct,  $last_id, $quantidade)";
+      if ($mysqli->query($select1) === TRUE) {
+        unset($_SESSION['itens'][$idProduct]);
+        $select2 = $mysqli->query("SELECT * FROM products WHERE id=$idProduct");
+        $products = $select2->fetch_array();
+        $qtd = $products['qtd'] - $quantidade;
+
+        // ------- atualiza a quantidade dos produtos -------------
+        $select3 = "UPDATE products SET qtd=$qtd WHERE id=$idProduct ";
+        if ($mysqli->query($select3) === TRUE){
+          //echo "Aleterado com sucesso";
+        }else{
+          //echo "Erro ao alterar";
+        }
+      } else {
+        //echo "Error: " . $select1 . "<br>" . $mysqli->error;
+        }
+    }
+      header('location: loja.php');
+      $mysqli->close();
+      exit;
     }else{
-      //echo "Erro ao alterar";
+      $conn = $mysqli->query("SELECT * FROM usuario WHERE id=$idUsuario");
+      $linhas = $conn->num_rows;
+
+      for ($i=0; $i < $linhas; $i++) {
+        $dados = $conn->fetch_array();
+        $idCidade = $dados['cidade_id'];
+        $idEstado = $dados['estado_id'];
+        $idBairro = $dados['bairro_id'];
+        $idRua = $dados['rua_id'];
+      echo '
+      <div class="main">
+        <div class="register-grids">
+          <div class="container">
+          <form action="finalizarpedido.php?action=confirmar" method="POST">
+              <div class="register-top-grid">
+                  <h3>INFORMAÇÕES PESSOAIS</h3>
+                  <div>
+                    <span>Nome<label>*</label></span>
+                    <input type="text" name="nome" value="'.$dados['nome'].'">
+                  </div>
+
+                  <div>
+                    <span>Sobrenome<label>*</label></span>
+                    <input type="text" name="sobrenome" value="'.$dados['sobrenome'].'">
+                  </div>
+
+                  <div>
+                    <span>Telefone<label>*</label></span>
+                    <input type="text" name="telefone" maxlength="13" value="'.$dados['contato'].'">
+                  </div>
+                  <div>
+                    <span>CPF<label>*</label></span>
+                    <input type="text" name="cpf" maxlength="14" value="'.$dados['cpf'].'">
+                  </div>
+                  ';
+
+                  $con = $mysqli->query("SELECT * FROM estado WHERE id=$idEstado");
+                  $dados1 = $con->fetch_array();
+
+                  $con = $mysqli->query("SELECT * FROM cidade WHERE id=$idCidade");
+                  $dados2 = $con->fetch_array();
+
+                  $con = $mysqli->query("SELECT * FROM bairro WHERE id=$idBairro");
+                  $dados3 = $con->fetch_array();
+
+                  $con = $mysqli->query("SELECT * FROM rua WHERE id=$idRua");
+                  $dados4 = $con->fetch_array();
+
+                  echo'
+                  <div>
+                    <span>Estado<label>*</label></span>
+                    <input type="text" name="estado" value="'.$dados1['nome'].'">
+                  </div>
+                  <div>
+                    <span>Cidade<label>*</label></span>
+                    <input type="text" name="bairro" value="'.$dados2['nome'].'">
+                  </div>
+
+                  <div>
+                    <span>Bairro<label>*</label></span>
+                    <input type="text" name="endereco" value="'.$dados3['nome'].'">
+                  </div>
+                  <div>
+                    <span>Rua<label>*</label></span>
+                    <input type="text" name="Estado" value="'.$dados4['nome'].'">
+                  </div>
+                  <br>
+                  <div class="clear"> </div>
+              </div>
+              <input type="submit" value="Confirmar" id="inputSubmit">
+          </form>
+        </div>
+      </div>
+    </div>';
     }
-  } else {
-    //echo "Error: " . $select1 . "<br>" . $mysqli->error;
-    }
-}
-  header('location: loja.php');
-  $mysqli->close();
-  exit;
+   }
+
+
 }else{
 
 //echo "Nao esta logado";
