@@ -62,6 +62,8 @@ if ($linhas > 0) {
 
 	if ((isset($_GET['action']) && $_GET['action'] == "cadastrar")) {
 
+
+				include "conecta_mysql.inc";
 				$nome = $_POST['nome'];
 				$sobrenome = $_POST['sobrenome'];
 				$telefone = $_POST['telefone'];
@@ -76,19 +78,20 @@ if ($linhas > 0) {
 				$usuario = 3;
 
 
-				$sql1 = ("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id,tipousuario_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado', '$usuario')");
-				$mysqli->query($sql1);
+				$resultado = $mysqli->query("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado')");
+
 
 				$resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
 				$linhas = $resultado->num_rows;
 				$dados = $resultado->fetch_array();
 				$idusuario = $dados['id'];
-
+/*
 				$insereCidade = $mysqli->query("INSERT INTO cidade(id_usuario, nome) values ('$idusuario', '$cidade')");
 				$insereBairro = $mysqli->query("INSERT INTO bairro(id_usuario, nome) values ('$idusuario', '$bairro')");
 				$insereEndereco = $mysqli->query("INSERT INTO rua(id_usuario, nome) values ('$idusuario', '$endereco')");
 
-
+				$insereEndereços = $mysqli->query("INSERT INTO usuario(cidade_id,rua_id,bairro_id) select id_usuario from cidade");
+*/
 			 header('location: register.php?action=cadastrado');
 
 	 }
@@ -146,7 +149,7 @@ if ($linhas > 0) {
 	 }
 
 	 // ----------------- PAGAR MENSALIDADE --------------------------------------------
-if($_SESSION['TIPOUSUARIO'] == 3){
+
 	 if((isset($_GET['action']) && $_GET['action'] == "pagar")){
 
 			 if (!isset($dataPagamento) == " "){
@@ -168,28 +171,12 @@ if($_SESSION['TIPOUSUARIO'] == 3){
 				 header('location: pagarMensalidade.php?action=pago');
 
 			 }
-
-
-
-	}else{
-
-			header('location: painelUsuario.php');
-
-
 	}
 
-}else{
-	if (!isset($_SESSION['TIPOUSUARIO'])) {
-		header('location: login.php');
-	}else{
-			// SE TIPO USUARIO NÃO FOR = 3 (USUARIO) VOLTA PRA INDEX
-			//header('location: index.php');
-	}
-}
 
 
 
 
 
-$mysqli->close();
+//$mysqli->close();
 ?>

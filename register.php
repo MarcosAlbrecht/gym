@@ -48,12 +48,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
 			   <li class="active"><a href="index.html">Home</a></li>
-			   <li><a href="sobre.html">Sobre</a></li>
-			   <li><a href="trainers.html">Treinos</a></li>
-			   <li><a href="classes.html">Professores</a></li>
-			   <li><a href="blog.html">Loja</a></li>
-			   <li><a href="pricing.html">Preço</a></li>
-			   <li><a href="contact.html">Contato</a></li>
+			   <li><a href="sobre.php">Sobre</a></li>
+			   <li><a href="trainers.php">Treinos</a></li>
+			   <li><a href="classes.php">Professores</a></li>
+			   <li><a href="blog.php">Loja</a></li>
+			   <li><a href="pricing.php">Preço</a></li>
+			   <li><a href="contact.php">Contato</a></li>
          <li><a href="login.php">Login</a></li>
 			 </ul>
 			  <script type="text/javascript" src="js/nav.js"></script>
@@ -97,7 +97,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         <div class="main">
           <div class="register-grids">
           	<div class="container">
-						<form action="register.php?action=cadastrar" method="POST">
+						<form action="verificaUsuario.php?action=cadastrar" method="POST">
 								<div class="register-top-grid">
 										<h3>INFORMAÇÕES PESSOAIS</h3>
 										<div>
@@ -174,9 +174,16 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 										<div class="clear"> </div>
 								</div>
 								<div class="clear"> </div>
-                <input type="hidden" name="tipo" value="1">
+                
 								<input type="submit" value="ENVIAR" id="inputSubmit">
 						</form>
+            <?php if((isset($_GET['action']) && $_GET['action'] == 'cadastrado')){
+
+              echo '<div class="container">
+                      <h3>Você foi Cadastrado !!</h3>
+                  </div>';
+
+            }?>
 					</div>
 				</div>
       </div>
@@ -186,27 +193,41 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 
       if ((isset($_GET['action']) && $_GET['action'] == "cadastrar")) {
-      	if ($_SESSION['TIPOUSUARIO'] == 1) {
+    //  	if ($_SESSION['TIPOUSUARIO'] == 1) {
 
 
-            $nome = $_POST['nome'];
-            $sobrenome = $_POST['sobrenome'];
-            $telefone = $_POST['telefone'];
-            $cpf = $_POST['cpf'];
-            $endereco = $_POST['endereco'];
-            $tipo = $_POST['tipo'];
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
-            $estado = $_POST['estado'];
-            $cidade = $_POST['cidade'];
-            $bairro = $_POST['bairro'];
+          $nome = $_POST['nome'];
+          $sobrenome = $_POST['sobrenome'];
+          $telefone = $_POST['telefone'];
+          $cpf = $_POST['cpf'];
+          $endereco = $_POST['endereco'];
+          $tipo = $_POST['tipo'];
+          $email = $_POST['email'];
+          $senha = $_POST['senha'];
+          $estado = $_POST['estado'];
+          $cidade = $_POST['cidade'];
+          $bairro = $_POST['bairro'];
+          $usuario = 3;
 
 
-            $sql1 = ("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado')");
-            $mysqli->query($sql1);
+          $sql1 = ("INSERT INTO usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id,tipousuario_id) VALUES ('$nome','$sobrenome','$cpf','$telefone','$email', '$senha', '$estado', '$usuario')");
+          $mysqli->query($sql1);
 
-      		  header('location: register.php');
-      	}
+          $resultado = $mysqli->query("SELECT * FROM usuario where nome = '$nome'");
+          $linhas = $resultado->num_rows;
+          $dados = $resultado->fetch_array();
+          $idusuario = $dados['id'];
+
+          $insereCidade = $mysqli->query("INSERT INTO cidade(id_usuario, nome) values ('$idusuario', '$cidade')");
+          $insereBairro = $mysqli->query("INSERT INTO bairro(id_usuario, nome) values ('$idusuario', '$bairro')");
+          $insereEndereco = $mysqli->query("INSERT INTO rua(id_usuario, nome) values ('$idusuario', '$endereco')");
+
+          $insereEndereços = $mysqli->query("INSERT INTO usuario(cidade_id,rua_id,bairro_id) select id_usuario from cidade");
+
+        header('location: index.php');
+
+
+    //  	}
       }
 
       $mysqli->close();
