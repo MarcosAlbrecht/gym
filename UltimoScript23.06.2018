@@ -36,7 +36,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbloja`.`estado` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT NOT NULL,
   `nome` VARCHAR(255) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -47,7 +46,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbloja`.`cidade` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT NOT NULL,
   `nome` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -58,7 +56,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbloja`.`bairro` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT NOT NULL,
   `nome` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -69,8 +66,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dbloja`.`rua` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `sobrenome` INT NOT NULL,
-  `id_usuario` VARCHAR(45) NOT NULL,
+  `nome` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -129,8 +125,6 @@ CREATE TABLE IF NOT EXISTS `dbloja`.`usuario` (
   `bairro_id` INT NULL,
   `rua_id` INT NULL,
   `tipousuario_id` INT NULL,
-  `treino_id` INT NULL,
-  `pagamento_id` INT NULL,
   PRIMARY KEY (`id`),
   
   CONSTRAINT `fk_usuario_estado1`
@@ -146,13 +140,7 @@ CREATE TABLE IF NOT EXISTS `dbloja`.`usuario` (
     REFERENCES `dbloja`.`rua` (`id`),
   CONSTRAINT `fk_usuario_tipousuario1`
     FOREIGN KEY (`tipousuario_id`)
-    REFERENCES `dbloja`.`tipousuario` (`id`),
-  CONSTRAINT `fk_usuario_treino1`
-    FOREIGN KEY (`treino_id`)
-    REFERENCES `dbloja`.`treino` (`id`),
-  CONSTRAINT `fk_usuario_pagamento1`
-    FOREIGN KEY (`pagamento_id`)
-    REFERENCES `dbloja`.`pagamento` (`id`))
+    REFERENCES `dbloja`.`tipousuario` (`id`))
 ENGINE = InnoDB;
 
 
@@ -186,11 +174,16 @@ CREATE TABLE IF NOT EXISTS `dbloja`.`products_has_venda` (
     REFERENCES `dbloja`.`venda` (`id`))
 ENGINE = InnoDB;
 
-insert into estado(nome,id_usuario) values ('parana',1);
+insert into estado(nome) values ('parana');
 
 insert into usuario(nome,sobrenome,cpf,telefone,email,senha,estado_id,tipousuario_id) values ('admin','admin', '111111', '11111', 'admin', 'admin',1,1);
 
-insert into usuario(tipousuario_id) values (1);
+
+INSERT INTO tipousuario(id,tipo) values (1,'admin');
+INSERT INTO tipousuario(id,tipo) values (2,'treinador');
+INSERT INTO tipousuario(id,tipo) values (3,'usuario');
+
+select * from tipousuario;
 
 select * from usuario;
 
@@ -198,7 +191,13 @@ select * from estado;
 
 select * from bairro;
 
+select * from rua;
+
 select * from pagamento;
+
+select * from cidade;
+
+
 
 update usuario set tipousuario_id = '1' where id = 1;
 
