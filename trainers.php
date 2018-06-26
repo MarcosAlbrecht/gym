@@ -464,7 +464,7 @@
 		 					 <h4>VENHA PARA UNICA</h4>
 		 					 <p>Invista em sua saúde com a certeza de ter os melhores equipamentos e profissionais a sua disposição.</p>
 		 					 <div class="btn3">
-		 						 <a href="register.html">Entre Hoje</a>
+		 						 <a href="register.php">Entre Hoje</a>
 		 						 </div>
 		 				</div>
 		 			</div>
@@ -476,11 +476,11 @@
 		 						 de ter os melhores equipamentos e profissionais a sua disposição. </p>
 		 					 <div class="buttons_login">
 		 					 <div class="btn4">
-		 						 <a href="login.php">Log In</a>
+		 						 <a href="login.php">LOGIN</a>
 		 						 </div>
 		 						 <div class="p-ww">
 		 					<form>
-		 					 <input class="date" id="datepicker" type="text" value="Calendário" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Calendário';}">
+		 					 <input class="date" id="datepicker" type="text" value="Calendário" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'View Calendar';}">
 		 					</form>
 		 					 </div>
 		 						 <div class="clear"></div>

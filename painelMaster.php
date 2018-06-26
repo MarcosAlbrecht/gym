@@ -28,7 +28,7 @@
          <li ><a href="painelMaster.php?action=excluirAlterar">Alterar/excluir</a></li>
          <li><a href="verificaMaster.php?action=consultarmensalidade">Mensalidades</a></li>
          <li><a href="verificaMaster.php?action=criarTreino">Criar Treino</a></li>
-         <li><a href="painelMaster.php?action=excluirAlterar">Voltar</a></li>
+         <li><a href="index.php">Voltar ao site</a></li>
          <li><a href="verificaUsuario.php?action=logout">Sair</a></li>
        </ul>
 

@@ -235,7 +235,7 @@
 		   </div>
 		   <div class="row classes_bottom">
 		      <div class="col-md-8">
-		     	 <h3 class="m_2">All Classes</h3>
+		     	 <h3 class="m_2">Todos os Treinos</h3>
 		     	 <div class="classes">
 		     	 	<div class="cardio_list">
 		     	 	  <div class="cardio_sublist">
@@ -360,7 +360,7 @@
             <h4>VENHA PARA UNICA</h4>
             <p>Invista em sua saúde com a certeza de ter os melhores equipamentos e profissionais a sua disposição.</p>
             <div class="btn3">
-              <a href="register.html">Entre Hoje</a>
+              <a href="register.php">Entre Hoje</a>
               </div>
          </div>
        </div>
@@ -372,11 +372,11 @@
               de ter os melhores equipamentos e profissionais a sua disposição. </p>
             <div class="buttons_login">
             <div class="btn4">
-              <a href="login.html">Log In</a>
+              <a href="login.php">LOGIN</a>
               </div>
               <div class="p-ww">
            <form>
-            <input class="date" id="datepicker" type="text" value="View Calender" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'View Calender';}">
+            <input class="date" id="datepicker" type="text" value="Calendario" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'View Calender';}">
            </form>
             </div>
               <div class="clear"></div>

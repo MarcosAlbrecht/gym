@@ -22,7 +22,7 @@ include 'conecta_mysql.inc';
 session_start();
 
 $totalcompra = $_POST['totalcompra'];
-//echo "<br>total da compra ".$totalcompra."<br>";
+
 
 // ------ BUSCA A DATA ATUAL PARA INSERIR NA VENDA --------------
 //echo $_SESSION['itens'][2];
@@ -37,32 +37,33 @@ if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
   $tipo = $_SESSION['TIPOUSUARIO'];
   $idUsuario = $_SESSION['idUsuario'];
 
-    if (isset($_GET['action']) && isset($_GET['action']) == 'confirmar') {
-      $select = "INSERT INTO venda (usuario_id, date, valor) VALUES ($idUsuario,  '$data', $totalcompra)";
+    if (isset($_GET['action']) && $_GET['action'] == 'confirmar') {
+      $totalcompra = $_POST['totalcompra'];
+
+      $select = "INSERT INTO venda (valor, date, usuario_id) VALUES ($totalcompra, '$data', $idUsuario)";
       if ($mysqli->query($select) === TRUE) {
         $last_id = $mysqli->insert_id;
+
       }
     //--------- INSERE TA TABELA product_has_venda O ID DA VENDA E OS PRODUTOS COMPRADOS -------------
     foreach ($_SESSION['itens'] as $idProduct => $quantidade) {
-
       $select1 = "INSERT INTO products_has_venda (products_id, venda_id, quantidade) VALUES ($idProduct,  $last_id, $quantidade)";
-      if ($mysqli->query($select1) === TRUE) {
-        unset($_SESSION['itens'][$idProduct]);
-        $select2 = $mysqli->query("SELECT * FROM products WHERE id=$idProduct");
-        $products = $select2->fetch_array();
-        $qtd = $products['qtd'] - $quantidade;
+        if ($mysqli->query($select1) === TRUE) {
+          unset($_SESSION['itens'][$idProduct]);
+        }
+          $select2 = $mysqli->query("SELECT * FROM products WHERE id=$idProduct");
+          $products = $select2->fetch_array();
+          $qtd = $products['qtd'] - $quantidade;
 
-        // ------- atualiza a quantidade dos produtos -------------
-        $select3 = "UPDATE products SET qtd=$qtd WHERE id=$idProduct ";
-        if ($mysqli->query($select3) === TRUE){
-          //echo "Aleterado com sucesso";
-        }else{
-          //echo "Erro ao alterar";
+          // ------- atualiza a quantidade dos produtos -------------
+          $select3 = "UPDATE products SET qtd=$qtd WHERE id=$idProduct ";
+          if ($mysqli->query($select3) === TRUE){
+            //echo "Aleterado com sucesso";
+          }else{
+            //echo "Erro ao alterar";
+          }
         }
-      } else {
-        //echo "Error: " . $select1 . "<br>" . $mysqli->error;
-        }
-    }
+
       header('location: loja.php');
       $mysqli->close();
       exit;
@@ -82,7 +83,7 @@ if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
           <div class="container">
           <form action="finalizarpedido.php?action=confirmar" method="POST">
               <div class="register-top-grid">
-                  <h3>INFORMAÇÕES PESSOAIS</h3>
+                  <h3>CONFIRMAR DADOS PESSOAIS</h3>
                   <div>
                     <span>Nome<label>*</label></span>
                     <input type="text" name="nome" value="'.$dados['nome'].'">
@@ -133,6 +134,11 @@ if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
                     <span>Rua<label>*</label></span>
                     <input type="text" name="Estado" value="'.$dados4['nome'].'">
                   </div>
+
+                  <div>
+                    <span>Total<label>*</label></span>
+                    <input type="hidden" name="totalcompra" value="'.$totalcompra.'">
+                  </div>
                   <br>
                   <div class="clear"> </div>
               </div>
@@ -142,11 +148,10 @@ if(isset($_SESSION['email']) && isset($_SESSION['senha'])){
       </div>
     </div>';
     }
-   }
 
+}
 
 }else{
-
 //echo "Nao esta logado";
 header('location:login.php?action=carrinho');
 }

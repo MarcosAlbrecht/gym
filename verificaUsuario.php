@@ -11,15 +11,15 @@
 
 		$resultado = $mysqli->query("SELECT * FROM usuario where email = '$email' and senha = '$senha'");
 		$linhas = $resultado->num_rows;
-		$registro  = $resultado->fetch_row();
+		$registro  = $resultado->fetch_array();
 
 		if ($linhas > 0) {
 
-			$_SESSION['nome'] = $registro[1];
-			$_SESSION['email'] = $registro[5];
-			$_SESSION['senha'] = $registro[6];
-			$_SESSION['TIPOUSUARIO'] = $registro[11];
-			$_SESSION['idUsuario'] = $registro[0];
+			$_SESSION['nome'] = $registro['nome'];
+			$_SESSION['email'] = $registro['email'];
+			$_SESSION['senha'] = $registro['senha'];
+			$_SESSION['TIPOUSUARIO'] = $registro['tipousuario_id'];
+			$_SESSION['idUsuario'] = $registro['id'];
 			//header('location: index.php');
 		}else{
 

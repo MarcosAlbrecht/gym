@@ -47,11 +47,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		 <div class="h_menu4"><!-- start h_menu4 -->
 		   <a class="toggleMenu" href="#">Menu</a>
 			 <ul class="nav">
-<<<<<<< HEAD
+
 			   <li ><a href="index.php">Home</a></li>
-=======
+
 			   <li class="active"><a href="index.php">Home</a></li>
->>>>>>> bba120c901ba83a351da59a19b3cc68aaa1edb63
+
 			   <li><a href="sobre.php">Sobre</a></li>
 			   <li><a href="trainers.php">Treinos</a></li>
 			   <li><a href="classes.php">Professores</a></li>
